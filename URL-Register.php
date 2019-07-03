@@ -60,7 +60,7 @@ if(mysqli_num_rows($ret_userID) < 1){
       <!-- 인라인으로 스타일을 준 것은, bootstrap.css에서 색상 속성이 !important로 선언되어 있기 때문임. boostrap 파일을 변경하기보단, 인라인으로 새 속성을 주었음 -->
       <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2c65c1 !important">
 
-        <a class="navbar-brand" href="#"><img src="img/message-square.svg" style="margin-right: 10px;">등록 URL 목록</a>
+        <a class="navbar-brand" href="#"><img src="img/message-square.svg" style="margin-right: 10px;">서비스 중인 홈페이지</a>
 
         <!-- 창 너비에 따라 버튼이 미디어 쿼리로, 두 종류로 나뉜다. -->
         <!-- 아래의 버튼은 창이 작을 때, 핸드폰이나 태블릿 같은 환경에서 사용할 버튼 및 a 태그 들이다.-->
@@ -80,7 +80,7 @@ if(mysqli_num_rows($ret_userID) < 1){
               <a class="nav-link" onclick="logout()">로그아웃</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="modal" data-target="#UserInfoModal">내 정보</a>
+              <a class="nav-link" data-toggle="modal" data-target="#UserInfoModal">정보 수정</a>
             </li>
           </ul>
         </div>
@@ -95,7 +95,7 @@ if(mysqli_num_rows($ret_userID) < 1){
           <div class="dropdown-menu dropdown-menu-right">
             <!-- 로그아웃: 쿠키 제거 -->
             <a class="dropdown-item active" onclick="logout()" href="#">로그아웃</a>
-            <a class="dropdown-item" href="#">내 정보</a>
+            <a class="dropdown-item" href="#">정보 수정</a>
           </div>
           <button type="button" class="side_btn sizeUpOnHover" data-toggle="modal" data-target="#UserInfoModal"><img src="img/user.svg" alt="user info button"></button>
         </div>
@@ -178,7 +178,7 @@ if(mysqli_num_rows($ret_userID) < 1){
       <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body">
-              <h4 class="text-center" style="font-size: 15px; margin-bottom: 20px;">등록된 URL을 DB에서 제거하시겠습니까?<br>해당 URL에 등록되어 있던 모든 댓글 데이터기 삭제됩니다.</h4>
+              <h4 class="text-center" style="font-size: 15px; margin-bottom: 20px;">등록된 URL을 DB에서 제거하시겠습니까?<br>해당 URL에 등록되어 있던 모든 댓글 데이터가 삭제됩니다.</h4>
               <div class="text-center" style="width: 70%; margin: 0 auto">
                 <a class="btn btn-sm btn-danger btn-yes btn-block" style="color:#ffffff;" data-dismiss="modal" onclick="DeleteChattingRoom()">네</a>
                 <!-- data dismiss란 attribute를 줌으로써, 모달 박스를 닫는 이벤트를 구현할 수 있음 -->

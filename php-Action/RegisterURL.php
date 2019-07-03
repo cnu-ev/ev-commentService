@@ -34,15 +34,16 @@ $insertData = "
 )";
 
 // URL에 매칭되는 새 댓글 데이터를 담는 테이블을 ev-url-comment-db에 생성
-$createNewService = "
-  CREATE TABLE `urlcommentdb`.`$URL_ID`(
-  	`CommentUserId` VARCHAR(20) NOT NULL,
-    `Content` MEDIUMTEXT NOT NULL,
-    `DateTime` DATETIME NOT NULL,
-    `ProfileImageFileName` VARCHAR(25),
-    `CommentIndex` INT(11) NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY(`CommentIndex`)
-)";
+
+// $createNewService = "
+//   CREATE TABLE `urlcommentdb`.`$URL_ID`(
+//   	`CommentUserId` VARCHAR(20) NOT NULL,
+//     `Content` MEDIUMTEXT NOT NULL,
+//     `DateTime` DATETIME NOT NULL,
+//     `ProfileImageFileName` VARCHAR(25),
+//     `CommentIndex` INT(11) NOT NULL AUTO_INCREMENT,
+//     PRIMARY KEY(`CommentIndex`)
+// )";
 
 $ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
 $ret = mysqli_query($connect_object_urlDB, $createNewService) or die("Error Occured in Making table");

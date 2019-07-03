@@ -22,15 +22,15 @@ class ShowHomePage{
       <div id="%s" class="jumbotron" style="background-color: #e8f9ff !important; padding: 33px 32px 30px 32px">
         <div class="row">
           <div class="col-sm-11">
-            <h1 class="display-6">%s</h1>
+            <h1 class="display-6">Title : %s</h1>
           </div>
           <div class="col-sm-1">
-            <img src="img/log-out.svg" class="responsiveSmall sizeUpOnHover" style="width: 32px; height:32px;" data-toggle="modal" onclick="setIndexToDeleteRoom(this.parentNode.parentNode.parentNode.id)" data-target="#DeleteConfirmModal" alt="Chatting Room Delete Button" />
+            <img src="img/trash-2.svg" class="responsiveSmall sizeUpOnHover" style="width: 32px; height:32px;" data-toggle="modal" onclick="setIndexToDeleteRoom(this.parentNode.parentNode.parentNode.id)" data-target="#DeleteConfirmModal" alt="Homepage Delete Button" />
           </div>
         </div>
         <hr class="my-2">
-        <p class="MessageContent">%s</p>
-        <form action="../ChattingRoom.php" method="get">
+        <p class="MessageContent">URL : %s</p>
+        <form action="../CommentManageService.php" method="get">
           <label for="RoomID">
           <button class="btn btn-secondary btn-lg Buttons" type="submit" name="RoomID" value="%s">댓글 관리 페이지로 이동</button>
           </label>
