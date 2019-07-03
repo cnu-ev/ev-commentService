@@ -1,0 +1,194 @@
+/* CDN 방식으로 폰트를 가져온다 */
+@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	outline: none !important;
+}
+
+/* 아래쪽 사이드바 스타일 */
+footer{
+  color: #ffffff;
+  width: 100%;
+}
+
+/* Chatting box 스타일 */
+textarea{
+  width: 100%
+}
+
+textarea:focus{
+  background-color: #ffffff;
+  color: black;
+}
+
+textarea:not(focus){
+  background-color: #dce3ef;
+}
+
+/* 위쪽 사이드바 스타일 */
+a.navbar-brand{
+  font-family: 'Jeju Gothic';
+}
+
+/* 요소 위에 마우스를 올려 놓았을 때 변화 */
+.sizeUpOnHover:hover{
+  transform: scale(1.35);
+}
+
+/* 위쪽 사이드바 버튼 스타일 */
+.side_btn{
+  border: none;
+  background-color: #2c65c1 !important;
+}
+
+.roomDelete_btn{
+  border: none;
+  background-color: #e9ecef;
+}
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
+.jumbotron{
+  margin-top: 15px;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.jumbotron h1{
+  font-size: 28px;
+  font-family: 'Jeju Gothic';
+}
+
+.MessageContent{
+  font-size: 16px;
+  font-family: 'Jeju Gothic';
+}
+
+.Buttons{
+  font-size: 14px;
+  font-family: 'Jeju Gothic';
+}
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+.stikyFooter{
+  position: sticky;
+  display: block;
+  bottom: 0px;
+  left: 0px;
+}
+
+#Copyright{
+  font-family: 'Jeju Gothic';
+  font-size: 12pt;
+  text-align: center;
+  color: #f2f2f2;
+  width: 100%;
+}
+
+#Copyright em{
+  font-size: 12pt;
+}
+
+#Header {
+  color: #ffffff;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 10px;
+}
+
+#Background{
+  background-color: #c9ddff;
+}
+
+#ChattingRoomNotExistedWarning{
+  font-family: 'Jeju Gothic';
+  font-size: 12pt;
+  text-align: center;
+}
+
+#Modal_USER_ID{
+  display: inline;
+  font-family: 'Jeju Gothic';
+}
+
+#Modal_SIGNUP_DATE{
+  display: inline;
+  font-family: 'Jeju Gothic';
+}
+
+#userDefaultProfile{
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+#smallModal{
+  padding: 15px;
+  background-image: url("../img/userProfileBackImage.png");
+}
+
+#FixedNavbar{
+  border-bottom: #f8fc25 3px solid;
+}
+
+#FooterDiv{
+  margin-top: 70px;
+}
+
+#WhiteSpaceForResponsivePage{
+  width: 100%;
+  height: 70px;
+}
+
+@media screen and (max-width: 766px) {
+  .responsive{
+    display: none;
+  }
+  .responsiveNone{
+    display: none;
+  }
+  .responsiveNone2{
+    display: default;
+  }
+  .responsiveNone2 *{
+    display: default;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .responsive{
+    display: default;
+  }
+  .responsiveNone{
+    display: default;
+  }
+  .responsiveNone2{
+    display: none;
+  }
+  .responsiveNone2 *{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .responsiveSmall{
+    display: none;
+  }
+  .responsiveSmallReverse{
+    display: default;
+  }
+}
+
+@media screen and (min-width: 581px) {
+  .responsiveSmallReverse{
+    display: none;
+  }
+}
