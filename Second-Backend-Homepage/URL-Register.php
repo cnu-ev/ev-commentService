@@ -13,7 +13,7 @@ if(empty($ID)){
   exit();
 }
 
-$connect_object = MySQLConnection::DB_Connect('ev-userdb');
+$connect_object = MySQLConnection::DB_Connect('userdb');
 
 // 로그인 된 유저의 모든 등록된 URL을 가져와 표시한다
 $searchUserURLs = "
@@ -116,7 +116,7 @@ if(mysqli_num_rows($ret_userID) < 1){
         }
 
         while($row = mysqli_fetch_array($ret_URLs)){
-          echo ShowHomePage::ShowHomePages($row['Title'], $row['Description'], $row['RoomID']);
+          echo ShowHomePage::ShowHomePages($row['URLTitle'], $row['URL'], $row['URLID']);
         }
 
       ?>
@@ -133,7 +133,7 @@ if(mysqli_num_rows($ret_userID) < 1){
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <?php
-            echo UserModalBox::GenerateUserInfoModal($row_userID['ID'], $row_userID['SignupDate'], $row_userID['ProfileImageFileName']);
+            echo UserModalBox::GenerateUserInfoModal($row_userID['ID'], $row_userID['SignUpDate'], $row_userID['ProfileImageFileName']);
           ?>
         </div>
       </div>
@@ -152,14 +152,14 @@ if(mysqli_num_rows($ret_userID) < 1){
             </button>
           </div>
           <div class="modal-body">
-            <form action="purePHP/ChattingRoomAddButtonClickedAction.php" onsubmit="return AddChattingRoomButtonClicked()" method="post" accept-charset="utf-8">
+            <form action="php-Action/RegisterURL.php" onsubmit="return AddURLButtonClicked()" method="post" accept-charset="utf-8">
               <div class="form-group">
-                <label for="RoomTitle">웹 사이트 제목</label>
-                <input id="newChattingRoom_Title" name="RoomTitle" type="text" class="form-control">
+                <label for="URL-Title">웹 사이트 제목</label>
+                <input id="URL-Title" name="URL-Title" type="text" class="form-control">
               </div>
               <div class="form-group">
-                <label for="RoomDesc">사이트 URL</label>
-                <textarea id="newChattingRoom_Desc" name="RoomDesc" type="text" class="form-control" style="height: 180px;"></textarea>
+                <label for="URL">사이트 URL</label>
+                <textarea id="URL" name="URL" type="text" class="form-control" style="height: 180px;"></textarea>
               </div>
               <div class="modal-footer">
                 <!-- data-dismiss 속성을 통해, 취소 버튼을 누르면 모달 박스가 없어지는 것을 구현 -->
@@ -205,7 +205,7 @@ if(mysqli_num_rows($ret_userID) < 1){
     <!-- 제이쿼리 쿠키 플러그인 추가하기 -->
     <script src="./lib/jquery.cookie.js"></script>
     <!-- 커스텀 자바스크립트 추가하기 -->
-    <script src="./js/ChattingRoomSelector.js"></script>
+    <script src="./js/URL_Register.js"></script>
     <!-- 커스텀 자바스크립트 추가하기 -->
     <script src="./js/Logout.js"></script>
 

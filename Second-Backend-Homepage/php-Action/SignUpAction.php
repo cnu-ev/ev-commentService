@@ -2,7 +2,7 @@
 require_once('MySQLConection.php');
 
 // DB 연결
-$connect_object = MySQLConnection::DB_Connect('ev-userdb');
+$connect_object = MySQLConnection::DB_Connect('userdb');
 
 // Post 방식으로 유저 데이터를 가져옴
 $ID = $_POST["ID"];
@@ -72,7 +72,7 @@ $insertData = "
     Now()
 )";
 
-$ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Message to DB");
+$ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
 
 echo ("<script language=javascript>alert('축하합니다! 회원가입이 완료되었습니다!')</script>");
 echo ("<script>location.href='../SignIn.html';</script>");

@@ -4,7 +4,7 @@ require_once('MySQLConection.php');
 $UserNewID = $_GET["userID"];
 
 // DB 연결
-$connect_object = MySQLConnection::DB_Connect('ev-userdb');
+$connect_object = MySQLConnection::DB_Connect('userdb');
 
 // DB에서 PK (ID) 중복 검사
 $searchUserID = "

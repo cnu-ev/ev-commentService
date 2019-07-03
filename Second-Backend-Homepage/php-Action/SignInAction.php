@@ -2,7 +2,7 @@
 
   require_once('MySQLConection.php');
 
-  $connect_object = MySQLConnection::DB_Connect('ev-userdb');
+  $connect_object = MySQLConnection::DB_Connect('userdb');
 
   // Post 방식으로 유저 데이터를 가져옴
   $ID = $_POST["ID"];
@@ -34,4 +34,4 @@
   setcookie("profileImageFileName", $row['ProfileImageFileName'], time() + 3600, "/");
 
 
-  echo ("<script>location.href='../RegisterURL.php';</script>");
+  echo ("<script>location.href='../URL-Register.php';</script>");
