@@ -5,12 +5,11 @@
 *{
   box-sizing: border-box;
   font-family: 'Jeju Gothic';
+  outline: none !important;
 }
 
-#EV-Buttons{
-  margin-top: 12px;
-  margin-left: 9px;
-  margin-right: 9px;
+.comment-content{
+  display: inline;
 }
 
 #EV-comment ul {
@@ -47,12 +46,19 @@
   background-color: #111111;
 }
 
+#EV-Buttons{
+  margin-top: 12px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 20px;
+}
+
 #EV-Buttons ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 2px;
   background-color: #545454;
   font-size: 14px;
 }
@@ -62,14 +68,15 @@
   display: block;
   color: white;
   text-align: center;
-  padding: 16px;
+  padding: 14px;
+  font-size: 16px;
   text-decoration: none;
+  width: 75px;
 }
 
 #EV-Buttons ul li:hover {
   background-color: #111111;
 }
-
 
 #CommentArea{
   overflow: auto;
@@ -78,8 +85,7 @@
   background-color: #ffffff;
   border-radius: 10px;
   border: 2px solid #616161;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-top: 15px;
 }
 
 #EV-Container{
@@ -92,11 +98,24 @@
   margin-top: 5px;
 }
 
+#EV-Footer{
+  background-color: #333333;
+  height: 35px;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+}
+
 #Textarea-placeholder{
   position: absolute;
   top: 9px;
-  left: 34px;
+  left: 24px;
   color: #858585;
+}
+
+#post-button{
+  float: right !important;
 }
 
 @media screen and (max-width: 766px) {
