@@ -1,0 +1,113 @@
+/* CDN 방식으로 폰트를 가져온다 */
+@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+*{
+  box-sizing: border-box;
+  font-family: 'Jeju Gothic';
+}
+
+#EV-Buttons{
+  margin-top: 12px;
+  margin-left: 9px;
+  margin-right: 9px;
+}
+
+#EV-comment ul {
+  list-style-type: none;
+  margin: 5px;
+  overflow: hidden;
+}
+
+#EV-comment ul li {
+  list-style-type: none;
+  margin: 5px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+#EV-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+#EV-nav ul li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+#EV-nav ul li:hover {
+  background-color: #111111;
+}
+
+#EV-Buttons ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #545454;
+  font-size: 14px;
+}
+
+#EV-Buttons ul li{
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+#EV-Buttons ul li:hover {
+  background-color: #111111;
+}
+
+
+#CommentArea{
+  overflow: auto;
+  overflow-wrap: break-word;
+  max-height: 200px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2px solid #616161;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+#EV-Container{
+  background-color: #f2f2f2;
+  padding: 0px;
+  max-width: 850px;
+}
+
+#EV-UserInputArea{
+  margin-top: 5px;
+}
+
+#Textarea-placeholder{
+  position: absolute;
+  top: 9px;
+  left: 34px;
+  color: #858585;
+}
+
+@media screen and (max-width: 766px) {
+  #connectedUser-Avatar{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  #connectedUser-Avatar{
+    display: default;
+  }
+
+}
