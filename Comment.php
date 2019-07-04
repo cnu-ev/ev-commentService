@@ -1,12 +1,51 @@
 <?php
   require_once('php-Action\MySQLConection.php');
 
-  $URL = $_GET['db'];
+  $URL_ID = $_GET['db'];
   $PageID = $_GET['pageID'];
 
-  $connect_object = MySQLConnection::DB_Connect($URL);
+  $connect_object = MySQLConnection::DB_Connect($URL_ID);
 
-  
+  $fetchAllComments = "
+    SELECT * FROM `" . $PageID . "`";
+
+  class Comment{
+
+    static public function CreateComment($CommentUserId, $Content, $DateTime, $ProfileImageFileName, $CommentIndex){
+
+      #############################################################
+      #                                                           #
+      #  프로필 이미지 지정해 놓은 게 없는 경우, 디폴트 이미지를 표시  #
+      #                                                           #
+      #############################################################
+
+      if(empty($profileImageName)){
+        $ProfileImageFileName = 'img/userDefaultProfile.svg';
+      }
+      else{
+        $ProfileImageFileName =  'profileImages/' . $profileImageName;
+      }
+
+      $profileImageElement = sprintf(
+        '<img class="comment-avatar col-1.5" width="48px" height="48px" class="img-fluid rounded-circle" src="%s" alt="Image For User Profile">',
+        $ProfileImageFileName
+      );
+
+      return sprintf(
+      '
+        <li class="row">
+          %s
+          <div class="comment col-10">
+            <span class="comment-userID">%s</span><br>
+            <p class="comment-content">%s</p>
+          </div>
+        </li>',
+          $profileImageElement,
+          $CommentUserId,
+          $Content
+        );
+      }
+   }
 
 ?>
 
@@ -55,7 +94,19 @@
         <!-- 댓글 -->
         <div id="EV-comment">
           <ul>
+            <?php
+              $ret = mysqli_query($connect_object, $fetchAllComments);
 
+              while($row = mysqli_fetch_array($ret)){
+                echo Comment::CreateComment(
+                  $row['CommentUserId'],
+                  $row['Content'],
+                  $row['DateTime'],
+                  $row['ProfileImageFileName'],
+                  $row['CommentIndex']
+                );
+              }
+            ?>
           </ul>
         </div>
       </div>

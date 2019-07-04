@@ -28,11 +28,11 @@ $insertData = "
 )";
 
 $createNewService = "
-  CREATE DATABASE `$URL`
+  CREATE DATABASE `$URL_ID`
 ";
 
 $createDefaultTable = "
-  CREATE TABLE `$URL`.`default`(
+  CREATE TABLE `$URL_ID`.`default`(
   	`CommentUserId` VARCHAR(20) NOT NULL,
     `Content` MEDIUMTEXT NOT NULL,
     `DateTime` DATETIME NOT NULL,
@@ -44,7 +44,7 @@ $createDefaultTable = "
 $ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
 $ret = mysqli_query($connect_object, $createNewService) or die("Error Occured in Creating DB");
 
-$connect_url = MySQLConnection::DB_Connect($URL) or die("Error Occured in Connection to DB");
+$connect_url = MySQLConnection::DB_Connect($URL_ID) or die("Error Occured in Connection to DB");
 $ret = mysqli_query($connect_url, $createDefaultTable) or die("Error Occured in Creating DB");
 
 function Hashing($Algorithm, $URL){

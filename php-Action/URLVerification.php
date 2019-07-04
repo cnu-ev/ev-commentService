@@ -6,11 +6,11 @@
 require_once('MySQLConection.php');
 
 $connect_object = MySQLConnection::DB_Connect('userdb') or die("Error Occured in Connection to DB");
-$connect_object_urlDB = MySQLConnection::DB_Connect('urlcommentdb') or die("Error Occured in Connection to DB2");
 
-$UserName = $_GET['UserName'];
+$UserName = $_GET["UserName"];
 $PageIdentifier = $_GET["PageIdentifier"];
 $SiteURL = $_GET["SiteURL"];
+$URL_ID = Hashing("sha256", $SiteURL);
 
 // DB에서 등록된 Site 인지 찾음
 $searchSite = "
@@ -21,22 +21,23 @@ $ret = mysqli_query($connect_object, $searchSite);
 
 // 등록되지 않은 요청은 거절
 if(mysqli_num_rows($ret) < 1){
+  echo ("등록되지 않은 URL 입니다.");
   exit ();
 }
 
 // 등록된 요청이라면 해당 URL의 DB가 존재.
 // PageID의 테이블이 존재하는지 확인
 // 존재한다면 해당 테이블의 댓글 데이터를 반환
-if(MySQLConnection::isExist($SiteURL, $PageIdentifier)){
-  echo "<iframe src='localhost/Comment.php?db=$URL&pageID=$PageIdentifier'></iframe>";
+if(MySQLConnection::isExist($URL_ID, $PageIdentifier)){
+  echo "<iframe style='width: 100%; border: none; overflow-y:hidden;' src='http://localhost/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
 }
 // 존재하지 않는다면 새 테이블을 생성한 후 컴포넌트만 반환
 else {
 
-  $connect_url = MySQLConnection::DB_Connect($URL) or die("Error Occured in Connection to DB");
+  $connect_url = MySQLConnection::DB_Connect($URL_ID) or die("Error Occured in Connection to DB");
 
   $createNewTable = "
-    CREATE TABLE `$URL`.`$PageIdentifier`(
+    CREATE TABLE `$URL_ID`.`$PageIdentifier`(
     	`CommentUserId` VARCHAR(20) NOT NULL,
       `Content` MEDIUMTEXT NOT NULL,
       `DateTime` DATETIME NOT NULL,
@@ -47,9 +48,10 @@ else {
 
   $ret = mysqli_query($connect_url, $createNewTable);
 
-  echo "<iframe src='localhost/Comment.php?db=$URL&pageID=$PageIdentifier'></iframe>";
+  echo "<iframe style='width: 100%; border: none; overflow-y:hidden;' src='http://localhost/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
 }
 
-function Hashing($Algorithm, $URL, $PageID){
-  return hash($Algorithm, $URL, $PageID);
+
+function Hashing($Algorithm, $URL){
+  return hash($Algorithm, $URL);
 }

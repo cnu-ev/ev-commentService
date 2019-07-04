@@ -32,7 +32,7 @@ while($row = mysqli_fetch_array($ret)){
 
 if($_FILES['ProfileImage']['size'] != 0){
   // 중복 ID가 없는 경우, 프로필 사진 업로드 처리 및 폴더에 저장
-  $ProfileImageUploadDir = 'C:\xampp\EV-Front\Second-Backend-Homepage\profileImages\\';
+  $ProfileImageUploadDir = 'C:\xampp\EV-Front\profileImages\\';
 
   // 아래 코드에서 mb_stristr가 파일 확장자만 잘라 ID와 붙인다
   $ProfileImageFileName = $ID . mb_stristr($_FILES['ProfileImage']['name'], '.');

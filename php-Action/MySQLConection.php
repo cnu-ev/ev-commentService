@@ -16,11 +16,21 @@ class MySQLConnection{
     }
     return $connect_object;
   }
-  // https://zetawiki.com/wiki/MySQL_%ED%85%8C%EC%9D%B4%EB%B8%94_%EC%9E%88%EB%8A%94%EC%A7%80_%ED%99%95%EC%9D%B8 참고함
+
   public static function isExist($db_name, $table_name){
-    $mysqli = new mysqli(self::$database_host,self::$database_user,self::$database_password, $db_name);
-    $result = $mysqli->query("SHOW TABLES LIKE '테이블명'");
-    return ( $result->num_rows > 0 );
+
+    $connect_object = MySQLConnection::DB_Connect($db_name) or die("Cannot connect to DB");
+
+    $query = 'SHOW TABLES LIKE ' . "'" . $table_name . "'";
+
+    $ret = mysqli_query($connect_object, $query);
+
+    if (mysqli_num_rows($ret) < 1){
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 }

@@ -1,3 +1,4 @@
+<!-- include this file to your site -->
 {% if site.ev_username %}
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -13,17 +14,14 @@
 
     var url = siteURL + pageURL;
 
-    var verification_URL = "http://localhost/php-Action/URLVerification.php";
-    // var verification_URL = "http://www.evcommentservice.ga/URLVerification.php";
-
     (function() {
         var embededd_js = document.createElement('script');
         embededd_js.type = 'text/javascript';
         embededd_js.async = true;
 
         // 아래처럼 하면 스크립트 파일을 수정하지 못하게 할 수 있음
-        // embededd_js.src = 'http://www.evcommentservice.ga/Embed-JS-Script/' + userName + ".js";
-        embededd_js.src = 'http://127.0.0.1/script.js';
+        // embededd_js.src = 'http://127.0.0.1/script.js';
+        embededd_js.src = 'http://www.evcommentservice.ga/script.js';
         document.getElementById('EV-Start').appendChild(embededd_js);
     })();
 
