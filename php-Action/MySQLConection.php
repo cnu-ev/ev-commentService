@@ -16,4 +16,11 @@ class MySQLConnection{
     }
     return $connect_object;
   }
+  // https://zetawiki.com/wiki/MySQL_%ED%85%8C%EC%9D%B4%EB%B8%94_%EC%9E%88%EB%8A%94%EC%A7%80_%ED%99%95%EC%9D%B8 참고함
+  public static function isExist($db_name, $table_name){
+    $mysqli = new mysqli(self::$database_host,self::$database_user,self::$database_password, $db_name);
+    $result = $mysqli->query("SHOW TABLES LIKE '테이블명'");
+    return ( $result->num_rows > 0 );
+  }
+
 }
