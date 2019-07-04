@@ -11,7 +11,8 @@ EV-Script.html은 지킬 기반의 블로그에서 쉽게 댓글 서비스를 �
 URL을 서비스에 등록하고 사용하는 절차는 아래와 같다.
 
 ```
-1 - evcommentservice.ga에 가입하고, + 버튼을 클릭해, 서비스를 사용할 홈페이지의 URL을 등록한다. URL을 등록할 때 http:www.{domain}.ga 처럼 등록해야 하고, 뒤에 / 가 붙으면 안 된다.
+1 - evcommentservice.ga에 가입하고, + 버튼을 클릭해, 서비스를 사용할 홈페이지의 URL을 등록한다. 
+URL을 등록할 때 http:www.{domain}.ga 처럼 등록해야 하고, 뒤에 / 가 붙으면 안 된다.
 
 2 - _config.yml (프로젝트 설정 파일) 에 아래와 같은 설정을 추가한다. User ID는 위에서 가입한 홈페이지의 ID를 등록한다.
 
