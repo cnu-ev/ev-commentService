@@ -17,7 +17,7 @@ a.navbar-brand{
 /* 위쪽 사이드바 버튼 스타일 */
 .side_btn{
   border: none;
-  background-color: #2c65c1;
+  background-color: #333333;
 }
 
 .bg-dark *{
@@ -25,7 +25,7 @@ a.navbar-brand{
 }
 
 #Background{
-  background-color: #c9ddff;
+  background-color: #e3e3e3;
 }
 
 #Copyright{

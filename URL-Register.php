@@ -58,9 +58,9 @@ if(mysqli_num_rows($ret_userID) < 1){
   <body id="Background">
     <div class="container">
       <!-- 인라인으로 스타일을 준 것은, bootstrap.css에서 색상 속성이 !important로 선언되어 있기 때문임. boostrap 파일을 변경하기보단, 인라인으로 새 속성을 주었음 -->
-      <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2c65c1 !important">
+      <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
 
-        <a class="navbar-brand" href="#"><img src="img/message-square.svg" style="margin-right: 10px;">서비스 중인 홈페이지</a>
+        <a class="navbar-brand" href="#"><img src="img/smile.svg" style="margin-right: 10px;">서비스 중인 홈페이지</a>
 
         <!-- 창 너비에 따라 버튼이 미디어 쿼리로, 두 종류로 나뉜다. -->
         <!-- 아래의 버튼은 창이 작을 때, 핸드폰이나 태블릿 같은 환경에서 사용할 버튼 및 a 태그 들이다.-->
@@ -74,7 +74,7 @@ if(mysqli_num_rows($ret_userID) < 1){
           <!-- ml은 margin-left. -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" data-toggle="modal" data-target="#ChattingRoomAddModal">새 홈페이지</a>
+              <a class="nav-link" data-toggle="modal" data-target="#HomePageAddModal">새 홈페이지</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" onclick="logout()">로그아웃</a>
@@ -90,7 +90,7 @@ if(mysqli_num_rows($ret_userID) < 1){
         <!-- 텍스트를 중간에 배치하기 위해 버튼들을 absoulte로 놓고 오른쪽엔 div로 따로 공간을 두었음 -->
         <!-- sizeUpOnHover가 들어간 엘리먼트는 hover 하면 크기가 커짐 -->
         <div class="btn-group float-right responsiveNone">
-          <button type="button" class="side_btn sizeUpOnHover" data-toggle="modal" data-target="#ChattingRoomAddModal"><img src="img/plus.svg" alt="Chatting Room Add Button"></button>
+          <button type="button" class="side_btn sizeUpOnHover" data-toggle="modal" data-target="#HomePageAddModal"><img src="img/plus.svg" alt="Service Add Button"></button>
           <button type="button" class="btn-sm side_btn dropdown-toggle sizeUpOnHover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/menu.svg" alt="sidebar menu"></button>
           <div class="dropdown-menu dropdown-menu-right">
             <!-- 로그아웃: 쿠키 제거 -->
@@ -103,7 +103,7 @@ if(mysqli_num_rows($ret_userID) < 1){
       </nav>
     </div>
 
-    <section id="ChattingRoomSection" class="container mt-1" style="padding-top: 75px;">
+    <section id="ServiceSection" class="container mt-1" style="padding-top: 75px;">
 
       <?php
 
@@ -140,7 +140,7 @@ if(mysqli_num_rows($ret_userID) < 1){
     </div>
 
 
-    <div id="ChattingRoomAddModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div id="HomePageAddModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -180,7 +180,7 @@ if(mysqli_num_rows($ret_userID) < 1){
             <div class="modal-body">
               <h4 class="text-center" style="font-size: 15px; margin-bottom: 20px;">등록된 URL을 DB에서 제거하시겠습니까?<br>해당 URL에 등록되어 있던 모든 댓글 데이터가 삭제됩니다.</h4>
               <div class="text-center" style="width: 70%; margin: 0 auto">
-                <a class="btn btn-sm btn-danger btn-yes btn-block" style="color:#ffffff;" data-dismiss="modal" onclick="DeleteChattingRoom()">네</a>
+                <a class="btn btn-sm btn-danger btn-yes btn-block" style="color:#ffffff;" data-dismiss="modal" onclick="DeleteService()">네</a>
                 <!-- data dismiss란 attribute를 줌으로써, 모달 박스를 닫는 이벤트를 구현할 수 있음 -->
                 <a class="btn btn-sm btn-success btn-no btn-block" style="color:#ffffff;" data-dismiss="modal">아니오</a>
               </div>
@@ -190,7 +190,7 @@ if(mysqli_num_rows($ret_userID) < 1){
     </div>
 
     <!-- p는 padding, mt는 margin-top란 의미 (Bootstrap 4 API spacing 참고) -->
-    <div id="FooterDiv" class="navbar p-1 fixed-bottom" style="background-color: #2c65c1 !important">
+    <div id="FooterDiv" class="navbar p-1 fixed-bottom" style="background-color: #333333 !important">
       <footer id="Copyright" class="p-3 text-center"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub>&nbsp;</footer>
     </div>
 

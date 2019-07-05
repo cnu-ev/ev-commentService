@@ -47,6 +47,30 @@
       }
    }
 
+   // 로그인 되어 있다면 (쿠키가 존재하면), 해당하는 ID의 프로필 사진을 찾아 띄우고
+   // 로그인 되어 있지 않다면 프로필 사진 대신 로그인 버튼을 띄운다.
+   $UserID = $_COOKIE["connectedUserID"];
+
+   $fetchMyProfileImage = "
+     SELECT * FROM usersinfotbl WHERE ID = " . $UserID;
+
+   $ret = mysqli_query($connect_object, $fetchMyProfileImage);
+
+   $row = mysqli_fetch_array($ret);
+
+   if(empty($UserID)){
+     $LoginButton = '<li id="EV-Login" style="float:right;" class="nav-tab" data-toggle="modal" data-target="#LogInModal">Login</li>';
+   }
+
+   else {
+     $ret = mysqli_query($connect_object, $fetchMyProfileImage);
+     $row = mysqli_fetch_array($ret);
+     $myProfileImageName = $row['ProfileImageFileName'];
+
+     $myProfileImageElement = '<li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" width="25px" height="25px" class="img-fluid rounded-circle" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
+   }
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -60,10 +84,11 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/comment.css">
     <script type="text/javascript">
-      // iframe이 load 되고 나서 부모 프레임에 height를 전달함.
-      // 부모 프레임은 자식 프레임의 origin을 확인해 evcommentservice.ga에서 올라온 메시지를
-      // 높이 메시지로 취급하고 iframe의 height 속성에 적용한다
       window.onload = function (){
+
+        // iframe이 load 되고 나서 부모 프레임에 height를 전달함.
+        // 부모 프레임은 자식 프레임의 origin을 확인해 evcommentservice.ga에서 올라온 메시지를
+        // 높이 메시지로 취급하고 iframe의 height 속성에 적용한다
         window.parent.postMessage({ height: document.body.scrollHeight }, '*');
       };
     </script>
@@ -76,7 +101,14 @@
           <li id="EV-CommentNumber" class="nav-tab">Comments</li>
           <li id="EV-UserID" class="nav-tab"></li>
           <li id="EV-Feedback" class="nav-tab"></li>
-          <li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" width="25px" height="25px" class="img-fluid rounded-circle" src="img/userDefaultProfile.svg" alt="Image For User Profile"></li>
+          <?php
+            if(empty($myProfileImageElement)){
+              echo $LoginButton;
+            }
+            else{
+              echo $myProfileImageElement;
+            }
+          ?>
         </ul>
       </header>
       <!-- 댓글 창들의 모음 컨테이너 -->
@@ -97,6 +129,7 @@
               <li id="post-button">제출</li>
             </ul>
           </div>
+          <p id="recommendLoginAlert" class="lead" style="font-size: 14px; color: #4c4c4c; display: none;">페이지에 로그인하시겠습니까?<br>익명으로 댓글을 남기시려면 제출을 한 번 더 클릭해주세요.</p>
         </div>
         <hr>
         <!-- 댓글 -->
@@ -119,6 +152,38 @@
         </div>
       </div>
       <hr>
+
+      <div id="LogInModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">EV Comment Service 로그인</h5>
+              <!-- data-dismiss 속성을 통해, 취소 버튼을 누르면 모달 박스가 없어지는 것을 구현 -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <!-- times를 x 버튼 대신 이용함 -->
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="php-Action/CommentPageLogin.php" method="post" accept-charset="utf-8">
+                <div class="form-group">
+                  <label for="ID">ID</label>
+                  <input id="ID" name="ID" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="PW">PW</label>
+                  <input id="PW" name="PW" type="text" class="form-control">
+                </div>
+                <div class="modal-footer">
+                  <!-- data-dismiss 속성을 통해, 취소 버튼을 누르면 모달 박스가 없어지는 것을 구현 -->
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                  <button type="submit" class="btn btn-primary">로그인</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <footer id="EV-Footer">
         <p style="padding-top: 7px;">&copy; 2019 Team EV</p>
       </footer>

@@ -11,7 +11,7 @@ class ShowHomePage{
         <button type="button" class="close" aria-label="Close" data-dismiss="alert">
           <span aria-hidden="true">&times;</span>
         </button>
-        <p id="ChattingRoomNotExistedWarning" class="lead" style="font-size: 14px; color: #4c4c4c;"><br>등록된 홈페이지가 존재하지 않습니다. <br><br>우측 상단바의 + 버튼을 눌러 새 홈페이지를 등록해보세요! </p>
+        <p id="NoServiceWarning" class="lead" style="font-size: 14px; color: #4c4c4c;"><br>등록된 홈페이지가 존재하지 않습니다. <br><br>우측 상단바의 + 버튼을 눌러 새 홈페이지를 등록해보세요! </p>
       </div>
     ');
   }

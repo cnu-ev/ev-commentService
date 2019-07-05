@@ -1,0 +1,35 @@
+<?php
+
+// CommentID는 Auto Index로, 삭제하고 다시 insert해도 중복된 값이 들어가지
+// 않으므로 ID 값으로 쓸 수 있음.
+$UserID = $_POST['userID'];
+$CommentID = $_POST['CommentID'];
+$URLID = $_POST['urlID'];
+$PageID = $_POST['pageID'];
+
+$connect_object = MySQLConnection::DB_Connect($URLID);
+
+// CommentID와 같은 레코드를 삭제한다.
+$selectComment = "
+  SELECT FROM '" . $PageID . "' WHERE CommentID ='$CommentID'
+";
+
+$ret = mysqli_query($connect_object, $selectComment);
+
+$row = mysqli_fetch_array($ret);
+
+// User ID가 Comment User ID와 다를 경우 댓글을 삭제할 수 없게 한다.
+// 이미 지워진 댓글을 시도하려고 하는 경우 역시 아무 행동도 취하지 않는다.
+if(empty($row) || $row['UserID'] != $UserID){
+  exit();
+}
+
+// CommentID와 같은 레코드를 삭제한다.
+$deleteComment = "
+  DELETE FROM '" . $PageID . "' WHERE CommentID ='$CommentID'
+";
+
+$ret = mysqli_query($connect_object, $deleteComment);
+
+// 코멘트를 지운 뒤 페이지를 리로드 해 데이터를 다시 가져온다. 
+echo ("<script>location.reload();</script>");
