@@ -21,10 +21,20 @@
   registerFunction();
 });
 
+// 클릭되거나, 텍스트가 입력되면 placeholder를 숨김
+function hidePlaceholder(){
+  $('#Textarea-placeholder').hide();
+}
+
+function registerFunction(){
+
+  $('#CommentArea').click(function(){
+    hidePlaceholder();
+  });
+}
+
 window.addEventListener('message', function(e) {
   if(e.origin == "http://evcommentservice.ga"){
-    console.log(e.data);
-    console.log(e.origin);
     document.getElementById('EV-Iframe').height = e.data.height;
   }
 });

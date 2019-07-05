@@ -1,12 +1,3 @@
-// 클릭되거나, 텍스트가 입력되면 placeholder를 숨김
-function hidePlaceholder(){
-  $('#Textarea-placeholder').hide();
-}
-
-$('#CommentArea').click(function(){
-  hidePlaceholder();
-});
-
 // 커서를 마지막 위치로 이동시킴
 // 지금 당장은 필요 없지만 댓글에 이미지를 포함시키는 기능을 추가한다면 필요해질 것
 // https://stackoverflow.com/questions/4609405/set-focus-after-last-character-in-text-box
