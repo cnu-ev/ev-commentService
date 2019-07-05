@@ -1,5 +1,5 @@
-// var verification_URL = "http://www.evcommentservice.ga/php-Action/URLVerification.php";
-var verification_URL = "http://localhost/php-Action/URLVerification.php";
+// var verification_URL = "http://localhost/php-Action/URLVerification.php";
+var verification_URL = "http://evcommentservice.ga/php-Action/URLVerification.php";
 
 // 컴포넌트를 부르고 이벤트를 등록
 (async function(){
