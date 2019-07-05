@@ -1,11 +1,8 @@
-// var verification_URL = "http://localhost/php-Action/URLVerification.php";
-var verification_URL = "http://evcommentservice.ga/php-Action/URLVerification.php";
-
 // 컴포넌트를 부르고 이벤트를 등록
 (async function(){
   $.ajax({
       type: "GET",
-      url : verification_URL,
+      url : "http://evcommentservice.ga/php-Action/URLVerification.php",
       data : {
           UserName : userName,
           PageIdentifier : pageIdentifier,
@@ -35,3 +32,11 @@ function registerFunction(){
     hidePlaceholder();
   });
 }
+
+window.addEventListener('message', function(e) {
+  if(e.origin == "http://evcommentservice.ga"){
+    console.log(e.data);
+    console.log(e.origin);
+    document.getElementById('the_iframe').height = e.data.height;
+  }
+});

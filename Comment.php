@@ -59,6 +59,12 @@
     <!-- Bootstrap 스타일 시트를 적용. min이 붙은 것은 난독화 파일이기 때문.-->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/comment.css">
+    <script type="text/javascript">
+      window.onload = function (){
+        console.log(document.body.scrollHeight);
+        window.parent.postMessage({ height: document.body.scrollHeight }, '*');
+      };
+    </script>
   </head>
   <body>
     <div id="EV-Container" class="container">
@@ -127,5 +133,6 @@
   <script src="./lib/mdb.min.js"></script>
   <!-- 커스텀 자바스크립트 추가하기 -->
   <script src="./js/comment.js"></script>
+  <!-- iframe 높이 자동 계산 자바스크립트 -->
 
 </html>

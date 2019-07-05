@@ -29,7 +29,7 @@ if(mysqli_num_rows($ret) < 1){
 // PageID의 테이블이 존재하는지 확인
 // 존재한다면 해당 테이블의 댓글 데이터를 반환
 if(MySQLConnection::isExist($URL_ID, $PageIdentifier)){
-  echo "<iframe style='width: 100%; border: none; height='100vh'; overflow-y:hidden;' src='http://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
+  echo "<iframe id='the_iframe' style='width:100%; border:none;' scrolling='no' src='http://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
 }
 // 존재하지 않는다면 새 테이블을 생성한 후 컴포넌트만 반환
 else {
@@ -48,7 +48,7 @@ else {
 
   $ret = mysqli_query($connect_url, $createNewTable);
 
-  echo "<iframe style='width: 100%; border: none; height='100vh'; overflow-y:hidden;' src='http://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
+  echo "<iframe id='the_iframe' style='width:100%; border:none;' scrolling='no' src='http://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
 }
 
 
