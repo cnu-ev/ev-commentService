@@ -60,8 +60,10 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/comment.css">
     <script type="text/javascript">
+      // iframe이 load 되고 나서 부모 프레임에 height를 전달함.
+      // 부모 프레임은 자식 프레임의 origin을 확인해 evcommentservice.ga에서 올라온 메시지를
+      // 높이 메시지로 취급하고 iframe의 height 속성에 적용한다
       window.onload = function (){
-        console.log(document.body.scrollHeight);
         window.parent.postMessage({ height: document.body.scrollHeight }, '*');
       };
     </script>
@@ -133,6 +135,5 @@
   <script src="./lib/mdb.min.js"></script>
   <!-- 커스텀 자바스크립트 추가하기 -->
   <script src="./js/comment.js"></script>
-  <!-- iframe 높이 자동 계산 자바스크립트 -->
 
 </html>
