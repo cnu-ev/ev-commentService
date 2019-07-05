@@ -120,12 +120,13 @@
               <span id="Textarea-placeholder">여기에 텍스트를 입력하세요..</span>
               <div id="CommentArea" class="alignLeft" width="100%" tabindex="0" role="textbox" aria-multiline="true" contenteditable="PLAINTEXT-ONLY" data-role="editable" class="text-right" title="Join the discussion..."></div>
             </div>
+          <!-- 텍스트 에디터 내에 해당 태그를 붙여주는 버튼들이다. -->
           <div id="EV-Buttons">
             <ul>
-              <li><b>B</b></li>
-              <li><i>I</i></li>
-              <li><u>U</u></li>
-              <li><s>S</s></li>
+              <li id="EV-Buttons-B" onclick="editButtonClicked(this.id)"><b>B</b></li>
+              <li id="EV-Buttons-I" onclick="editButtonClicked(this.id)"><i>I</i></li>
+              <li id="EV-Buttons-U" onclick="editButtonClicked(this.id)"><u>U</u></li>
+              <li id="EV-Buttons-S" onclick="editButtonClicked(this.id)"><s>S</s></li>
               <li id="post-button">제출</li>
             </ul>
           </div>

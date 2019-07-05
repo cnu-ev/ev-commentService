@@ -1,5 +1,7 @@
 <?php
 
+require_once('MySQLConection.php');
+
 $UserID = $_POST['userID'];
 $CommentContent = $_POST['commentContent'];
 $URLID = $_POST['urlID'];

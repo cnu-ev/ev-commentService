@@ -1,3 +1,19 @@
+// B, I, U, S 등 편집기의 각 버튼이 클릭 되었을 때의 이벤트 처리를
+// 모두 담당하는 함수
+function editButtonClicked(clickedButton){
+  switch (clickedButton) {
+    case "EV-Buttons-B":
+      break;
+    case "EV-Buttons-I":
+      break;
+    case "EV-Buttons-U":
+      break;
+    case "EV-Buttons-S":
+      break;
+
+  }
+}
+
 // 제출 버튼을 클릭해 댓글을 달 때 실행되는 함수
 function postComment(){
 
@@ -13,7 +29,7 @@ function postComment(){
   // 위 상태에서 한 번 더 제출 버튼을 클릭하면 익명으로 댓글을 남기기 위해,
   // UserID에 Anonymous (익명)을 저장한다
   // 댓글 등록 시간은 클라이언트가 보내는 시간이 아니라, DB에 저장되는 시간으로 저장한다.
-  // profileImageFileName의 Null 처리는 여기서 하지 않음에 주의. 
+  // profileImageFileName의 Null 처리는 여기서 하지 않음에 주의.
   if(userID == null){
     userID = 'Anonymous';
   }
