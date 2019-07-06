@@ -20,11 +20,11 @@
       #                                                           #
       #############################################################
 
-      if(empty($profileImageName)){
+      if(empty($ProfileImageFileName)){
         $ProfileImageFileName = 'img/userDefaultProfile.svg';
       }
       else{
-        $ProfileImageFileName =  'profileImages/' . $profileImageName;
+        $ProfileImageFileName =  'profileImages/' . $ProfileImageFileName;
       }
 
       $profileImageElement = sprintf(
@@ -47,14 +47,17 @@
         <li id="ev-comment-%s" class="row comment">
           %s
           <div class="comment col-10">
-            <span class="comment-userID">%s</span><br>
-            <p class="comment-content">%s</p>
+            <span class="comment-userID">%s</span>
+            <span style="color: #777777; font-size: 12px;">&nbsp;&nbsp;&nbsp;%s</span>
+            <br>
+            <p class="comment-content">%s</p><br>
             %s
           </div>
         </li>',
           $CommentIndex,
           $profileImageElement,
           $CommentUserId,
+          $DateTime,
           $Content,
           $ElementsOnMyComment
         );
@@ -112,7 +115,7 @@
         // iframe이 load 되고 나서 부모 프레임에 height를 전달함.
         // 부모 프레임은 자식 프레임의 origin을 확인해 evcommentservice.ga에서 올라온 메시지를
         // 높이 메시지로 취급하고 iframe의 height 속성에 적용한다
-        window.parent.postMessage({ height: document.body.scrollHeight }, '*');
+        onHeightChange();
       };
     </script>
   </head>
@@ -154,7 +157,7 @@
             </ul>
           </div>
           <div id="recommendLoginAlert" class="alert alert-success alert-dismissible fade show" style="display: none;">
-            <p class="lead" style="font-size: 14px; color: #4c4c4c;">페이지에 로그인하시겠습니까?<br>익명으로 댓글을 남기시려면 제출을 한 번 더 클릭해주세요.</p>
+            <p class="lead" style="font-size: 14px; color: #4c4c4c;">Ev Comment 서비스에 로그인하시겠습니까?<br>익명으로 댓글을 남기시려면 제출을 한 번 더 클릭해주세요.</p>
           </div>
         </div>
         <hr>

@@ -36,6 +36,7 @@ function postComment(){
   // 로그인 되어 있지 않은 경우 우선 로그인을 권유하는 알림을 띄운다
   if(userID == null && !($('#recommendLoginAlert').is(":visible"))){
     $('#recommendLoginAlert').show();
+    onHeightChange();
     return;
   }
 
@@ -104,6 +105,10 @@ $('#CommentArea').click(function(){
   hidePlaceholder();
 });
 
+// 높이가 변하면 부모 프레임에 높이를 전달
+function onHeightChange(){
+  window.parent.postMessage({ height: document.body.scrollHeight }, '*');
+}
 
 // get 방식 파라미터 값을 가져오는 함수
 // http://naminsik.com/blog/3070 참고
