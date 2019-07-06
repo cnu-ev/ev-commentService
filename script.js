@@ -1,8 +1,9 @@
 // 컴포넌트를 부르고 이벤트를 등록
 (async function(){
   $.ajax({
+      crossOrigin: true,
       type: "GET",
-      url : "http://evcommentservice.ga/php-Action/URLVerification.php",
+      url : "https://evcommentservice.ga/php-Action/URLVerification.php",
       data : {
           UserName : userName,
           PageIdentifier : pageIdentifier,
@@ -22,7 +23,7 @@
 });
 
 window.addEventListener('message', function(e) {
-  if(e.origin == "http://evcommentservice.ga"){
+  if(e.origin == "https://evcommentservice.ga"){
     document.getElementById('EV-Iframe').height = e.data.height;
   }
 });
