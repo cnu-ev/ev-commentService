@@ -61,8 +61,32 @@ function postComment(){
     },
 
     success : function(data, status, xhr) {
-      console.log("서버로 채팅 데이터 전송 성공" + data);
+      location.reload();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+    }
+  });
+}
 
+function deleteComment(id){
+
+  var userID = $.cookie('connectedUserID');
+  // id 중 숫자만 추출
+  var commentID = id.replace(/[^0-9]/g,"");
+
+  $.ajax({
+    type: "POST",
+    url : "../php-Action/DeleteComment.php",
+    data: {
+      userID : userID,
+      CommentID : commentID,
+      urlID : getParameterByName('db'),
+      pageID : getParameterByName('pageID')
+    },
+
+    success : function(data, status, xhr) {
+      location.reload();
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
@@ -111,4 +135,11 @@ function focusCampo(id){
     }else{
         inputField.focus();
     }
+}
+
+function logout(){
+  // 저장해 두었던 로그인 관련 쿠키들을 삭제함
+  $.removeCookie('connectedUserID');
+  $.removeCookie('profileImageFileName');
+  location.reload();
 }

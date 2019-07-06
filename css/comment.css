@@ -8,6 +8,10 @@
   outline: none !important;
 }
 
+.comment{
+  margin-bottom: 15px;
+}
+
 .comment-avatar{
 
 }
@@ -141,4 +145,9 @@
 
 #connectedUser-Avatar{
   display: default;
+}
+
+#recommendLoginAlert p{
+  font-size: 12pt;
+  text-align: center;
 }

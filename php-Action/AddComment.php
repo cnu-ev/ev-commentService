@@ -16,8 +16,6 @@ else {
 
 $connect_object = MySQLConnection::DB_Connect($URLID) or die("Error Occured in Connection to DB");
 
-var_dump($PageID);
-
 // 해당 DB의 페이지 ID 테이블에 새 레코드 입력
 $insertComment = "
   Insert INTO `" . $PageID . "`(

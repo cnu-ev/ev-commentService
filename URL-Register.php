@@ -133,7 +133,7 @@ if(mysqli_num_rows($ret_userID) < 1){
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <?php
-            echo UserModalBox::GenerateUserInfoModal($row_userID['ID'], $row_userID['SignUpDate'], $row_userID['ProfileImageFileName']);
+            echo UserModalBox::GenerateUserInfoModal($row_userID['ID'], $row_userID['ProfileImageFileName']);
           ?>
         </div>
       </div>

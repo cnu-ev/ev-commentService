@@ -2,7 +2,7 @@
 
 class UserModalBox{
 
-  static public function GenerateUserInfoModal($UserID, $SignUpDate, $ProfileImageFileName){
+  static public function GenerateUserInfoModal($UserID, $ProfileImageFileName){
 
     // 프로필 이미지 지정해 놓은 게 없는 경우, 디폴트 이미지를 표시
     if(empty($ProfileImageFileName)){

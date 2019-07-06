@@ -1,4 +1,5 @@
 <?php
+  require_once('php-Action\UserModalBox.php');
   require_once('php-Action\MySQLConection.php');
 
   $URL_ID = $_GET['db'];
@@ -31,18 +32,31 @@
         $ProfileImageFileName
       );
 
+      // 본인이 단 댓글인 경우, Edit, Delete Button을 활성화 함
+      if(!empty($_COOKIE["connectedUserID"]) && $_COOKIE["connectedUserID"] == $CommentUserId){
+        $ElementsOnMyComment =
+        '<span><img src="./img/trash-2.svg" width="16px" height="16px" onclick="deleteComment($(this).closest(\'li\').attr(\'id\'))"></span>
+        <span><img src="./img/edit.svg" width="16px" height="16px"></span>';
+      }
+      else {
+        $ElementsOnMyComment = "";
+      }
+
       return sprintf(
       '
-        <li class="row">
+        <li id="ev-comment-%s" class="row comment">
           %s
           <div class="comment col-10">
             <span class="comment-userID">%s</span><br>
             <p class="comment-content">%s</p>
+            %s
           </div>
         </li>',
+          $CommentIndex,
           $profileImageElement,
           $CommentUserId,
-          $Content
+          $Content,
+          $ElementsOnMyComment
         );
       }
    }
@@ -67,10 +81,14 @@
      $myProfileImageName = $row['ProfileImageFileName'];
 
      if(empty($myProfileImageName)){
-       $myProfileImageElement = '<li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" width="25px" height="25px" class="img-fluid rounded-circle" src="img/userDefaultProfile.svg" alt="Image For User Profile"></li>';
+       $myProfileImageElement = '
+       <li id="EV-Logout" style="float:right;" onclick="logout()">Logout</li>
+       <li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" data-toggle="modal" data-target="#UserInfoModal" width="25px" height="25px" class="img-fluid rounded-circle" src="img/userDefaultProfile.svg" alt="Image For User Profile"></li>';
      }
      else{
-      $myProfileImageElement = '<li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" width="25px" height="25px" class="img-fluid rounded-circle" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
+      $myProfileImageElement ='
+      <li id="EV-Logout" style="float:right;" onclick="logout()">Logout</li>
+      <li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" data-toggle="modal" data-target="#UserInfoModal" width="25px" height="25px" class="img-fluid rounded-circle" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
      }
 
 
@@ -135,7 +153,9 @@
               <li id="EV-Buttons-CommentSubmit" onclick="editButtonClicked(this.id)" style="float: right;">제출</li>
             </ul>
           </div>
-          <p id="recommendLoginAlert" class="lead" style="font-size: 14px; color: #4c4c4c; display: none;">페이지에 로그인하시겠습니까?<br>익명으로 댓글을 남기시려면 제출을 한 번 더 클릭해주세요.</p>
+          <div id="recommendLoginAlert" class="alert alert-success alert-dismissible fade show" style="display: none;">
+            <p class="lead" style="font-size: 14px; color: #4c4c4c;">페이지에 로그인하시겠습니까?<br>익명으로 댓글을 남기시려면 제출을 한 번 더 클릭해주세요.</p>
+          </div>
         </div>
         <hr>
         <!-- 댓글 -->
@@ -158,6 +178,24 @@
         </div>
       </div>
       <hr>
+
+      <!-- fade 클래스를 이용해 애니메이션을 줌 -->
+      <!-- tabindex에 대해선 오른쪽 참고 https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex?hl=ko -->
+      <div id="UserInfoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <!-- modal-sm, modal-md, modal-lg는 modal 창 크기에 대한 부트스트랩 속성임 -->
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <?php
+              if(empty($_COOKIE['profileImageFileName'])){
+                echo UserModalBox::GenerateUserInfoModal($_COOKIE["connectedUserID"], '');
+              }
+              else{
+                echo UserModalBox::GenerateUserInfoModal($_COOKIE["connectedUserID"], $_COOKIE['profileImageFileName']);
+              }
+            ?>
+          </div>
+        </div>
+      </div>
 
       <div id="LogInModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
         <div class="modal-dialog">
