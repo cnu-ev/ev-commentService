@@ -28,7 +28,7 @@ $insertData = "
 )";
 
 $createNewService = "
-  CREATE DATABASE `$URL_ID`
+  CREATE DATABASE `$URL_ID` CHARSET 'utf8mb4' COLLATE utf8mb4_unicode_ci
 ";
 
 $createDefaultTable = "

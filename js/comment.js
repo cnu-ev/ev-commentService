@@ -10,8 +10,21 @@ function editButtonClicked(clickedButton){
       break;
     case "EV-Buttons-S":
       break;
+    case "EV-Buttons-CommentSubmit":
+      if(verifyComment() == true){
+        postComment();
+      }
+      break;
 
   }
+}
+
+// 댓글이 안전한 형식인지 검사하는 함수.
+function verifyComment(){
+  if($('#CommentArea').html() == ''){
+    return false;
+  }
+  return true;
 }
 
 // 제출 버튼을 클릭해 댓글을 달 때 실행되는 함수
@@ -41,7 +54,7 @@ function postComment(){
     url : "../php-Action/AddComment.php",
     data: {
       userID : userID,
-      commentContent : $('#CommentArea').val(),
+      commentContent : $('#CommentArea').html(),
       urlID : getParameterByName('db'),
       pageID : getParameterByName('pageID'),
       profileImageFileName : profileImageFileName
@@ -57,6 +70,16 @@ function postComment(){
   });
 
 }
+
+// 클릭되거나, 텍스트가 입력되면 placeholder를 숨김
+function hidePlaceholder(){
+  $('#Textarea-placeholder').hide();
+}
+
+$('#CommentArea').click(function(){
+  hidePlaceholder();
+});
+
 
 // get 방식 파라미터 값을 가져오는 함수
 // http://naminsik.com/blog/3070 참고

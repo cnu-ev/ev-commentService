@@ -47,29 +47,34 @@
       }
    }
 
+
    // 로그인 되어 있다면 (쿠키가 존재하면), 해당하는 ID의 프로필 사진을 찾아 띄우고
    // 로그인 되어 있지 않다면 프로필 사진 대신 로그인 버튼을 띄운다.
-   $UserID = $_COOKIE["connectedUserID"];
-
-   $fetchMyProfileImage = "
-     SELECT * FROM usersinfotbl WHERE ID = " . $UserID;
-
-   $ret = mysqli_query($connect_object, $fetchMyProfileImage);
-
-   $row = mysqli_fetch_array($ret);
-
-   if(empty($UserID)){
+   if(empty($_COOKIE["connectedUserID"])){
      $LoginButton = '<li id="EV-Login" style="float:right;" class="nav-tab" data-toggle="modal" data-target="#LogInModal">Login</li>';
    }
+   else{
 
-   else {
-     $ret = mysqli_query($connect_object, $fetchMyProfileImage);
+     $connect_userdb = MySQLConnection::DB_Connect("userdb");
+
+     $fetchMyProfileImage = "
+       SELECT * FROM usersinfotbl WHERE ID = '" . $_COOKIE["connectedUserID"] . "'";
+
+     $ret = mysqli_query($connect_userdb, $fetchMyProfileImage);
+
      $row = mysqli_fetch_array($ret);
+
      $myProfileImageName = $row['ProfileImageFileName'];
 
-     $myProfileImageElement = '<li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" width="25px" height="25px" class="img-fluid rounded-circle" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
+     if(empty($myProfileImageName)){
+       $myProfileImageElement = '<li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" width="25px" height="25px" class="img-fluid rounded-circle" src="img/userDefaultProfile.svg" alt="Image For User Profile"></li>';
+     }
+     else{
+      $myProfileImageElement = '<li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" width="25px" height="25px" class="img-fluid rounded-circle" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
+     }
+
+
    }
-  }
 
 ?>
 
@@ -127,7 +132,7 @@
               <li id="EV-Buttons-I" onclick="editButtonClicked(this.id)"><i>I</i></li>
               <li id="EV-Buttons-U" onclick="editButtonClicked(this.id)"><u>U</u></li>
               <li id="EV-Buttons-S" onclick="editButtonClicked(this.id)"><s>S</s></li>
-              <li id="post-button">제출</li>
+              <li id="EV-Buttons-CommentSubmit" onclick="editButtonClicked(this.id)" style="float: right;">제출</li>
             </ul>
           </div>
           <p id="recommendLoginAlert" class="lead" style="font-size: 14px; color: #4c4c4c; display: none;">페이지에 로그인하시겠습니까?<br>익명으로 댓글을 남기시려면 제출을 한 번 더 클릭해주세요.</p>
@@ -173,7 +178,7 @@
                 </div>
                 <div class="form-group">
                   <label for="PW">PW</label>
-                  <input id="PW" name="PW" type="text" class="form-control">
+                  <input id="PW" name="PW" type="password" class="form-control">
                 </div>
                 <div class="modal-footer">
                   <!-- data-dismiss 속성을 통해, 취소 버튼을 누르면 모달 박스가 없어지는 것을 구현 -->
@@ -199,6 +204,8 @@
   <script src="./lib/bootstrap.min.js"></script>
   <!-- MDB 라이브러리 추가하기 -->
   <script src="./lib/mdb.min.js"></script>
+  <!-- 쿠키 사용 라이브러리 추가하기 -->
+  <script src="./lib/jquery.cookie.js"></script>
   <!-- 커스텀 자바스크립트 추가하기 -->
   <script src="./js/comment.js"></script>
 

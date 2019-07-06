@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-*{
+* {
   box-sizing: border-box;
   font-family: 'Jeju Gothic';
   outline: none !important;
@@ -22,6 +22,11 @@
   font-size: 10;
   font-weight: bold;
 }
+
+#PW{
+  font-family: 'Standard font, Serif font: Times New Roman' !important;
+}
+
 
 #EV-comment ul {
   list-style-type: none;

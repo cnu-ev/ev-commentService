@@ -29,7 +29,7 @@ a.navbar-brand{
 }
 
 #Background{
-  background-color: #e3e3e3;
+  background-color: #e3e3e3 !important;
 }
 
 #Copyright{
