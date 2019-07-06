@@ -143,7 +143,7 @@
           <!-- Avatar (셋팅된 프로필 사진) -->
             <!-- 댓글 입력 창 -->
             <div class="textarea-outer col-sm-12">
-              <span id="Textarea-placeholder">여기에 텍스트를 입력하세요..</span>
+              <span id="Textarea-placeholder" onclick="textAreaClicked()">여기에 텍스트를 입력하세요..</span>
               <div id="CommentArea" class="alignLeft" width="100%" tabindex="0" role="textbox" aria-multiline="true" contenteditable="PLAINTEXT-ONLY" data-role="editable" class="text-right" title="Join the discussion..."></div>
             </div>
           <!-- 텍스트 에디터 내에 해당 태그를 붙여주는 버튼들이다. -->

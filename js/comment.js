@@ -3,12 +3,16 @@
 function editButtonClicked(clickedButton){
   switch (clickedButton) {
     case "EV-Buttons-B":
+      $('#CommentArea').html("<b>" + $('#CommentArea').html() + "</b>");
       break;
     case "EV-Buttons-I":
+      $('#CommentArea').html("<i>" + $('#CommentArea').html() + "</i>");
       break;
     case "EV-Buttons-U":
+      $('#CommentArea').html("<u>" + $('#CommentArea').html() + "</u>");
       break;
     case "EV-Buttons-S":
+      $('#CommentArea').html("<s>" + $('#CommentArea').html() + "</s>");
       break;
     case "EV-Buttons-CommentSubmit":
       if(verifyComment() == true){
@@ -17,6 +21,12 @@ function editButtonClicked(clickedButton){
       break;
 
   }
+}
+
+// 클릭되거나, 텍스트가 입력되면 placeholder를 숨김
+function textAreaClicked(){
+  $('#CommentArea').focus();
+  $('#Textarea-placeholder').hide();
 }
 
 // 댓글이 안전한 형식인지 검사하는 함수.
@@ -97,12 +107,9 @@ function deleteComment(id){
 }
 
 // 클릭되거나, 텍스트가 입력되면 placeholder를 숨김
-function hidePlaceholder(){
-  $('#Textarea-placeholder').hide();
-}
 
 $('#CommentArea').click(function(){
-  hidePlaceholder();
+  textAreaClicked();
 });
 
 // 높이가 변하면 부모 프레임에 높이를 전달
