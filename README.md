@@ -13,8 +13,8 @@ evcommentservice.ga 홈페이지엔 모바일 환경에서도 용이하게 사�
 `https://feathericons.com`
 
 
-
 <h2>Environment Details</h2>
+
 >xampp for windows 7.1.30, xampp control panel 3.2.4
 >
 >Apache 2.4.39
@@ -27,11 +27,9 @@ evcommentservice.ga 홈페이지엔 모바일 환경에서도 용이하게 사�
 >
 >JQuery 3.2.1
 
-그 외 도메인 임대는 freenom `(https://www.freenom.com/en/index.html?lang=en)` 
+그 외 도메인 임대는 freenom (https://www.freenom.com/en/index.html?lang=en),  
 
-https 프로토콜 등록은 cloudFlare `(https://jsdev.kr/t/https-cloudflare-flexible-ssl/1973)` 의 서비스를 이용했다.
-
-
+https 프로토콜 등록은 cloudFlare (https://jsdev.kr/t/https-cloudflare-flexible-ssl/1973)를 이용했다.
 
 <h2>How to Use</h2>
 EV-Script.html은 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
