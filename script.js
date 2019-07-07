@@ -1,4 +1,4 @@
-// 컴포넌트를 부르고 이벤트를 등록
+// success시, iframe 태그를 부모 창에 전송함 
 (async function(){
   $.ajax({
       crossOrigin: true,
