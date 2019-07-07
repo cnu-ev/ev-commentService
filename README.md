@@ -29,6 +29,10 @@ https://feathericons.com/
 >
 >JQuery 3.2.1
 
+그 외 도메인 임대는 freenom (https://www.freenom.com/en/index.html?lang=en),  
+
+https 프로토콜 등록은 cloudFlare (https://jsdev.kr/t/https-cloudflare-flexible-ssl/1973)를 이용했다.
+
 
 
 <h2>How to Use</h2>
