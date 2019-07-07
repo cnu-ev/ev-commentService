@@ -40,8 +40,8 @@ function verifyComment(){
 // 제출 버튼을 클릭해 댓글을 달 때 실행되는 함수
 function postComment(){
 
-  var userID = $.cookie('connectedUserID');
-  var profileImageFileName = $.cookie('profileImageFileName');
+  let userID = $.cookie('connectedUserID');
+  let profileImageFileName = $.cookie('profileImageFileName');
 
   // 로그인 되어 있지 않은 경우 우선 로그인을 권유하는 알림을 띄운다
   if(userID == null && !($('#recommendLoginAlert').is(":visible"))){
@@ -82,9 +82,9 @@ function postComment(){
 
 function deleteComment(id){
 
-  var userID = $.cookie('connectedUserID');
+  let userID = $.cookie('connectedUserID');
   // id 중 숫자만 추출
-  var commentID = id.replace(/[^0-9]/g,"");
+  let commentID = id.replace(/[^0-9]/g,"");
 
   $.ajax({
     type: "POST",
@@ -154,4 +154,64 @@ function logout(){
   $.removeCookie('connectedUserID');
   $.removeCookie('profileImageFileName');
   location.reload();
+}
+
+var isEditMode = false;
+// 수정 중인 (수정 중이었던) Comment의 ContentID
+var editCommentContentID;
+var editCommentContent;
+
+// 현재 수정 상태라면 수정을 취소하는 명령으로,
+// 현재 수정 상태가 아니라면 editArea로 만드는 명령으로 작동
+function editComment(id, submitButton){
+  if(isEditMode){
+    $('#' + editCommentContentID).removeAttr('contenteditable');
+    $('#' + editCommentContentID).html(editCommentContent);
+    $('#' + editCommentContentID).nextAll('sendCommentUpdateButton').hide();
+
+    if(id == editCommentContentID) {
+      isEditMode = false;
+      onHeightChange();
+      return;
+    }
+  }
+
+  isEditMode = true;
+  editCommentContentID = id;
+  editCommentContent = $('#' + id).html();
+  submitButton.show();
+  $('#' + id).attr('contenteditable', 'PLAINTEXT-ONLY');
+  $('#' + id).addClass('editArea');
+  onHeightChange();
+}
+
+// 수정 버튼을 클릭하면 댓글 내용을 수정하기 위한 조치를 한 후, 제출 버튼 (이미지)을 추가한다.
+// 그 상태에서 제출 버튼을 클릭하면, sendCommentUpdateMessage 가 실행되어 Ajax로 EditComment.php 내 코드를 실행해
+// DB 에서 해당 레코드 Comment Content를 수정한다
+function sendCommentUpdateMessage(contentID){
+
+  let userID = $.cookie('connectedUserID');
+  // id 중 숫자만 추출
+  let commentID = contentID.replace(/[^0-9]/g,"");
+  let content = contentID.html();
+
+  $.ajax({
+    type: "POST",
+    url : "../php-Action/EditComment.php",
+    data: {
+      userID : userID,
+      CommentID : commentID,
+      urlID : getParameterByName('db'),
+      pageID : getParameterByName('pageID'),
+      updatedContent : content
+    },
+
+    success : function(data, status, xhr) {
+      location.reload();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+    }
+  });
+
 }

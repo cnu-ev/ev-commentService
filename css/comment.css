@@ -17,14 +17,28 @@
 }
 
 .comment-content{
-  display: inline;
-  margin-top: 30px;
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .comment-userID{
   color: #678ac2;
   font-size: 10;
   font-weight: bold;
+}
+
+.editArea{
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  min-height: 50px;
+  max-height: 250px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2px solid #616161;
+  line-height: 1.4;
+  font-size: 14px;
+  cursor: text;
 }
 
 #PW{
@@ -150,4 +164,9 @@
 #recommendLoginAlert p{
   font-size: 12pt;
   text-align: center;
+}
+
+#smallModal{
+  padding: 15px;
+  background-image: url("../img/userProfileBackImage.png");
 }

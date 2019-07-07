@@ -1,5 +1,4 @@
 <?php
-
 require_once('MySQLConection.php');
 
 // CommentID는 Auto Index로, 삭제하고 다시 insert해도 중복된 값이 들어가지
@@ -8,6 +7,7 @@ $UserID = $_POST['userID'];
 $CommentID = $_POST['CommentID'];
 $URLID = $_POST['urlID'];
 $PageID = $_POST['pageID'];
+$UpdatedContent = $_POST['updatedContent'];
 
 $connect_object = MySQLConnection::DB_Connect($URLID) or die("Error Occured in Connection to DB");
 
@@ -27,9 +27,9 @@ if(empty($row) || $row['CommentUserId'] != $UserID){
   exit();
 }
 
-// CommentID와 같은 레코드를 삭제한다.
-$deleteComment = "
-  DELETE FROM `" . $PageID . "` WHERE CommentIndex = '$CommentID'
+// CommentID와 같은 레코드를 업데이트 한다.
+$updateComment = "
+  UPDATE `" . $PageID . "` SET CommentUserId=" . $UpdatedContent . " WHERE CommentIndex = '$CommentID'
 ";
 
-$ret = mysqli_query($connect_object, $deleteComment) or die("Error Occured in deleteing Data");
+$ret = mysqli_query($connect_object, $updateComment);
