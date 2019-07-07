@@ -1,5 +1,5 @@
 <h2>Outline</h2>
-ev-front는 `지킬 기반의 블로그` 에 댓글 서비스를 쉽게 추가할 수 있도록 하기 위해 만든 댓글 컴포넌트 및 댓글 서비스 홈페이지 (백엔드) 프로젝트를 포함하고 있다.  
+ev-front는 지킬 기반의 블로그 에 댓글 서비스를 쉽게 추가할 수 있도록 하기 위해 만든 댓글 컴포넌트 및 댓글 서비스 홈페이지 (백엔드) 프로젝트를 포함하고 있다.  
 
 백엔드는 모두 php를 사용해 작성했고, DB는 mySQL을 사용했다.
 
@@ -10,7 +10,7 @@ evcommentservice.ga 홈페이지엔 모바일 환경에서도 용이하게 사�
 
 프로젝트에 사용된 svg 아이콘은 모두 아래 페이지에서 다운로드해 사용한 것이다.
 
-`https://feathericons.com`
+https://feathericons.com
 
 
 <h2>Environment Details</h2>
@@ -27,9 +27,9 @@ evcommentservice.ga 홈페이지엔 모바일 환경에서도 용이하게 사�
 >
 >JQuery 3.2.1
 
-그 외 도메인 임대는 freenom `(https://www.freenom.com/en/index.html?lang=en)`,  
+그 외 도메인 임대는 freenom (https://www.freenom.com/en/index.html?lang=en),  
 
-https 프로토콜 등록은 cloudFlare `(https://jsdev.kr/t/https-cloudflare-flexible-ssl/1973)` 를 이용했다.
+https 프로토콜 등록은 cloudFlare (https://jsdev.kr/t/https-cloudflare-flexible-ssl/1973) 를 이용했다.
 
 <h2>How to Use</h2>
 EV-Script.html은 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
