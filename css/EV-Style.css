@@ -1,0 +1,36 @@
+/* 1에 가까울 수록 정도가 약함, 5에 가까울수록 정도가 심함 */
+/* #f2f2f2는 배경색 */
+
+.comment-positive01{
+  background: linear-gradient( to bottom, #edfff3, #f2f2f2 80%) !important;
+}
+.comment-positive02{
+  background: linear-gradient( to bottom, #c2f2d1, #f2f2f2 80%) !important;
+}
+.comment-positive03{
+  background: linear-gradient( to bottom, #a8ffc4, #f2f2f2 80%) !important;
+}
+.comment-positive04{
+  background: linear-gradient( to bottom, #8affaf, #f2f2f2 80%) !important;
+}
+.comment-positive05{
+  background: linear-gradient( to bottom, #68fc97, #f2f2f2 80%) !important;
+}
+.comment-neutral{
+
+}
+.comment-negative01{
+  background: linear-gradient( to bottom, #fff3ed, #f2f2f2 80%) !important;
+}
+.comment-negative02{
+  background: linear-gradient( to bottom, #ffe7db, #f2f2f2 80%) !important;
+}
+.comment-negative03{
+  background: linear-gradient( to bottom, #ffd6c2, #f2f2f2 80%) !important;
+}
+.comment-negative04{
+  background: linear-gradient( to bottom, #ffc5a8, #f2f2f2 80%) !important;
+}
+.comment-negative05{
+  background: linear-gradient( to bottom, #ffb38c, #f2f2f2 80%) !important;
+}

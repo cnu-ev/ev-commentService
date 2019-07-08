@@ -113,6 +113,7 @@
     <!-- Bootstrap 스타일 시트를 적용. min이 붙은 것은 난독화 파일이기 때문.-->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/comment.css">
+    <link rel="stylesheet" href="./css/EV-Style.css">
     <script type="text/javascript">
       window.onload = function (){
 
@@ -219,11 +220,11 @@
               <form action="php-Action/CommentPageLogin.php" method="post" accept-charset="utf-8">
                 <div class="form-group">
                   <label for="ID">ID</label>
-                  <input id="ID" name="ID" type="text" class="form-control">
+                  <input id="ID" name="ID" type="text" class="form-control" required>
                 </div>
                 <div class="form-group">
                   <label for="PW">PW</label>
-                  <input id="PW" name="PW" type="password" class="form-control">
+                  <input id="PW" name="PW" type="password" class="form-control" required>
                 </div>
                 <div class="modal-footer">
                   <!-- data-dismiss 속성을 통해, 취소 버튼을 누르면 모달 박스가 없어지는 것을 구현 -->

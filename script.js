@@ -1,11 +1,11 @@
-// success시, iframe 태그를 부모 창에 전송함 
+// success시, iframe 태그를 부모 창에 전송함
 (async function(){
   $.ajax({
       crossOrigin: true,
       type: "GET",
       url : "https://evcommentservice.ga/php-Action/URLVerification.php",
       data : {
-          UserName : userName,
+          UserName : blogOwner,
           PageIdentifier : pageIdentifier,
           SiteURL : siteURL,
       },

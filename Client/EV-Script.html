@@ -6,13 +6,9 @@
 <!-- 서버로 무조건 데이터 전송하고 검증은 서버에서 함 -->
 <script type="text/javascript">
 
-    var userName = "{{site.ev_username}}";
+    var blogOwner = "{{site.ev_username}}";
     var pageIdentifier = "{{page.id}}";
-
     var siteURL = "{{site.url}}";
-    var pageURL = "{{page.url}}";
-
-    var url = siteURL + pageURL;
 
     (function() {
         var embededd_js = document.createElement('script');
