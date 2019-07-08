@@ -166,6 +166,12 @@
   text-align: center;
 }
 
+#userDefaultProfile{
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
 #smallModal{
   padding: 15px;
   background-image: url("../img/userProfileBackImage.png");

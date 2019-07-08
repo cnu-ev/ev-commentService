@@ -37,7 +37,7 @@
         $ElementsOnMyComment =
         '
         <span><img src="./img/trash-2.svg" width="16px" height="16px" onclick="deleteComment($(this).closest(\'li\').attr(\'id\'))"></span>
-        <span><img src="./img/edit.svg" width="16px" height="16px" onclick="editComment($(this).parent().prevAll(\'p\').attr(\'id\')), $(this).next()"></span>
+        <span><img src="./img/edit.svg" width="16px" height="16px" onclick="editComment($(this).parent().prevAll(\'p\').attr(\'id\'), $(this).parent().next())"></span>
         <span style="display: none;" class="sendCommentUpdateButton"><img src="./img/send.svg" width="16px" height="16px" onclick="sendCommentUpdateMessage($(this).parent().prevAll(\'p\').attr(\'id\'))"></span>
         ';
       }
@@ -53,7 +53,7 @@
             <span class="comment-userID">%s</span>
             <span style="color: #777777; font-size: 12px;">&nbsp;&nbsp;&nbsp;%s</span>
             <br>
-            <p id="comment-content-%s" class="comment-content">%s</p><br>
+            <p id="comment-content-%s" class="comment-content">%s</p>
             %s
           </div>
         </li>',

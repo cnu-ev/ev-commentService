@@ -16,11 +16,11 @@ $selectComment = "
   SELECT * FROM `" . $PageID . "` WHERE CommentIndex = '$CommentID'
 ";
 
-$ret = mysqli_query($connect_object, $selectComment);
+$ret = mysqli_query($connect_object, $selectComment) or die("Error Occured in Selecting in DB");
 
 $row = mysqli_fetch_array($ret);
 
-// User ID가 Comment User ID와 다를 경우 댓글을 삭제할 수 없게 한다.
+// User ID가 Comment User ID와 다를 경우 댓글을 수정할 수 없게 한다
 // 이미 지워진 댓글을 시도하려고 하는 경우 역시 아무 행동도 취하지 않는다.
 
 if(empty($row) || $row['CommentUserId'] != $UserID){
@@ -29,7 +29,7 @@ if(empty($row) || $row['CommentUserId'] != $UserID){
 
 // CommentID와 같은 레코드를 업데이트 한다.
 $updateComment = "
-  UPDATE `" . $PageID . "` SET CommentUserId=" . $UpdatedContent . " WHERE CommentIndex = '$CommentID'
+  UPDATE `" . $PageID . "` SET Content = '$UpdatedContent' WHERE CommentIndex = '$CommentID'
 ";
 
-$ret = mysqli_query($connect_object, $updateComment);
+$ret = mysqli_query($connect_object, $updateComment) or die("Error Occured in Updating DB");

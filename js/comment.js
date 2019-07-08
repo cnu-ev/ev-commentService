@@ -19,7 +19,6 @@ function editButtonClicked(clickedButton){
         postComment();
       }
       break;
-
   }
 }
 
@@ -166,8 +165,9 @@ var editCommentContent;
 function editComment(id, submitButton){
   if(isEditMode){
     $('#' + editCommentContentID).removeAttr('contenteditable');
+    $('#' + editCommentContentID).removeClass('editArea');
     $('#' + editCommentContentID).html(editCommentContent);
-    $('#' + editCommentContentID).nextAll('sendCommentUpdateButton').hide();
+    $('#' + editCommentContentID).nextAll('.sendCommentUpdateButton').hide();
 
     if(id == editCommentContentID) {
       isEditMode = false;
@@ -193,7 +193,7 @@ function sendCommentUpdateMessage(contentID){
   let userID = $.cookie('connectedUserID');
   // id 중 숫자만 추출
   let commentID = contentID.replace(/[^0-9]/g,"");
-  let content = contentID.html();
+  let content = $('#' + contentID).html();
 
   $.ajax({
     type: "POST",
@@ -208,6 +208,7 @@ function sendCommentUpdateMessage(contentID){
 
     success : function(data, status, xhr) {
       location.reload();
+      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
