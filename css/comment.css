@@ -40,6 +40,12 @@
   cursor: text;
 }
 
+#NoCommentWarning{
+  font-family: 'Jeju Gothic';
+  font-size: 12pt;
+  text-align: center;
+}
+
 #PW{
   font-family: 'Standard font, Serif font: Times New Roman' !important;
 }

@@ -12,6 +12,17 @@
 
   class Comment{
 
+    static public function WarnNoCommentsToShow(){
+      return sprintf('
+        <div class="alert alert-secondary alert-dismissible fade show">
+          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p id="NoCommentWarning" class="lead" style="font-size: 14px; color: #4c4c4c;">등록된 댓글이 없습니다.</p>
+        </div>
+      ');
+    }
+
     static public function CreateComment($CommentUserId, $Content, $DateTime, $ProfileImageFileName, $CommentIndex){
 
       #############################################################
@@ -56,7 +67,9 @@
             <p id="comment-content-%s" class="comment-content">%s</p>
             %s
           </div>
-        </li>',
+        </li>
+        <hr>
+        ',
           $CommentIndex,
           $profileImageElement,
           $CommentUserId,
@@ -172,6 +185,10 @@
             <?php
               $ret = mysqli_query($connect_object, $fetchAllComments);
 
+              if(mysqli_num_rows($ret) < 1){
+                echo Comment::WarnNoCommentsToShow();
+              }
+
               while($row = mysqli_fetch_array($ret)){
                 echo Comment::CreateComment(
                   $row['CommentUserId'],
@@ -185,7 +202,6 @@
           </ul>
         </div>
       </div>
-      <hr>
 
       <!-- fade 클래스를 이용해 애니메이션을 줌 -->
       <!-- tabindex에 대해선 오른쪽 참고 https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex?hl=ko -->
