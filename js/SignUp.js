@@ -25,7 +25,7 @@ function SubmitButtonClicked(){
 }
 
 function ToLogin(){
-  location.href='SignIn.html';
+  location.href='SignIn.php';
 }
 
 function UserID_DuplicateCheck(){

@@ -1,9 +1,17 @@
 <?php
 
-require_once('MySQLConection.php');
+session_start();
 
-// 쿠키를 가져와 로그인 한 유저가 맞는지 확인
-$UserID = $_COOKIE["connectedUserID"];
+$UserID = $_SESSION['user_id'];
+
+// 세션에 ID가 있다면, 로그인 된 상태이므로 바로 URL-Register로 이동
+if(!isset($UserID))
+  echo ("<script language=javascript>alert('먼저 로그인하세요!')</script>");
+  echo ("<script>location.href='SignIn.php';</script>");
+  exit();
+}
+
+require_once('MySQLConection.php');
 
 // DB에 접속
 $connect_object = MySQLConnection::DB_Connect('userdb') or die("Error Occured in Connection to DB");

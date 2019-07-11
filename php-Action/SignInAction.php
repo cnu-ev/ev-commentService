@@ -1,5 +1,12 @@
 <?php
 
+  session_start();
+
+  // 세션에 ID가 있다면, 로그인 된 상태이므로 바로 URL-Register로 이동
+  if(isset($_SESSION['user_id'])){
+    echo "<script>location.href='../URL-Register.php';</script>";
+  }
+
   require_once('MySQLConection.php');
 
   $connect_object = MySQLConnection::DB_Connect('userdb');
@@ -19,19 +26,21 @@
 
   if(empty($row)){
     echo ("<script language=javascript>alert('존재하지 않는 계정입니다.')</script>");
-    echo ("<script>location.href='../SignIn.html';</script>");
+    echo ("<script>location.href='../SignIn.php';</script>");
     exit();
   }
 
   else if($row['PW'] != $PW){
     echo ("<script language=javascript>alert('입력하신 ID의 비밀번호가 일치하지 않습니다.')</script>");
-    echo ("<script>location.href='../SignIn.html';</script>");
+    echo ("<script>location.href='../SignIn.php';</script>");
     exit();
   }
 
   // 1시간 동안 로그인 및 유저 프로필 사진 이름을 쿠키를 이용해 유지함
-  setcookie("connectedUserID", $ID, time() + 3600, "/");
-  setcookie("profileImageFileName", $row['ProfileImageFileName'], time() + 3600, "/");
+  // setcookie("connectedUserID", $ID, time() + 3600, "/");
+  // setcookie("profileImageFileName", $row['ProfileImageFileName'], time() + 3600, "/");
 
+  $_SESSION['user_id'] = $ID;
+  $_SESSION['profileImageFileName'] = $row['ProfileImageFileName'];
 
   echo ("<script>location.href='../URL-Register.php';</script>");

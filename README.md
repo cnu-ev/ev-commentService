@@ -31,9 +31,9 @@ https://feathericons.com
 https 프로토콜 등록은 cloudFlare (https://jsdev.kr/t/https-cloudflare-flexible-ssl/1973) 를 이용했다.
 
 <h2>How to Use</h2>
-EV-Script.html은 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
+EV-Script.html은 Github Page 등 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
 
-URL을 서비스에 등록하고 사용하는 절차는 아래와 같다.
+지킬 기반의 블로그에서 URL을 서비스에 등록하고 사용하는 절차는 아래와 같다.
 
 ```
 1 - https://evcommentservice.ga에 가입하고, + 버튼을 클릭해, 서비스를 사용할 홈페이지의 URL을 등록한다.  
@@ -64,4 +64,5 @@ binary : 댓글 내용의 부정, 긍정 여부에 따라 색상을 두 단계�
 
 none : 댓글 감정 분석 서비스를 이용하지 않는다.
 ```
+
 

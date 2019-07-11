@@ -3,13 +3,13 @@ require_once('php-Action\UserModalBox.php');
 require_once('php-Action\MySQLConection.php');
 require_once('php-Action\ShowHomePage.php');
 
-$ID = $_COOKIE["connectedUserID"];
+session_start();
 
-// 쿠키가 소멸되면 로그아웃 됨
-// 로그아웃은 js 파일에서 쿠키를 제거하는 것으로 구현함
-if(empty($ID)){
+$ID = $_SESSION['user_id'];
+
+if(!isset($ID)){
   echo ("<script language=javascript>alert('먼저 로그인하세요!')</script>");
-  echo ("<script>location.href='SignIn.html';</script>");
+  echo ("<script>location.href='SignIn.php';</script>");
   exit();
 }
 
@@ -31,7 +31,7 @@ $row_userID = mysqli_fetch_array($ret_userID);
 // 존재하는 아이디인지, 자바스크립트로 점검했더라도 서버 쪽에서 다시 점검한다.
 if(mysqli_num_rows($ret_userID) < 1){
   echo ("<script language=javascript>alert('존재하지 않는 ID입니다!')</script>");
-  echo ("<script>location.href='SignIn.html';</script>");
+  echo ("<script>location.href='SignIn.php';</script>");
   exit ();
 }
 
@@ -77,7 +77,7 @@ if(mysqli_num_rows($ret_userID) < 1){
               <a class="nav-link" data-toggle="modal" data-target="#HomePageAddModal">새 홈페이지</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" onclick="logout()">로그아웃</a>
+              <a class="nav-link" href="./php-Action/LogoutAction.php">로그아웃</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="modal" data-target="#UserInfoModal">정보 수정</a>
@@ -94,7 +94,7 @@ if(mysqli_num_rows($ret_userID) < 1){
           <button type="button" class="btn-sm side_btn dropdown-toggle sizeUpOnHover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/menu.svg" alt="sidebar menu"></button>
           <div class="dropdown-menu dropdown-menu-right">
             <!-- 로그아웃: 쿠키 제거 -->
-            <a class="dropdown-item active" onclick="logout()" href="#">로그아웃</a>
+            <a class="dropdown-item active" href="./php-Action/LogoutAction.php">로그아웃</a>
             <a class="dropdown-item" href="#">정보 수정</a>
           </div>
           <button type="button" class="side_btn sizeUpOnHover" data-toggle="modal" data-target="#UserInfoModal"><img src="img/user.svg" alt="user info button"></button>
@@ -206,8 +206,6 @@ if(mysqli_num_rows($ret_userID) < 1){
     <script src="./lib/jquery.cookie.js"></script>
     <!-- 커스텀 자바스크립트 추가하기 -->
     <script src="./js/URL_Register.js"></script>
-    <!-- 커스텀 자바스크립트 추가하기 -->
-    <script src="./js/Logout.js"></script>
 
   </body>
 </html>

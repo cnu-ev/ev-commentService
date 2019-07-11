@@ -1,3 +1,12 @@
+<?php
+  // 세션에 ID가 있다면, 로그인 된 상태이므로 바로 URL-Register로 이동
+  session_start();
+  
+  if(isset($_SESSION['user_id'])){
+    echo "<script>location.href='../URL-Register.php';</script>";
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -31,7 +40,7 @@
     <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
       <!-- navbar-brand는 brand를 나타내는 일종의 강조 표시 -->
 
-      <a class="navbar-brand" href="./SignIn.html" style="float: left !important;"><img src="img/smile.svg" style="margin-right: 10px;">감정분석 댓글 서비스</a>
+      <a class="navbar-brand" href="./SignIn.php" style="float: left !important;"><img src="img/smile.svg" style="margin-right: 10px;">감정분석 댓글 서비스</a>
 
     </nav>
 
