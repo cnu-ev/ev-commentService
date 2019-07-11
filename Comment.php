@@ -6,6 +6,16 @@
   $URL_ID = $_GET['db'];
   $PageID = $_GET['pageID'];
 
+<<<<<<< Updated upstream
+=======
+  $connectedUserProfileFileName = '';
+
+  if(isset($_SESSION['user_id'])){
+    $connectedUserID = $_SESSION['user_id'];
+    $connectedUserProfileFileName = $_SESSION['profileImageFileName'];
+  }
+
+>>>>>>> Stashed changes
   $connect_object = MySQLConnection::DB_Connect($URL_ID);
 
   $fetchAllComments = "
@@ -128,15 +138,6 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/comment.css">
     <link rel="stylesheet" href="./css/EV-Style.css">
-    <script type="text/javascript">
-      window.onload = function (){
-
-        // iframe이 load 되고 나서 부모 프레임에 height를 전달함.
-        // 부모 프레임은 자식 프레임의 origin을 확인해 evcommentservice.ga에서 올라온 메시지를
-        // 높이 메시지로 취급하고 iframe의 height 속성에 적용한다
-        onHeightChange();
-      };
-    </script>
   </head>
   <body>
     <div id="EV-Container" class="container">
@@ -211,11 +212,19 @@
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <?php
+<<<<<<< Updated upstream
               if(empty($_COOKIE['profileImageFileName'])){
                 echo UserModalBox::GenerateUserInfoModal($_COOKIE["connectedUserID"], '');
               }
               else{
                 echo UserModalBox::GenerateUserInfoModal($_COOKIE["connectedUserID"], $_COOKIE['profileImageFileName']);
+=======
+              if(!isset($connectedUserProfileFileName)){
+                echo UserModalBox::GenerateUserInfoModal($connectedUserID, '');
+              }
+              else{
+                echo UserModalBox::GenerateUserInfoModal($connectedUserID, $connectedUserProfileFileName);
+>>>>>>> Stashed changes
               }
             ?>
           </div>
