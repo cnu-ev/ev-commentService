@@ -5,4 +5,3 @@
     unset($_SESSION['profileImageFileName']);
     // 삭제한 후 로그인 페이지로 돌아감
     echo ("<script>location.href='../SignIn.php';</script>");
-?>

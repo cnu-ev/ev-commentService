@@ -1,9 +1,33 @@
 // var evDjangoURL = "";
 var evEmotionalAnalysisServiceURL = "localhost/comment";
 
+var connectedUserID;
+var profileImageFileName;
+
 var urlID = getParameterByName('db');
 var pageID = getParameterByName('pageID');
 var evMode = getParameterByName('mode');
+
+window.onload = function(){
+  // 현재 페이지에 세션을 로드
+  $.ajax({
+    type: "POST",
+    url : "../php-Action/EchoSession.php",
+    data: {
+    },
+
+    success : function(data, status, xhr) {
+      let dataObj = JSON.parse(data);
+      connectedUserID = dataObj.connectedUserID;
+      profileImageFileName = dataObj.connectedUserProfileFileName;
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+    }
+  });
+
+  onHeightChange();
+}
 
 // B, I, U, S 등 편집기의 각 버튼이 클릭 되었을 때의 이벤트 처리를
 // 모두 담당하는 함수
@@ -46,11 +70,10 @@ function verifyComment(){
 // 제출 버튼을 클릭해 댓글을 달 때 실행되는 함수
 function postComment(){
 
-  let userID = $.cookie('connectedUserID');
-  let profileImageFileName = $.cookie('profileImageFileName');
+  let userID = connectedUserID;
 
   // 로그인 되어 있지 않은 경우 우선 로그인을 권유하는 알림을 띄운다
-  if(userID == null && !($('#recommendLoginAlert').is(":visible"))){
+  if(userID == '' && !($('#recommendLoginAlert').is(":visible"))){
     $('#recommendLoginAlert').show();
     onHeightChange();
     return;
@@ -60,7 +83,7 @@ function postComment(){
   // UserID에 Anonymous (익명)을 저장한다
   // 댓글 등록 시간은 클라이언트가 보내는 시간이 아니라, DB에 저장되는 시간으로 저장한다.
   // profileImageFileName의 Null 처리는 여기서 하지 않음에 주의.
-  if(userID == null){
+  if(userID == ''){
     userID = 'Anonymous';
   }
 
@@ -138,7 +161,6 @@ function postComment(){
 
 function deleteComment(id){
 
-  let userID = $.cookie('connectedUserID');
   // id 중 숫자만 추출
   let commentID = id.replace(/[^0-9]/g,"");
 
@@ -146,7 +168,7 @@ function deleteComment(id){
     type: "POST",
     url : "../php-Action/DeleteComment.php",
     data: {
-      userID : userID,
+      userID : connectedUserID,
       CommentID : commentID,
       urlID : urlID,
       pageID : pageID
@@ -205,14 +227,9 @@ function focusCampo(id){
     }
 }
 
-function logout(){
-  // 저장해 두었던 로그인 관련 쿠키들을 삭제함
-  $.removeCookie('connectedUserID');
-  $.removeCookie('profileImageFileName');
-  location.reload();
-}
-
+// 현재 댓글을 수정 중인지를 나타내는 boolean 변수
 var isEditMode = false;
+
 // 수정 중인 (수정 중이었던) Comment의 ContentID
 var editCommentContentID;
 var editCommentContent;
@@ -247,7 +264,7 @@ function editComment(id, submitButton){
 // DB 에서 해당 레코드 Comment Content를 수정한다
 function sendCommentUpdateMessage(contentID){
 
-  let userID = $.cookie('connectedUserID');
+  let userID = connectedUserID;
   // id 중 숫자만 추출
   let commentID = contentID.replace(/[^0-9]/g,"");
   let content = $('#' + contentID).html();

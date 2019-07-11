@@ -1,10 +1,20 @@
 <?php
 
+  session_start();
+
   require_once('php-Action\UserModalBox.php');
   require_once('php-Action\MySQLConection.php');
 
   $URL_ID = $_GET['db'];
   $PageID = $_GET['pageID'];
+
+  $connectedUserID = '';
+  $connectedUserProfileFileName = '';
+
+  if(isset($_SESSION['user_id'])){
+    $connectedUserID = $_SESSION['user_id'];
+    $connectedUserProfileFileName = $_SESSION['profileImageFileName'];
+  }
 
   $connect_object = MySQLConnection::DB_Connect($URL_ID);
 
@@ -26,6 +36,9 @@
 
     static public function CreateComment($CommentUserId, $Content, $DateTime, $ProfileImageFileName, $CommentIndex){
 
+      global $connectedUserID;
+      global $connectedUserProfileFileName;
+
       #############################################################
       #                                                           #
       #  프로필 이미지 지정해 놓은 게 없는 경우, 디폴트 이미지를 표시  #
@@ -45,7 +58,7 @@
       );
 
       // 본인이 단 댓글인 경우, Edit, Delete Button을 활성화 함
-      if(!empty($_COOKIE["connectedUserID"]) && $_COOKIE["connectedUserID"] == $CommentUserId){
+      if(isset($connectedUserID) && $connectedUserID == $CommentUserId){
         $ElementsOnMyComment =
         '
         <span><img src="./img/trash-2.svg" width="16px" height="16px" onclick="deleteComment($(this).closest(\'li\').attr(\'id\'))"></span>
@@ -85,7 +98,7 @@
 
    // 로그인 되어 있다면 (쿠키가 존재하면), 해당하는 ID의 프로필 사진을 찾아 띄우고
    // 로그인 되어 있지 않다면 프로필 사진 대신 로그인 버튼을 띄운다.
-   if(empty($_COOKIE["connectedUserID"])){
+   if(!isset($connectedUserID)){
      $LoginButton = '<li id="EV-Login" style="float:right;" class="nav-tab" data-toggle="modal" data-target="#LogInModal">Login</li>';
    }
    else{
@@ -93,7 +106,7 @@
      $connect_userdb = MySQLConnection::DB_Connect("userdb");
 
      $fetchMyProfileImage = "
-       SELECT * FROM usersinfotbl WHERE ID = '" . $_COOKIE["connectedUserID"] . "'";
+       SELECT * FROM usersinfotbl WHERE ID = '" . $connectedUserID . "'";
 
      $ret = mysqli_query($connect_userdb, $fetchMyProfileImage);
 
@@ -103,16 +116,14 @@
 
      if(empty($myProfileImageName)){
        $myProfileImageElement = '
-       <li id="EV-Logout" style="float:right;" onclick="logout()">Logout</li>
+       <li id="EV-Logout" style="float:right;" onclick="location.href=\'./php-Action/CommentPageLogout.php\'">Logout</li>
        <li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" data-toggle="modal" data-target="#UserInfoModal" width="25px" height="25px" class="img-fluid rounded-circle" src="img/userDefaultProfile.svg" alt="Image For User Profile"></li>';
      }
      else{
       $myProfileImageElement ='
-      <li id="EV-Logout" style="float:right;" onclick="logout()">Logout</li>
+      <li id="EV-Logout" style="float:right;" onclick="location.href=\'./php-Action/CommentPageLogout.php\'">Logout</li>
       <li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" data-toggle="modal" data-target="#UserInfoModal" width="25px" height="25px" class="img-fluid rounded-circle" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
      }
-
-
    }
 
 ?>
@@ -211,11 +222,11 @@
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <?php
-              if(empty($_COOKIE['profileImageFileName'])){
-                echo UserModalBox::GenerateUserInfoModal($_COOKIE["connectedUserID"], '');
+              if(!isset($ProfileImageFileName)){
+                echo UserModalBox::GenerateUserInfoModal($connectedUserID, '');
               }
               else{
-                echo UserModalBox::GenerateUserInfoModal($_COOKIE["connectedUserID"], $_COOKIE['profileImageFileName']);
+                echo UserModalBox::GenerateUserInfoModal($connectedUserID, $ProfileImageFileName);
               }
             ?>
           </div>
@@ -267,8 +278,6 @@
   <script src="./lib/bootstrap.min.js"></script>
   <!-- MDB 라이브러리 추가하기 -->
   <script src="./lib/mdb.min.js"></script>
-  <!-- 쿠키 사용 라이브러리 추가하기 -->
-  <script src="./lib/jquery.cookie.js"></script>
   <!-- 커스텀 자바스크립트 추가하기 -->
   <script src="./js/comment.js"></script>
 
