@@ -38,6 +38,7 @@ $createDefaultTable = "
     `DateTime` DATETIME NOT NULL,
     `ProfileImageFileName` VARCHAR(25),
     `CommentIndex` INT(11) NOT NULL AUTO_INCREMENT,
+    `EmotionalAnalysisValue` TINYINT,
     PRIMARY KEY(`CommentIndex`)
 )";
 

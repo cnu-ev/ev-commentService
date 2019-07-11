@@ -1,3 +1,6 @@
+// var evDjangoURL = "";
+var evEmotionalAnalysisServiceURL = "localhost/comment";
+
 // B, I, U, S 등 편집기의 각 버튼이 클릭 되었을 때의 이벤트 처리를
 // 모두 담당하는 함수
 function editButtonClicked(clickedButton){
@@ -58,25 +61,75 @@ function postComment(){
   }
 
   // url을 PHP로 넘겨야 하기 때문에 주소 값을 파싱해서 파라미터 값을 php로 전송해야 한다
+  const commentContent = $('#CommentArea').html();
 
-  $.ajax({
-    type: "POST",
-    url : "../php-Action/AddComment.php",
-    data: {
-      userID : userID,
-      commentContent : $('#CommentArea').html(),
-      urlID : getParameterByName('db'),
-      pageID : getParameterByName('pageID'),
-      profileImageFileName : profileImageFileName
-    },
+  switch (evMode) {
 
-    success : function(data, status, xhr) {
-      location.reload();
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-    }
-  });
+    case "full":
+      // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
+      $.ajax({
+        type: "POST",
+        url : "localhost/comment",
+        data: {
+          commentContent : commentContent,
+        },
+
+        // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
+        success : function(data, status, xhr) {
+          $.ajax({
+            type: "POST",
+            url : "../php-Action/AddComment.php",
+            data: {
+              userID : userID,
+              commentContent : commentContent,
+              urlID : getParameterByName('db'),
+              pageID : getParameterByName('pageID'),
+              profileImageFileName : profileImageFileName,
+              emotionalAnalysisValue : data
+            },
+
+            success : function(data, status, xhr) {
+              location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+            }
+          });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+        }
+      });
+
+    // binary는 full과 동일하게 작동
+    case "binary":
+      break;
+
+    case "none":
+      $.ajax({
+        type: "POST",
+        url : "../php-Action/AddComment.php",
+        data: {
+          userID : userID,
+          commentContent : $('#CommentArea').html(),
+          urlID : getParameterByName('db'),
+          pageID : getParameterByName('pageID'),
+          profileImageFileName : profileImageFileName
+        },
+
+        success : function(data, status, xhr) {
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+        }
+      });
+      break;
+
+    case default:
+      console.log("Error:: mode value is one of 'full, binary, none'");
+      break;
+  }
 }
 
 function deleteComment(id){

@@ -6,6 +6,7 @@ $UserID = $_POST['userID'];
 $CommentContent = $_POST['commentContent'];
 $URLID = $_POST['urlID'];
 $PageID = $_POST['pageID'];
+$EmotionalAnalysisValue = $_POST['emotionalAnalysisValue'];
 
 if(empty($_POST['profileImageFileName'])){
   $ProfileImageFileName = '';
@@ -22,12 +23,14 @@ $insertComment = "
     CommentUserId,
     Content,
     DateTime,
-    ProfileImageFileName
+    ProfileImageFileName,
+    EmotionalAnalysisValue
     ) VALUES(
     '$UserID',
     '$CommentContent',
     Now(),
-    '$ProfileImageFileName'
+    '$ProfileImageFileName',
+    '$EmotionalAnalysisValue',
 )";
 
 $ret = mysqli_query($connect_object, $insertComment) or die("Error Occured in Inserting data to DB");

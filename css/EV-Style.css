@@ -1,6 +1,8 @@
 /* 1에 가까울 수록 정도가 약함, 5에 가까울수록 정도가 심함 */
 /* #f2f2f2는 배경색 */
 
+/* http://rwdb.kr/css_pattern/ 넣을 수 있는 체크 무늬 패턴 등 */
+
 .comment-positive01{
   background: linear-gradient( to right, #edfff3, #f2f2f2 95%) !important;
 }
