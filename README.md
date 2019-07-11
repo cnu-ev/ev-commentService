@@ -14,7 +14,6 @@ https://feathericons.com
 
 
 <h2>Environment Details</h2>
-
 >xampp for windows 7.1.30, xampp control panel 3.2.4
 >
 >Apache 2.4.39
@@ -51,4 +50,18 @@ ev_username: {User ID}
 ```
 
 
+
+블로거는 자신의 블로그 댓글 서비스에 감정 분석 서비스를 적용할 지 안 할지, 적용한다면 어떻게 스타일링 될 지를 결정할 수 있다. 사용법은 아래와 같다.
+
+```
+_config.yml 내 ev_mode에 아래와 같은 값을 설정한다. 
+
+ev_username: {full, binary, none}
+
+full : 댓글 내용의 부정 ~ 긍정 정도에 따라 색상을 10 단계로 나눠 적용한다.
+
+binary : 댓글 내용의 부정, 긍정 여부에 따라 색상을 두 단계로만 나눠 적용한다.
+
+none : 댓글 감정 분석 서비스를 이용하지 않는다.
+```
 

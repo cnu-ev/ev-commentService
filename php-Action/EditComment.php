@@ -9,6 +9,13 @@ $URLID = $_POST['urlID'];
 $PageID = $_POST['pageID'];
 $UpdatedContent = $_POST['updatedContent'];
 
+if(empty($_POST['emotionalAnalysisValue'])){
+  $EmotionalAnalysisValue = 0;
+}
+else {
+  $EmotionalAnalysisValue = $_POST['emotionalAnalysisValue'];
+}
+
 $connect_object = MySQLConnection::DB_Connect($URLID) or die("Error Occured in Connection to DB");
 
 // CommentID와 같은 레코드를 선택한다.

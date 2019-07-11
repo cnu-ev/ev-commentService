@@ -11,6 +11,7 @@ $UserName = $_GET["UserName"];
 $PageIdentifier = $_GET["PageIdentifier"];
 $SiteURL = $_GET["SiteURL"];
 $URL_ID = Hashing("sha256", $SiteURL);
+$EmotionalAnalysisMode = $_GET["EmotionalAnalysisMode"];
 
 // DB에서 등록된 Site 인지 찾음
 $searchSite = "
@@ -19,9 +20,13 @@ $searchSite = "
 
 $ret = mysqli_query($connect_object, $searchSite);
 
-// 등록되지 않은 요청은 거절
 if(mysqli_num_rows($ret) < 1){
-  echo ("등록되지 않은 URL 입니다.");
+  $unregisteredServiceWarning = sprintf('
+    <div class="alert alert-success">
+      <p style="text-align: center; font-size: 14px; color: #4c4c4c; margin: 0px auto;">서비스에 등록된 블로그가 아닙니다.<br> evcommentservice.ga에 방문해 블로그를 등록해보세요</p>
+    </div>
+  ');
+  echo $unregisteredServiceWarning;
   exit ();
 }
 
@@ -29,7 +34,7 @@ if(mysqli_num_rows($ret) < 1){
 // PageID의 테이블이 존재하는지 확인
 // 존재한다면 해당 테이블의 댓글 데이터를 반환
 if(MySQLConnection::isExist($URL_ID, $PageIdentifier)){
-  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
+  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode'></iframe>";
 }
 // 존재하지 않는다면 새 테이블을 생성한 후 컴포넌트만 반환
 else {
@@ -49,7 +54,7 @@ else {
 
   $ret = mysqli_query($connect_url, $createNewTable);
 
-  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier'></iframe>";
+  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode'></iframe>";
 }
 
 

@@ -1,6 +1,10 @@
 // var evDjangoURL = "";
 var evEmotionalAnalysisServiceURL = "localhost/comment";
 
+var urlID = getParameterByName('db');
+var pageID = getParameterByName('pageID');
+var evMode = getParameterByName('mode');
+
 // B, I, U, S 등 편집기의 각 버튼이 클릭 되었을 때의 이벤트 처리를
 // 모두 담당하는 함수
 function editButtonClicked(clickedButton){
@@ -82,8 +86,8 @@ function postComment(){
             data: {
               userID : userID,
               commentContent : commentContent,
-              urlID : getParameterByName('db'),
-              pageID : getParameterByName('pageID'),
+              urlID : urlID,
+              pageID : pageID,
               profileImageFileName : profileImageFileName,
               emotionalAnalysisValue : data
             },
@@ -112,8 +116,8 @@ function postComment(){
         data: {
           userID : userID,
           commentContent : $('#CommentArea').html(),
-          urlID : getParameterByName('db'),
-          pageID : getParameterByName('pageID'),
+          urlID : urlID,
+          pageID : pageID,
           profileImageFileName : profileImageFileName
         },
 
@@ -126,7 +130,7 @@ function postComment(){
       });
       break;
 
-    case default:
+    default:
       console.log("Error:: mode value is one of 'full, binary, none'");
       break;
   }
@@ -144,8 +148,8 @@ function deleteComment(id){
     data: {
       userID : userID,
       CommentID : commentID,
-      urlID : getParameterByName('db'),
-      pageID : getParameterByName('pageID')
+      urlID : urlID,
+      pageID : pageID
     },
 
     success : function(data, status, xhr) {
@@ -248,24 +252,72 @@ function sendCommentUpdateMessage(contentID){
   let commentID = contentID.replace(/[^0-9]/g,"");
   let content = $('#' + contentID).html();
 
-  $.ajax({
-    type: "POST",
-    url : "../php-Action/EditComment.php",
-    data: {
-      userID : userID,
-      CommentID : commentID,
-      urlID : getParameterByName('db'),
-      pageID : getParameterByName('pageID'),
-      updatedContent : content
-    },
+  switch (evMode) {
 
-    success : function(data, status, xhr) {
-      location.reload();
-      console.log(data);
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-    }
-  });
+    case "full":
+      // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
+      $.ajax({
+        type: "POST",
+        url : "localhost/comment",
+        data: {
+          commentContent : commentContent,
+        },
+
+        // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
+        success : function(data, status, xhr) {
+            $.ajax({
+              type: "POST",
+              url : "../php-Action/EditComment.php",
+              data: {
+                userID : userID,
+                CommentID : commentID,
+                urlID : urlID,
+                pageID : pageID,
+                updatedContent : content,
+                emotionalAnalysisValue : data
+              },
+
+              success : function(data, status, xhr) {
+                location.reload();
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+              }
+            });
+          },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+        }
+      });
+
+    // binary는 full과 동일하게 작동
+    case "binary":
+      break;
+
+    case "none":
+      $.ajax({
+        type: "POST",
+        url : "../php-Action/EditComment.php",
+        data: {
+          userID : userID,
+          CommentID : commentID,
+          urlID : urlID,
+          pageID : pageID,
+          updatedContent : content
+        },
+
+        success : function(data, status, xhr) {
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+        }
+      });
+      break;
+
+    default:
+      console.log("Error:: mode value is one of 'full, binary, none'");
+      break;
+  }
 
 }

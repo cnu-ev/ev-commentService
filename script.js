@@ -1,4 +1,5 @@
 // success시, iframe 태그를 부모 창에 전송함
+
 (async function(){
   $.ajax({
       crossOrigin: true,
@@ -8,6 +9,7 @@
           UserName : blogOwner,
           PageIdentifier : pageIdentifier,
           SiteURL : siteURL,
+          EmotionalAnalysisMode : evMode
       },
       dataType:"HTML",
 
