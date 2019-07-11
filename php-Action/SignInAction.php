@@ -35,11 +35,7 @@
     echo ("<script>location.href='../SignIn.php';</script>");
     exit();
   }
-
-  // 1시간 동안 로그인 및 유저 프로필 사진 이름을 쿠키를 이용해 유지함
-  // setcookie("connectedUserID", $ID, time() + 3600, "/");
-  // setcookie("profileImageFileName", $row['ProfileImageFileName'], time() + 3600, "/");
-
+  
   $_SESSION['user_id'] = $ID;
   $_SESSION['profileImageFileName'] = $row['ProfileImageFileName'];
 
