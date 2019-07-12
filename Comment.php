@@ -287,15 +287,23 @@
         </div>
       </div>
       <div id="EV-Pagination">
-        <a href="#">&laquo;</a>
 
         <?php
+
+          // 1 페이지에 있는 경우 왼쪽 버튼을 눌러도 1 페이지로 이동
+          $laquo_paginationID = $PaginationID == 1 ? 1 : $PaginationID - 1;
+          $raquo_paginationID = $PaginationID == $PaginationEnd ? $PaginationEnd : $PaginationID + 1;
+
+          echo sprintf('
+            <a href="https://evcommentservice.ga/Comment.php?db=%s&pageID=%s&mode=%s&paginationID=%s">&laquo;</a>
+          ', $URL_ID, $PageID, $EmotionalAnalysisMode, $laquo_paginationID);
+
           // $PaginationDivision (페이지 나누는 기준)
           // $PaginationID (현재 페이지)
           // $PaginationEnd (끝 페이지)
 
           // 페이지네이션 할 수 있는 숫자를 몇 개까지 표시할 것인지 나타내는 int형 변수
-          // (값을 바꿔도 되지만, 웹페이지 디자인 상 홀수여야 균형이 맞아보일 것 같으니 주의)
+          // (값을 바꿔도 되지만, 웹페이지 디자인 상 홀수여야 균형이 맞아보이니 주의)
           $paginatorsNumber = 5;
 
           // 현재 페이지가 앞 쪽에 치우친 경우 (1부터 순차대로 $paginatorsNumber 수 만큼 출력)
@@ -306,8 +314,8 @@
           // 현재 페이지가 뒤 쪽에 치우친 경우 (순차대로 $paginatorsNumber 수 만큼 출력)
           else if($PaginationEnd - $PaginationID < (int)($paginatorsNumber / 2)){
 
-            // $startPoint = $PaginationID - ($paginatorsNumber - ($PaginationEnd - $PaginationID + 1));
             $startPoint = $PaginationEnd - $paginatorsNumber + 1;
+
           }
           // 페이지를 중앙에 놓으면 되는 경우
           else {
@@ -317,25 +325,22 @@
           for($i = $startPoint; $i < $startPoint + $paginatorsNumber; $i++){
 
             // 반복문이 끝나기 전 Paginator가 끝나면 break
-            if($i > $PaginationEnd){
-              break;
-            }
+            if($i > $PaginationEnd) break;
 
             // $paginationID와 같은 Paginator에 Active 클래스를 달아놓는다.
-            if($i == $PaginationID){
-              $Active = 'active';
-            }
-            else {
-              $Active = '';
-            }
+            if($i == $PaginationID) $Active = 'active';
+            else $Active = '';
 
             echo sprintf('
               <a class="%s" href="https://evcommentservice.ga/Comment.php?db=%s&pageID=%s&mode=%s&paginationID=%s">%s</a>
             ', $Active, $URL_ID, $PageID, $EmotionalAnalysisMode, $i, $i);
           }
+
+          echo sprintf('
+            <a href="https://evcommentservice.ga/Comment.php?db=%s&pageID=%s&mode=%s&paginationID=%s">&raquo;</a>
+          ', $URL_ID, $PageID, $EmotionalAnalysisMode, $raquo_paginationID);
         ?>
 
-        <a href="#">&raquo;</a>
       </div>
       <footer id="EV-Footer">
         <p style="padding-top: 7px;">&copy; 2019 Team EV</p>

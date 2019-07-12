@@ -14,8 +14,8 @@ $Gender = $_POST["Gender"];
 $Name = $_POST["FirstName"] . ' '. $_POST["LastName"];
 $Email = $_POST["Email"];
 
-$reg_ID = preg_match('/^[A-Za-z0-9+]{4,20}$/', $ID, null)
-$reg_Email = preg_match('/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i', $Email, null);
+$reg_ID = preg_match('/^[A-Za-z0-9+]{4,20}$/', $ID, $r1);
+$reg_Email = preg_match('/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i', $Email, $r2);
 
 // 매칭되지 않는 값이 들어올 경우 SignUp을 실행하지 않는다
 if($reg_ID == 0 || $reg_Email == 0){

@@ -4,6 +4,7 @@ function AddURLButtonClicked(){
   if(checkUrlForm($('#URL').val())){
     return true;
   }
+  alert('올바른 URL 입력이 아닙니다. URL 입력을 확인해주세요.');
   return false;
 }
 
@@ -17,13 +18,13 @@ function DeleteService(){
 
   $.ajax({
     type: "POST",
-    url : "../purePHP/DeleteService.php",
+    url : "../php-Action/DeleteService.php",
     data : {
       URLID : DeletingURLID,
     },
 
     success : function(response) {
-      console.log("서비스 제거 성공");
+      console.log(response);
       $('#' + DeletingURLID).hide();
     },
     error: function(jqXHR, textStatus, errorThrown) {

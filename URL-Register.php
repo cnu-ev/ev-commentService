@@ -152,7 +152,7 @@ if(mysqli_num_rows($ret_userID) < 1){
             </button>
           </div>
           <div class="modal-body">
-            <form action="php-Action/RegisterURL.php" onsubmit="return AddURLButtonClicked()" method="post" accept-charset="utf-8">
+            <form action="./php-Action/RegisterURL.php" onsubmit="return AddURLButtonClicked()" method="post" accept-charset="utf-8">
               <div class="form-group">
                 <label for="URL-Title">웹 사이트 제목</label>
                 <input id="URL-Title" name="URL-Title" type="text" class="form-control">

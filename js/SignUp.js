@@ -20,7 +20,7 @@ function SubmitButtonClicked(){
   }
 
   // 이메일 주소의 유효성 검사
-  if(!validReg_Email.test($('Email').val())){
+  if(!validReg_Email.test($('#Email').val())){
     alert('올바른 이메일 주소 형식이 아닙니다.');
     return false;
   }

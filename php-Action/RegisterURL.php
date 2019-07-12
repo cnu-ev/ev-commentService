@@ -5,7 +5,7 @@ session_start();
 $UserID = $_SESSION['user_id'];
 
 // 세션에 ID가 없다면, 이용할 수 없음
-if(!isset($UserID))
+if(!isset($UserID)){
   echo ("<script language=javascript>alert('먼저 로그인하세요!')</script>");
   echo ("<script>location.href='SignIn.php';</script>");
   exit();
@@ -30,10 +30,9 @@ $ret = mysqli_query($connect_object, $searchURLID);
 
 $row = mysqli_fetch_array($ret);
 
-if(empty($row)){
+if(!empty($row)){
   echo ("<script language=javascript>alert('이미 존재하는 URL입니다. 서비스 관리자에게 문의하세요.')</script>");
-  $prevPage = $_SERVER["HTTP_REFERER"];
-  header("location:" . $prevPage);
+  echo ("<script>location.href='../URL-Register.php';</script>");
   exit();
 }
 
