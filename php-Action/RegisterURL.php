@@ -4,7 +4,7 @@ session_start();
 
 $UserID = $_SESSION['user_id'];
 
-// 세션에 ID가 있다면, 로그인 된 상태이므로 바로 URL-Register로 이동
+// 세션에 ID가 없다면, 이용할 수 없음
 if(!isset($UserID))
   echo ("<script language=javascript>alert('먼저 로그인하세요!')</script>");
   echo ("<script>location.href='SignIn.php';</script>");
@@ -20,6 +20,22 @@ $connect_object = MySQLConnection::DB_Connect('userdb') or die("Error Occured in
 $URL_Title = $_POST["URL-Title"];
 $URL = $_POST["URL"];
 $URL_ID = Hashing("sha256", $URL);
+
+// 중복 레코드가 있는지 검사. 존재한다면 이전 페이지로 돌아감
+$searchURLID = "
+  SELECT * FROM usersurltbl WHERE URLID = '$URL_ID'
+";
+
+$ret = mysqli_query($connect_object, $searchURLID);
+
+$row = mysqli_fetch_array($ret);
+
+if(empty($row)){
+  echo ("<script language=javascript>alert('이미 존재하는 URL입니다. 서비스 관리자에게 문의하세요.')</script>");
+  $prevPage = $_SERVER["HTTP_REFERER"];
+  header("location:" . $prevPage);
+  exit();
+}
 
 // DB에 새 레코드 입력
 $insertData = "

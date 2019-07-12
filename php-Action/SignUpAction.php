@@ -12,7 +12,17 @@ $Address = $_POST["Address"];
 $PhoneNumber = $_POST["PhoneNumber"];
 $Gender = $_POST["Gender"];
 $Name = $_POST["FirstName"] . ' '. $_POST["LastName"];
+$Email = $_POST["Email"];
 
+$reg_ID = preg_match('/^[A-Za-z0-9+]{4,20}$/', $ID, null)
+$reg_Email = preg_match('/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i', $Email, null);
+
+// 매칭되지 않는 값이 들어올 경우 SignUp을 실행하지 않는다
+if($reg_ID == 0 || $reg_Email == 0){
+  echo ("<script language=javascript>alert('잘못된 입력값이 존재합니다.')</script>");
+  echo ("<script>location.href='../SignUp.html';</script>");
+  exit();
+}
 
 // DB에서 PK (ID) 중복 검사
 $searchUserID = "

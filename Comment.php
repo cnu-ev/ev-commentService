@@ -217,7 +217,8 @@
                 $row = mysqli_fetch_array($ret);
               }
 
-              // $PaginationDivision만큼 댓글을 출력. 댓글이 더 없다면 break.
+              $rowStack = array();
+              // $PaginationDivision만큼 댓글을 push 하다 댓글이 더 없을 때 break.
               for($i = 0; $i < $PaginationDivision; $i++){
 
                 if($i >= $commentsNumber){
@@ -226,14 +227,19 @@
 
                 $row = mysqli_fetch_array($ret);
 
+                array_push($rowStack, $row);
+              }
+
+              while ($comment = array_pop($rowStack)){
                 echo Comment::CreateComment(
-                  $row['CommentUserId'],
-                  $row['Content'],
-                  $row['DateTime'],
-                  $row['ProfileImageFileName'],
-                  $row['CommentIndex']
+                  $comment['CommentUserId'],
+                  $comment['Content'],
+                  $comment['DateTime'],
+                  $comment['ProfileImageFileName'],
+                  $comment['CommentIndex']
                 );
               }
+
             ?>
           </ul>
         </div>
@@ -289,35 +295,51 @@
       </div>
       <div id="EV-Pagination">
         <a href="#">&laquo;</a>
-        <a href="#">1</a>
 
         <?php
           // $PaginationDivision (페이지 나누는 기준)
           // $PaginationID (현재 페이지)
           // $PaginationEnd (끝 페이지)
 
-          // 현재 페이지가 앞 쪽에 치우친 경우
-          if($PaginationID - ($PaginationDivision / 2) <= 0){
-
-          }
-
-          // 현재 페이지가 뒤 쪽에 치우친 경우
-          else if($PaginationEnd - $PaginationID < $PaginationDivision / 2){
-
-          }
-          // 페이지를 중앙에 놓으면 되는 경우
-          else {
-
-          }
-
           // 페이지네이션 할 수 있는 숫자를 몇 개까지 표시할 것인지 나타내는 int형 변수
           // (값을 바꿔도 되지만, 웹페이지 디자인 상 홀수여야 균형이 맞아보일 것 같으니 주의)
           $paginatorsNumber = 9;
 
-          for($i = 0; $i < $paginatorsNumber; $i++){
+          // 현재 페이지가 앞 쪽에 치우친 경우 (1부터 순차대로 $paginatorsNumber 수 만큼 출력)
+          if($PaginationID - ($PaginationDivision / 2) <= 0){
+            $startPoint = 1;
+          }
+
+          // 현재 페이지가 뒤 쪽에 치우친 경우 (순차대로 $paginatorsNumber 수 만큼 출력)
+          else if($PaginationEnd - $PaginationID < $PaginationDivision / 2){
+
+            // $startPoint = $PaginationID - ($paginatorsNumber - ($PaginationEnd - $PaginationID + 1));
+            $startPoint = $PaginationEnd - $paginatorsNumber + 1;
+
+          }
+          // 페이지를 중앙에 놓으면 되는 경우
+          else {
+            $startPoint = $PaginationID - ($paginatorsNumber / 2);
+          }
+
+          for($i = $startPoint; $i <= $paginatorsNumber; $i++){
+
+            // 반복문이 끝나기 전 Paginator가 끝나면 break
+            if($i > $PaginationEnd){
+              break;
+            }
+
+            // $paginationID와 같은 Paginator에 Active 클래스를 달아놓는다.
+            if($i == $paginationID){
+              $Active = 'paginator-active';
+            }
+            else {
+              $Active = '';
+            }
+
             echo sprintf('
-              <a href="https://evcommentservice.ga/Comment.php?db=%s&pageID=%s&mode=%s&paginationID=%s">%s</a>
-            ', $URL_ID, $PageIdentifier, $EmotionalAnalysisMode, $paginationID, $i);
+              <a class="%s" href="https://evcommentservice.ga/Comment.php?db=%s&pageID=%s&mode=%s&paginationID=%s">%s</a>
+            ', $Active, $URL_ID, $PageID, $EmotionalAnalysisMode, $paginationID, $i);
           }
         ?>
 
