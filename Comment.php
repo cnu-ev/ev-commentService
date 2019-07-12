@@ -11,6 +11,8 @@
   $PageID = $_GET['pageID'];
   // 해당 블로그 홈페이지의 Pagination이 몇 페이지를 가리키는지 나타내는 파라미터 (디폴트 값은 항상 1)
   $PaginationID = $_GET['paginationID'];
+  // 어떻게 감정분석 결과를 나타낼 것인지 나타내는 mode
+  $EmotionalAnalysisMode = $_GET['mode'];
   // 몇 개의 댓글을 기준으로 Pagination 할 것인지를 나타내는 int 값. 나중에 get 방식으로 받아오게 따로 빼서 확장해도 괜찮을 거 같다.
   $PaginationDivision = 10;
 
@@ -23,8 +25,9 @@
 
   $connect_object = MySQLConnection::DB_Connect($URL_ID);
 
+  // 최근 작성된 댓글부터 출력하기 위해 내림차순으로 조회한다
   $fetchAllComments = "
-    SELECT * FROM `" . $PageID . "`";
+    SELECT * FROM `" . $PageID . "` ORDER BY CommentIndex DESC";
 
   class Comment{
 
@@ -192,45 +195,36 @@
           <ul>
             <?php
 
-              $ret = mysqli_query($connect_object, $fetchAllComments);
+              $commentsRet = mysqli_query($connect_object, $fetchAllComments);
 
-              $commentsNumber = mysqli_num_rows($ret);
+              $commentsNumber = mysqli_num_rows($commentsRet);
 
               // 몇 페이지가 끝인 지 계산
-              if($commentsNumber % $PaginationDivision == 0){
-                $PaginationEnd = $commentsNumber / $PaginationDivision;
+              if(($commentsNumber % $PaginationDivision) == 0){
+                $PaginationEnd = (int)($commentsNumber / $PaginationDivision);
               }
               else {
-                $PaginationEnd = ($commentsNumber / $PaginationDivision) + 1;
+                $PaginationEnd = (int)($commentsNumber / $PaginationDivision) + 1;
               }
 
               // 댓글이 없는 경우 처리
-              if($commentsNumber < 1){
-                echo Comment::WarnNoCommentsToShow();
-              }
+              if($commentsNumber < 1) echo Comment::WarnNoCommentsToShow();
 
               // $PaginationID에 따른 포인터 ($row) 이동
-              for($i = 0; $i < $PaginationID * $PaginationDivision; $i++){
-                if($i >= $commentsNumber){
-                  break;
-                }
-                $row = mysqli_fetch_array($ret);
+              for($i = 0; $i < ($PaginationID - 1) * $PaginationDivision; $i++){
+
+                if($i >= $commentsNumber) break;
+
+                $row = mysqli_fetch_array($commentsRet);
               }
 
-              $rowStack = array();
               // $PaginationDivision만큼 댓글을 push 하다 댓글이 더 없을 때 break.
               for($i = 0; $i < $PaginationDivision; $i++){
 
-                if($i >= $commentsNumber){
-                  break;
-                }
+                $comment = mysqli_fetch_array($commentsRet);
 
-                $row = mysqli_fetch_array($ret);
+                if(empty($comment)) break;
 
-                array_push($rowStack, $row);
-              }
-
-              while ($comment = array_pop($rowStack)){
                 echo Comment::CreateComment(
                   $comment['CommentUserId'],
                   $comment['Content'],
@@ -239,7 +233,6 @@
                   $comment['CommentIndex']
                 );
               }
-
             ?>
           </ul>
         </div>
@@ -303,26 +296,25 @@
 
           // 페이지네이션 할 수 있는 숫자를 몇 개까지 표시할 것인지 나타내는 int형 변수
           // (값을 바꿔도 되지만, 웹페이지 디자인 상 홀수여야 균형이 맞아보일 것 같으니 주의)
-          $paginatorsNumber = 9;
+          $paginatorsNumber = 5;
 
           // 현재 페이지가 앞 쪽에 치우친 경우 (1부터 순차대로 $paginatorsNumber 수 만큼 출력)
-          if($PaginationID - ($PaginationDivision / 2) <= 0){
+          if($PaginationEnd < $paginatorsNumber || $PaginationID - (int)($paginatorsNumber / 2) <= 0){
             $startPoint = 1;
           }
 
           // 현재 페이지가 뒤 쪽에 치우친 경우 (순차대로 $paginatorsNumber 수 만큼 출력)
-          else if($PaginationEnd - $PaginationID < $PaginationDivision / 2){
+          else if($PaginationEnd - $PaginationID < (int)($paginatorsNumber / 2)){
 
             // $startPoint = $PaginationID - ($paginatorsNumber - ($PaginationEnd - $PaginationID + 1));
             $startPoint = $PaginationEnd - $paginatorsNumber + 1;
-
           }
           // 페이지를 중앙에 놓으면 되는 경우
           else {
-            $startPoint = $PaginationID - ($paginatorsNumber / 2);
+            $startPoint = $PaginationID - (int)($paginatorsNumber / 2);
           }
 
-          for($i = $startPoint; $i <= $paginatorsNumber; $i++){
+          for($i = $startPoint; $i < $startPoint + $paginatorsNumber; $i++){
 
             // 반복문이 끝나기 전 Paginator가 끝나면 break
             if($i > $PaginationEnd){
@@ -330,8 +322,8 @@
             }
 
             // $paginationID와 같은 Paginator에 Active 클래스를 달아놓는다.
-            if($i == $paginationID){
-              $Active = 'paginator-active';
+            if($i == $PaginationID){
+              $Active = 'active';
             }
             else {
               $Active = '';
@@ -339,7 +331,7 @@
 
             echo sprintf('
               <a class="%s" href="https://evcommentservice.ga/Comment.php?db=%s&pageID=%s&mode=%s&paginationID=%s">%s</a>
-            ', $Active, $URL_ID, $PageID, $EmotionalAnalysisMode, $paginationID, $i);
+            ', $Active, $URL_ID, $PageID, $EmotionalAnalysisMode, $i, $i);
           }
         ?>
 
