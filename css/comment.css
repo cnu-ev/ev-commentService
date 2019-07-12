@@ -40,6 +40,29 @@
   cursor: text;
 }
 
+#EV-Pagination {
+  display: inline-block;
+  text-align: center;
+  margin: 0px auto;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#EV-Pagination a {
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+#EV-Pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#EV-Pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
 #NoCommentWarning{
   font-family: 'Jeju Gothic';
   font-size: 12pt;

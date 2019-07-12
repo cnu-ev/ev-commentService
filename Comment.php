@@ -5,8 +5,14 @@
   require_once('php-Action\UserModalBox.php');
   require_once('php-Action\MySQLConection.php');
 
+  // 해당 홈페이지를 나타내는 파라미터
   $URL_ID = $_GET['db'];
+  // 해당 홈페이지의 서브 도메인을 가리키는 파라미터
   $PageID = $_GET['pageID'];
+  // 해당 블로그 홈페이지의 Pagination이 몇 페이지를 가리키는지 나타내는 파라미터 (디폴트 값은 항상 1)
+  $PaginationID = $_GET['paginationID'];
+  // 몇 개의 댓글을 기준으로 Pagination 할 것인지를 나타내는 int 값. 나중에 get 방식으로 받아오게 따로 빼서 확장해도 괜찮을 거 같다.
+  $PaginationDivision = 10;
 
   $connectedUserProfileFileName = '';
 
@@ -185,13 +191,41 @@
         <div id="EV-comment">
           <ul>
             <?php
+
               $ret = mysqli_query($connect_object, $fetchAllComments);
 
-              if(mysqli_num_rows($ret) < 1){
+              $commentsNumber = mysqli_num_rows($ret);
+
+              // 몇 페이지가 끝인 지 계산
+              if($commentsNumber % $PaginationDivision == 0){
+                $PaginationEnd = $commentsNumber / $PaginationDivision;
+              }
+              else {
+                $PaginationEnd = ($commentsNumber / $PaginationDivision) + 1;
+              }
+
+              // 댓글이 없는 경우 처리
+              if($commentsNumber < 1){
                 echo Comment::WarnNoCommentsToShow();
               }
 
-              while($row = mysqli_fetch_array($ret)){
+              // $PaginationID에 따른 포인터 ($row) 이동
+              for($i = 0; $i < $PaginationID * $PaginationDivision; $i++){
+                if($i >= $commentsNumber){
+                  break;
+                }
+                $row = mysqli_fetch_array($ret);
+              }
+
+              // $PaginationDivision만큼 댓글을 출력. 댓글이 더 없다면 break.
+              for($i = 0; $i < $PaginationDivision; $i++){
+
+                if($i >= $commentsNumber){
+                  break;
+                }
+
+                $row = mysqli_fetch_array($ret);
+
                 echo Comment::CreateComment(
                   $row['CommentUserId'],
                   $row['Content'],
@@ -253,7 +287,42 @@
           </div>
         </div>
       </div>
+      <div id="EV-Pagination">
+        <a href="#">&laquo;</a>
+        <a href="#">1</a>
 
+        <?php
+          // $PaginationDivision (페이지 나누는 기준)
+          // $PaginationID (현재 페이지)
+          // $PaginationEnd (끝 페이지)
+
+          // 현재 페이지가 앞 쪽에 치우친 경우
+          if($PaginationID - ($PaginationDivision / 2) <= 0){
+
+          }
+
+          // 현재 페이지가 뒤 쪽에 치우친 경우
+          else if($PaginationEnd - $PaginationID < $PaginationDivision / 2){
+
+          }
+          // 페이지를 중앙에 놓으면 되는 경우
+          else {
+
+          }
+
+          // 페이지네이션 할 수 있는 숫자를 몇 개까지 표시할 것인지 나타내는 int형 변수
+          // (값을 바꿔도 되지만, 웹페이지 디자인 상 홀수여야 균형이 맞아보일 것 같으니 주의)
+          $paginatorsNumber = 9;
+
+          for($i = 0; $i < $paginatorsNumber; $i++){
+            echo sprintf('
+              <a href="https://evcommentservice.ga/Comment.php?db=%s&pageID=%s&mode=%s&paginationID=%s">%s</a>
+            ', $URL_ID, $PageIdentifier, $EmotionalAnalysisMode, $paginationID, $i);
+          }
+        ?>
+
+        <a href="#">&raquo;</a>
+      </div>
       <footer id="EV-Footer">
         <p style="padding-top: 7px;">&copy; 2019 Team EV</p>
       </footer>
