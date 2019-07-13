@@ -1,8 +1,14 @@
 <?php
 
+session_start();
+
+$UserID = $_SESSION['user_id'];
+
+// 세션에 ID가 없다면, 익명으로 한다.
+if(!isset($UserID)) $UserID = "Anonymous";
+
 require_once('MySQLConection.php');
 
-$UserID = $_POST['userID'];
 $CommentContent = $_POST['commentContent'];
 $URLID = $_POST['urlID'];
 $PageID = $_POST['pageID'];

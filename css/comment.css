@@ -169,6 +169,14 @@
   margin-top: 5px;
 }
 
+#EV-ConnectedUserID{
+  display: none;
+}
+
+#EV-ConnectedUserIDProfileImageFileName{
+  display: none;
+}
+
 #EV-Footer{
   background-color: #333333;
   height: 35px;

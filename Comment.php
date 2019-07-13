@@ -144,11 +144,40 @@
     <!-- 반응형 웹페이지를 위한 viewport 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Bootstrap 스타일 시트를 적용. min이 붙은 것은 난독화 파일이기 때문.-->
+
     <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- 댓글 서비스의 css 시트. -->
     <link rel="stylesheet" href="./css/comment.css">
+    <!-- loader에 대한 css 시트. https://loading.io/css/ 를 사용했다.-->
+    <link rel="stylesheet" href="./css/loader.css">
+    <!-- 감정 분석 서비스의 css 시트 -->
     <link rel="stylesheet" href="./css/EV-Style.css">
   </head>
   <body>
+    
+    <?php
+    // 자바스크립트에서 사용할 ID, 프로필 사진 이름.
+    if (isset($connectedUserID)) {
+      echo sprintf('
+        <p id="EV-ConnectedUserID">%s</p>
+        <p id="EV-ConnectedUserIDProfileImageFileName">%s</p>
+      ', $connectedUserID, $connectedUserProfileFileName);
+    }
+    else {
+      echo sprintf('
+        <p id="EV-ConnectedUserID"></p>
+        <p id="EV-ConnectedUserIDProfileImageFileName"></p>
+      ');
+    }
+    ?>
+
+    <!-- Loading 창. 로딩이 끝나면 컨테이너를 show 한다. -->
+    <div id="EV-Loader" style="display: none;">
+      <!-- 아래 div 태그 지우지 말 것 -->
+      <div id="EV-Loader" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <p>Loading..</p>
+    </div>
+
     <div id="EV-Container" class="container">
       <!-- 현재 댓글의 갯수, 로그인 되어 있는 ID를 나타내는 NavBar -->
       <header id="EV-nav">

@@ -9,23 +9,16 @@ var pageID = getParameterByName('pageID');
 var evMode = getParameterByName('mode');
 
 window.onload = function(){
-  // 현재 페이지에 세션을 로드
-  $.ajax({
-    type: "POST",
-    url : "../php-Action/EchoSession.php",
-    data: {
-    },
 
-    success : function(data, status, xhr) {
-      let dataObj = JSON.parse(data);
-      connectedUserID = dataObj.connectedUserID;
-      profileImageFileName = dataObj.connectedUserProfileFileName;
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-    }
-  });
+  connectedUserID = $('#EV-ConnectedUserID').html();
+  profileImageFileName = $('#EV-ConnectedUserIDProfileImageFileName').html();
 
+  containerLoad();
+}
+
+function containerLoad(){
+  $('#EV-Loader').hide();
+  $('#EV-Container').show();
   onHeightChange();
 }
 
@@ -67,24 +60,15 @@ function verifyComment(){
   return true;
 }
 
+
 // 제출 버튼을 클릭해 댓글을 달 때 실행되는 함수
 function postComment(){
 
-  let userID = connectedUserID;
-
   // 로그인 되어 있지 않은 경우 우선 로그인을 권유하는 알림을 띄운다
-  if(userID == '' && !($('#recommendLoginAlert').is(":visible"))){
+  if(connectedUserID == '' && !($('#recommendLoginAlert').is(":visible"))){
     $('#recommendLoginAlert').show();
     onHeightChange();
     return;
-  }
-
-  // 위 상태에서 한 번 더 제출 버튼을 클릭하면 익명으로 댓글을 남기기 위해,
-  // UserID에 Anonymous (익명)을 저장한다
-  // 댓글 등록 시간은 클라이언트가 보내는 시간이 아니라, DB에 저장되는 시간으로 저장한다.
-  // profileImageFileName의 Null 처리는 여기서 하지 않음에 주의.
-  if(userID == ''){
-    userID = 'Anonymous';
   }
 
   // url을 PHP로 넘겨야 하기 때문에 주소 값을 파싱해서 파라미터 값을 php로 전송해야 한다
@@ -107,7 +91,6 @@ function postComment(){
             type: "POST",
             url : "../php-Action/AddComment.php",
             data: {
-              userID : userID,
               commentContent : commentContent,
               urlID : urlID,
               pageID : pageID,
@@ -137,7 +120,6 @@ function postComment(){
         type: "POST",
         url : "../php-Action/AddComment.php",
         data: {
-          userID : userID,
           commentContent : $('#CommentArea').html(),
           urlID : urlID,
           pageID : pageID,
