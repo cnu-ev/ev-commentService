@@ -80,7 +80,10 @@ if(mysqli_num_rows($ret_userID) < 1){
               <a class="nav-link" href="./php-Action/SignOutAction.php">로그아웃</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="modal" data-target="#UserInfoModal">정보 수정</a>
+              <a class="nav-link" data-toggle="modal" data-target="#UserInfoModal">내 정보</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./UserEdit.php">정보 수정</a>
             </li>
           </ul>
         </div>
@@ -94,7 +97,8 @@ if(mysqli_num_rows($ret_userID) < 1){
           <button type="button" class="btn-sm side_btn dropdown-toggle sizeUpOnHover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/menu.svg" alt="sidebar menu"></button>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item active" href="./php-Action/SignOutAction.php">로그아웃</a>
-            <a class="dropdown-item" href="#">정보 수정</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#UserInfoModal">내 정보</a>
+            <a class="dropdown-item" href="./UserEdit.php">정보 수정</a>
           </div>
           <button type="button" class="side_btn sizeUpOnHover" data-toggle="modal" data-target="#UserInfoModal"><img src="img/user.svg" alt="user info button"></button>
         </div>

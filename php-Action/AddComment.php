@@ -5,7 +5,8 @@ session_start();
 $UserID = $_SESSION['user_id'];
 
 // 세션에 ID가 없다면, 익명으로 한다.
-if(!isset($UserID)) $UserID = "Anonymous";
+// (, )는 특수문자로 일반 ID엔 사용할 수 없으므로 다른 ID들과 구분 가능
+if(!isset($UserID)) $UserID = "(Anonymous)";
 
 require_once('MySQLConection.php');
 

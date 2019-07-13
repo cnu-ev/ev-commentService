@@ -70,7 +70,8 @@ $insertData = "
     ProfileImageFileName,
     Gender,
     Name,
-    SignupDate
+    SignupDate,
+    Email
     ) VALUES(
     '$ID',
     '$PW',
@@ -79,7 +80,8 @@ $insertData = "
     '$ProfileImageFileName',
     '$Gender',
     '$Name',
-    Now()
+    Now(),
+    '$Email'
 )";
 
 $ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
