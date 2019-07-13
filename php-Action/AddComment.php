@@ -13,6 +13,10 @@ $CommentContent = $_POST['commentContent'];
 $URLID = $_POST['urlID'];
 $PageID = $_POST['pageID'];
 
+// $CommentContent에 XSS 공격이 가해질 경우에 대한 대처로, strip_tags를 사용했다
+// 댓글을 올릴 때와, echo할 때 모두 적용한다.
+$CommentContent = strip_tags($CommentContent, '<b><i><s><u>');
+
 if(empty($_POST['emotionalAnalysisValue'])){
   $EmotionalAnalysisValue = 0;
 }

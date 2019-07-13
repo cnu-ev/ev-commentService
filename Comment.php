@@ -103,7 +103,6 @@
       }
    }
 
-
    // 로그인 되어 있다면 (쿠키가 존재하면), 해당하는 ID의 프로필 사진을 찾아 띄우고
    // 로그인 되어 있지 않다면 프로필 사진 대신 로그인 버튼을 띄운다.
    if(!isset($connectedUserID)){
@@ -154,7 +153,7 @@
     <link rel="stylesheet" href="./css/EV-Style.css">
   </head>
   <body>
-    
+
     <?php
     // 자바스크립트에서 사용할 ID, 프로필 사진 이름.
     if (isset($connectedUserID)) {
@@ -254,9 +253,13 @@
 
                 if(empty($comment)) break;
 
+                // $CommentContent에 XSS 공격이 가해질 경우에 대한 대처로, strip_tags를 사용했다
+                // 댓글을 올릴 때와, echo할 때 모두 적용한다.
+                $CommentContent = strip_tags($comment['Content'], '<b><i><s><u>');
+
                 echo Comment::CreateComment(
                   $comment['CommentUserId'],
-                  $comment['Content'],
+                  $CommentContent,
                   $comment['DateTime'],
                   $comment['ProfileImageFileName'],
                   $comment['CommentIndex']
