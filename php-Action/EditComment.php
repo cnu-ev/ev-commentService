@@ -36,7 +36,7 @@ if(empty($row) || $row['CommentUserId'] != $UserID){
 
 // CommentID와 같은 레코드를 업데이트 한다.
 $updateComment = "
-  UPDATE `" . $PageID . "` SET Content = '$UpdatedContent', EmotionalAnalysisValue = '$EmotionalAnalysisValue' WHERE CommentIndex = '$CommentID'
+  UPDATE `" . $PageID . "` SET Content = '$UpdatedContent', EmotionalAnalysisValue = '$EmotionalAnalysisValue', DateTime = NOW() WHERE CommentIndex = '$CommentID'
 ";
 
 $ret = mysqli_query($connect_object, $updateComment) or die("Error Occured in Updating DB");

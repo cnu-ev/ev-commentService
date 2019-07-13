@@ -93,7 +93,6 @@ if(mysqli_num_rows($ret_userID) < 1){
           <button type="button" class="side_btn sizeUpOnHover" data-toggle="modal" data-target="#HomePageAddModal"><img src="img/plus.svg" alt="Service Add Button"></button>
           <button type="button" class="btn-sm side_btn dropdown-toggle sizeUpOnHover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/menu.svg" alt="sidebar menu"></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <!-- 로그아웃: 쿠키 제거 -->
             <a class="dropdown-item active" href="./php-Action/SignOutAction.php">로그아웃</a>
             <a class="dropdown-item" href="#">정보 수정</a>
           </div>
@@ -178,7 +177,7 @@ if(mysqli_num_rows($ret_userID) < 1){
       <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body">
-              <h4 class="text-center" style="font-size: 15px; margin-bottom: 20px;">등록된 URL을 DB에서 제거하시겠습니까?<br>해당 URL에 등록되어 있던 모든 댓글 데이터가 삭제됩니다.</h4>
+              <h4 class="text-center" style="font-size: 15px; margin-bottom: 20px;">등록된 URL을 DB에서 제거하시겠습니까?<br>해당 URL에 등록되어 있던 모든 댓글 데이터가 삭제됩니다!</h4>
               <div class="text-center" style="width: 70%; margin: 0 auto">
                 <a class="btn btn-sm btn-danger btn-yes btn-block" style="color:#ffffff;" data-dismiss="modal" onclick="DeleteService()">네</a>
                 <!-- data dismiss란 attribute를 줌으로써, 모달 박스를 닫는 이벤트를 구현할 수 있음 -->
