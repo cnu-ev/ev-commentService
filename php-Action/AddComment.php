@@ -13,6 +13,7 @@ require_once('MySQLConection.php');
 $CommentContent = $_POST['commentContent'];
 $URLID = $_POST['urlID'];
 $PageID = $_POST['pageID'];
+$PostTitle = $_POST['postTitle'];
 
 // $CommentContent에 XSS 공격이 가해질 경우에 대한 대처로, strip_tags를 사용했다
 // 댓글을 올릴 때와, echo할 때 모두 적용한다.
@@ -41,13 +42,15 @@ $insertComment = "
     Content,
     DateTime,
     ProfileImageFileName,
-    EmotionalAnalysisValue
+    EmotionalAnalysisValue,
+    PostTitle
     ) VALUES(
     '$UserID',
     '$CommentContent',
     Now(),
     '$ProfileImageFileName',
-    '$EmotionalAnalysisValue'
+    '$EmotionalAnalysisValue',
+    '$PostTitle'
 )";
 
 $ret = mysqli_query($connect_object, $insertComment) or die("Error Occured in Inserting data to DB");

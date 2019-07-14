@@ -13,6 +13,8 @@
   $PaginationID = $_GET['paginationID'];
   // 어떻게 감정분석 결과를 나타낼 것인지 나타내는 mode
   $EmotionalAnalysisMode = $_GET['mode'];
+  // 포스팅 제목
+  $PostTitle = $_GET['title'];
   // 몇 개의 댓글을 기준으로 Pagination 할 것인지를 나타내는 int 값. 나중에 get 방식으로 받아오게 따로 빼서 확장해도 괜찮을 거 같다.
   $PaginationDivision = 10;
 
@@ -155,21 +157,23 @@
   <body>
 
     <?php
-    // 자바스크립트에서 사용할 ID, 프로필 사진 이름.
+    // 자바스크립트에서 사용할 ID, 프로필 사진 이름 및 postTitle
     if (isset($connectedUserID)) {
       echo sprintf('
         <p id="EV-ConnectedUserID">%s</p>
         <p id="EV-ConnectedUserIDProfileImageFileName">%s</p>
-      ', $connectedUserID, $connectedUserProfileFileName);
+        <p id="EV-PostTitle">%s</p>
+      ', $connectedUserID, $connectedUserProfileFileName, $PostTitle);
     }
     else {
       echo sprintf('
         <p id="EV-ConnectedUserID"></p>
         <p id="EV-ConnectedUserIDProfileImageFileName"></p>
-      ');
+        <p id="EV-PostTitle">%s</p>
+      ', $PostTitle);
     }
     ?>
-
+    
     <!-- Loading 창. 로딩이 끝나면 컨테이너를 show 한다. -->
     <div id="EV-Loader" style="display: none;">
       <!-- 아래 div 태그 지우지 말 것 -->

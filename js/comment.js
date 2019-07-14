@@ -3,6 +3,7 @@ var evEmotionalAnalysisServiceURL = "localhost/comment";
 
 var connectedUserID;
 var profileImageFileName;
+var postTitle;
 
 var urlID = getParameterByName('db');
 var pageID = getParameterByName('pageID');
@@ -12,7 +13,7 @@ window.onload = function(){
 
   connectedUserID = $('#EV-ConnectedUserID').html();
   profileImageFileName = $('#EV-ConnectedUserIDProfileImageFileName').html();
-
+  postTitle = $('#EV-PostTitle').html();
   containerLoad();
 }
 
@@ -95,7 +96,8 @@ function postComment(){
               urlID : urlID,
               pageID : pageID,
               profileImageFileName : profileImageFileName,
-              emotionalAnalysisValue : data
+              emotionalAnalysisValue : data,
+              postTitle: postTitle
             },
 
             success : function(data, status, xhr) {
@@ -123,7 +125,8 @@ function postComment(){
           commentContent : $('#CommentArea').html(),
           urlID : urlID,
           pageID : pageID,
-          profileImageFileName : profileImageFileName
+          profileImageFileName : profileImageFileName,
+          postTitle: postTitle
         },
 
         success : function(data, status, xhr) {

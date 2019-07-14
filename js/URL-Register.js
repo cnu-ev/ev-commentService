@@ -36,3 +36,7 @@ function DeleteService(){
 function setIndexToDeleteRoom(urlID){
   DeletingURLID = urlID;
 }
+
+function ToCommentManagePage(serviceTitle, urlID){
+  location.href='CommentManageService.php?db=' + urlID + '&title=' + serviceTitle;
+}

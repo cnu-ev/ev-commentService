@@ -12,6 +12,7 @@ $PageIdentifier = $_GET["PageIdentifier"];
 $SiteURL = $_GET["SiteURL"];
 $URL_ID = Hashing("sha256", $SiteURL);
 $EmotionalAnalysisMode = $_GET["EmotionalAnalysisMode"];
+$PageTitle = $_GET["PageTitle"];
 
 // DB에서 등록된 Site 인지 찾음
 $searchSite = "
@@ -30,11 +31,28 @@ if(mysqli_num_rows($ret) < 1){
   exit ();
 }
 
+// 설정되지 않은 값을 찾음
+if(empty($UserName) || empty($PageIdentifier) || empty($SiteURL) || empty($PageTitle)){
+  $settingError = sprintf('
+    <div class="alert alert-success">
+      <p style="text-align: center; font-size: 14px; color: #4c4c4c; margin: 0px auto;">모든 값이 설정되어 있지 않습니다.<br> evcommentservice.ga에서 서비스의 사용법을 확인하세요.</p>
+    </div>
+  ');
+  echo $unregisteredServiceWarning;
+  exit ();
+}
+
 // 등록된 요청이라면 해당 URL의 DB가 존재.
 // PageID의 테이블이 존재하는지 확인
 // 존재한다면 해당 테이블의 댓글 데이터를 반환
 if(MySQLConnection::isExist($URL_ID, $PageIdentifier)){
-  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode&paginationID=1'></iframe>";
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // 페이지 제목이 변경되면 아래 DB에서도 변경되게 구조를 변경할 것
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode&paginationID=1&title=$PageTitle'></iframe>";
 }
 // 존재하지 않는다면 새 테이블을 생성한 후 컴포넌트만 반환
 else {
@@ -49,12 +67,14 @@ else {
       `ProfileImageFileName` VARCHAR(25),
       `CommentIndex` INT(11) NOT NULL AUTO_INCREMENT,
       `EmotionalAnalysisValue` FLOAT,
+      `PostTitle` MEDIUMTEXT,
       PRIMARY KEY(`CommentIndex`)
-  )";
+  )
+  ";
 
   $ret = mysqli_query($connect_url, $createNewTable);
 
-  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode&paginationID=1'></iframe>";
+  echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode&paginationID=1&title=$PageTitle'></iframe>";
 }
 
 

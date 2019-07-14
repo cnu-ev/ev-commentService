@@ -169,6 +169,10 @@
   margin-top: 5px;
 }
 
+#EV-PostTitle{
+  display: none;
+}
+
 #EV-ConnectedUserID{
   display: none;
 }

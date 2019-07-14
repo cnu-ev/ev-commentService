@@ -30,14 +30,14 @@ class ShowHomePage{
         </div>
         <hr class="my-2">
         <p class="MessageContent">URL : %s</p>
-        <form action="../CommentManageService.php" method="get">
-          <label for="RoomID">
-          <button class="btn btn-secondary btn-lg Buttons" type="submit" name="RoomID" value="%s">댓글 관리 페이지로 이동</button>
-          </label>
-          <button class="btn btn-danger btn-lg Buttons responsiveSmallReverse" type="button" data-toggle="modal" onclick="setIndexToDeleteRoom(this.parentNode.parentNode.id)" data-target="#DeleteConfirmModal">댓글 서비스 삭제</button>
-        </form>
+        <button class="btn btn-secondary btn-lg Buttons" type="button" name="RoomID" onclick="ToCommentManagePage(\'%s\', \'%s\')">댓글 관리 페이지로 이동</button>
+        <button class="btn btn-danger btn-lg Buttons responsiveSmallReverse" type="button" data-toggle="modal" onclick="setIndexToDeleteRoom(this.parentNode.id)" data-target="#DeleteConfirmModal">댓글 서비스 삭제</button>
       </div>
-    ', $HomePage_ID, $HomePage_Title, $HomePage_URL, $HomePage_ID);
+    ',
+    $HomePage_ID,
+    $HomePage_Title,
+    $HomePage_URL,
+    $HomePage_Title, $HomePage_ID);
   }
 
 }
