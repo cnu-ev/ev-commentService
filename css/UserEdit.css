@@ -64,6 +64,9 @@ a.navbar-brand{
 
 #userDefaultProfile{
   border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 766px) {

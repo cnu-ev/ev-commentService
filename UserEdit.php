@@ -51,7 +51,7 @@ else {
 <head>
   <!-- 검색되게 쉽게 하기 위한 meta 태그 작성 -->
   <meta charset="utf-8">
-  <meta name="description" content="Login page">
+  <meta name="description" content="UserInfo Edit Page">
   <meta name="keywords" content="Sentimental Analysis Comment Service">
   <meta name="author" content="Team EV">
   <!-- 반응형 웹페이지 구현을 위한 meta 데이터 -->
@@ -92,14 +92,14 @@ else {
       <div id="menuCollapseList" class="collapse navbar-collapse responsiveNone2">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" onclick="ToLogin();">관리 서비스로 이동</a>
+            <a class="nav-link" onclick="ToMainPage();">관리 서비스로 이동</a>
           </li>
         </ul>
       </div>
 
       <!-- 아래의 버튼은 데스크톱에서 사용할 버튼 -->
       <div class="btn-group float-right responsiveNone">
-        <button type="button" class="side_btn"><img src="img/arrow-left.svg" alt="return login page" onclick="ToLogin();"></img></button>
+        <button type="button" class="side_btn"><img src="img/arrow-left.svg" alt="return login page" onclick="ToMainPage();"></img></button>
       </div>
   </nav>
 
@@ -111,7 +111,7 @@ else {
 
     <!-- 파일을 함께 전송하므로, enctype은 multipart/form-data 여야 한다 -->
     <!-- SubmitButtonClicked()가 true를 반환하는 경우에만 서버로 데이터를 전송한다 -->
-    <form action="php-Action/SignUpAction.php" enctype="multipart/form-data" onsubmit="return SubmitButtonClicked()" method="post">
+    <form action="php-Action/UserEditAction.php" enctype="multipart/form-data" onsubmit="return SubmitButtonClicked()" method="post">
 
       <div id="ProfileImageDiv" class="form-group container bg-dark">
         <label class="custom-file" for="ProfileImage">프로필 사진</label>
@@ -124,13 +124,15 @@ else {
         <!-- form-control를 넣어 스타일을 줄 수 있음 (이게 없으면 모양이 나빠짐), mt는 margin-top, mb는 margin-bottom 의 의미. -->
         <!-- accept를 통해, 특정 확장자의 파일만 선택가능하게 구현 -->
         <input class="form-control mt-3 mb-1" type="file" name="ProfileImage" onchange="changeProfileImage(this)" accept=".png,.jpg,.jpeg" />
+        <!-- Old ProfileImageFileName -->
+        <input type="text" name="OldProfileImageFileName" value="<?=$ProfileImageFileName;?>" style="display: none;">
       </div>
 
       <!-- form 태그를 통해 SignInAction.php를 거쳐 로그인 함 -->
       <!-- form-group 및 form-control 은 부트스트랩 css를 적용하기 위한 태그 -->
       <div class="form-group">
-        <label for="ID">ID <strong>* </strong></label>
-        <input id="ID" value="<?=$ID;?>" type="text" name="ID" class="form-control" maxlength="20" placeholder="4글자 이상, 20자 이내로 입력해주세요." title="ID를 입력하세요." autofocus required>
+        <label for="ID">ID</label>
+        <input id="ID" value="<?=$ID;?>" type="text" name="ID" class="form-control" maxlength="20" placeholder="4글자 이상, 20자 이내로 입력해주세요." title="ID를 입력하세요." autofocus required disabled>
         <label for="IDCheck" style="display:inline;"></label>
       </div>
 
@@ -208,6 +210,6 @@ else {
   <!-- MDB 라이브러리 추가하기 -->
   <script src="./lib/mdb.min.js"></script>
   <!-- 커스텀 자바스크립트 추가하기 -->
-  <script src="./js/SignUp.js"></script>
+  <script src="./js/UserEdit.js"></script>
 </body>
 </html>
