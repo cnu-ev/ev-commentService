@@ -42,15 +42,13 @@ $insertComment = "
     Content,
     DateTime,
     ProfileImageFileName,
-    EmotionalAnalysisValue,
-    PostTitle
+    EmotionalAnalysisValue
     ) VALUES(
     '$UserID',
     '$CommentContent',
     Now(),
     '$ProfileImageFileName',
-    '$EmotionalAnalysisValue',
-    '$PostTitle'
+    '$EmotionalAnalysisValue'
 )";
 
 $ret = mysqli_query($connect_object, $insertComment) or die("Error Occured in Inserting data to DB");

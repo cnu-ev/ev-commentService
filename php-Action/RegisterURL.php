@@ -54,23 +54,19 @@ $createNewService = "
   CREATE DATABASE `$URL_ID` CHARSET 'utf8mb4' COLLATE utf8mb4_unicode_ci
 ";
 
-$createDefaultTable = "
-  CREATE TABLE `$URL_ID`.`default`(
-  	`CommentUserId` VARCHAR(20) NOT NULL,
-    `Content` MEDIUMTEXT NOT NULL,
-    `DateTime` DATETIME NOT NULL,
-    `ProfileImageFileName` VARCHAR(25),
-    `CommentIndex` INT(11) NOT NULL AUTO_INCREMENT,
-    `EmotionalAnalysisValue` FLOAT,
-    `PostTitle` MEDIUMTEXT,
-    PRIMARY KEY(`CommentIndex`)
-)";
+$createPageTitlePairTable = "
+  CREATE TABLE pagetitlepairs(
+    `PageID` MEDIUMTEXT NOT NULL,
+    `Title` MEDIUMTEXT NOT NULL
+  )
+";
 
 $ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
 $ret = mysqli_query($connect_object, $createNewService) or die("Error Occured in Creating DB");
 
 $connect_url = MySQLConnection::DB_Connect($URL_ID) or die("Error Occured in Connection to DB");
-$ret = mysqli_query($connect_url, $createDefaultTable) or die("Error Occured in Creating DB");
+
+$ret = mysqli_query($connect_url, $createPageTitlePairTable) or die("Error Occured in Creating Table");
 
 function Hashing($Algorithm, $URL){
   return hash($Algorithm, $URL);

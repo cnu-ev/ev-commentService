@@ -13,9 +13,10 @@ if(!isset($UserID)){
 
 $URLID = $_POST['URLID'];
 
+require_once('Comment.php');
 require_once('../MySQLConection.php');
 
-class RecentComments{
+class RecentCommentService{
 
   public static function WarnNoComments(){
 
@@ -35,6 +36,13 @@ class RecentComments{
       $comment = mb_substr($comment, 0, 45, 'utf-8') . '...';
     }
 
+    if(empty($profileImageFileName)){
+      $profileImageFileName = "img/userDefaultProfile.svg";
+    }
+    else {
+      $profileImageFileName = "profileImages/" . $profileImageFileName;
+    }
+
     return sprintf('
       <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
@@ -42,7 +50,7 @@ class RecentComments{
             <small style="width: 120px; text-align: right;">%s</small>
           </div>
           <p class="mb-1">%s</p>
-          <img class="rounded-circle commentProfile" src="profileImages/%s">
+          <img class="rounded-circle commentProfile" src="%s">
           <small>%s</small>
       </a>
     ',
@@ -62,55 +70,73 @@ $showTables = '
   SHOW TABLES
 ';
 
-$unionAllTable = '';
+$fetchOneTable = '';
 
 $allTableName = mysqli_query($connect_object, $showTables);
 
+// 날짜와 시간을 가중치로 하는 우선순위 큐
+$pq = new SplPriorityQueue();
+
 // 모든 테이블을 Union 하는 쿼리문을 생성
 while($tableName = mysqli_fetch_array($allTableName)){
-  $unionAllTable .= '
-    SELECT CommentUserId, Content, DateTime, PostTitle, ProfileImageFileName FROM `' . $tableName[0] .'`
-    UNION ALL
-';
+
+  if($tableName[0] == 'pagetitlepairs') continue;
+
+  $fetchOneTable = '
+    SELECT * FROM `' . $tableName[0] . '`
+  ';
+
+  $tblData = mysqli_query($connect_object, $fetchOneTable);
+
+  while($comment = mysqli_fetch_array($tblData)){
+
+    // 특수문자를 전부 제거해 가중치로 사용함
+    $weight = (int)(preg_replace("/[ #\&\+\-%@=\/\\\:;,\.'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]/i", "", $comment['DateTime']));
+
+    $fetchTitleAndPageID = "
+      SELECT * FROM pagetitlepairs WHERE PageID = '$tableName[0]'
+    ";
+
+    $TitleAndPageIDRet = mysqli_query($connect_object, $fetchTitleAndPageID);
+
+    $TitleAndPageID = mysqli_fetch_array($TitleAndPageIDRet);
+
+    $pq->insert(new Comment(
+        $comment['CommentUserId'],
+        $comment['Content'],
+        $comment['DateTime'],
+        $comment['ProfileImageFileName'],
+        $TitleAndPageID['PageID'],
+        $tableName[0],
+        $TitleAndPageID['Title']
+    ), $weight);
+  }
 }
 
-// 마지막 'UNION ALL'을 제거
-if(mysqli_num_rows($allTableName) > 0){
-  $arr = explode(' ', $unionAllTable);
-  // 마지막 문자열의 UNION 제거
-  unset($arr[count($arr) - 1]);
-  // 마지막 문자열의 All 제거
-  unset($arr[count($arr) - 1]);
-  $unionAllTable = implode(' ', $arr);
-}
-
-// 쿼리문에 DateTime 내림차순으로 정렬하는 문장 추가
-$unionAllTable .= '
-  ORDER BY DATETIME DESC
-';
-
-$allComments = mysqli_query($connect_object, $unionAllTable);
-
-// 최근의 댓글을 10개 까지 가져옴
-$index = 0;
 $commentsElements = '';
 
-if(mysqli_num_rows($allComments) < 1){
-  echo RecentComments::WarnNoComments();
+if($pq->count() < 1){
+  echo RecentCommentService::WarnNoComments();
   exit();
 }
 
-while($comment = mysqli_fetch_array($allComments)){
-  if($index++ > 10){
-    break;
-  }
-  $commentsElements .= RecentComments::ShowComments(
-    $comment['PostTitle'],
-    $comment['DateTime'],
-    $comment['Content'],
-    $comment['CommentUserId'],
-    $comment['ProfileImageFileName']
+$index = 0;
+while($pq->valid()){
+
+  // 최근의 댓글을 10개 까지 가져옴
+  if($index++ > 10) break;
+
+  $iterator = $pq->current();
+
+  $commentsElements .= RecentCommentService::ShowComments(
+    $iterator->PostTitle,
+    $iterator->DateTime,
+    $iterator->Content,
+    $iterator->CommentUserId,
+    $iterator->ProfileImageFileName
   );
+
+  $pq->next();
 }
 
 echo sprintf('

@@ -67,12 +67,22 @@ else {
       `ProfileImageFileName` VARCHAR(25),
       `CommentIndex` INT(11) NOT NULL AUTO_INCREMENT,
       `EmotionalAnalysisValue` FLOAT,
-      `PostTitle` MEDIUMTEXT,
       PRIMARY KEY(`CommentIndex`)
   )
   ";
 
+  // 해당 DB의 페이지 ID 테이블에 새 레코드 입력
+  $insertComment = "
+    Insert INTO pagetitlepairs(
+      PageID,
+      Title
+      ) VALUES(
+      '$PageIdentifier',
+      '$PageTitle'
+  )";
+
   $ret = mysqli_query($connect_url, $createNewTable);
+  $ret = mysqli_query($connect_url, $insertComment);
 
   echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode&paginationID=1&title=$PageTitle'></iframe>";
 }
