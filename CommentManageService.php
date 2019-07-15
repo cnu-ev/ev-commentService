@@ -89,7 +89,7 @@
 
     <section class="container mt-1" style="padding-top: 75px;">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin-bottom: 15px;">
           <div id="AnalysisButtons" class="list-group">
             <a id="Analysis-recentComments" href="#" class="list-group-item active" onclick="selectButtons(this.id)">최근 생성된 댓글</a>
             <a id="Analysis-visitorsNumber" href="#" class="list-group-item" onclick="selectButtons(this.id)">블로그 방문 수</a>
@@ -100,7 +100,7 @@
 
         <div id="ServiceSection" class="col-md-9">
         </div>
-        
+
       </div>
     </section>
 

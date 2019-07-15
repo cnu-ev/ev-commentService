@@ -29,7 +29,7 @@ class RecentComments{
     ');
   }
 
-  public static function ShowComments($postTitle, $dateTime, $comment, $commentUserID){
+  public static function ShowComments($postTitle, $dateTime, $comment, $commentUserID, $profileImageFileName){
     // comment가 너무 길면 앞 내용만 잘라 나타냄
     if(mb_strlen($comment) > 40){
       $comment = mb_substr($comment, 0, 45, 'utf-8') . '...';
@@ -37,17 +37,19 @@ class RecentComments{
 
     return sprintf('
       <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">%s</h5>
-          <small style="width: 120px; text-align: right;">%s</small>
-        </div>
-        <p class="mb-1">%s</p>
-        <small>%s</small>
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">%s</h5>
+            <small style="width: 120px; text-align: right;">%s</small>
+          </div>
+          <p class="mb-1">%s</p>
+          <img class="rounded-circle commentProfile" src="profileImages/%s">
+          <small>%s</small>
       </a>
     ',
     $postTitle,
     $dateTime,
     $comment,
+    $profileImageFileName,
     $commentUserID
     );
   }
@@ -67,7 +69,7 @@ $allTableName = mysqli_query($connect_object, $showTables);
 // 모든 테이블을 Union 하는 쿼리문을 생성
 while($tableName = mysqli_fetch_array($allTableName)){
   $unionAllTable .= '
-    SELECT CommentUserId, Content, DateTime, PostTitle FROM `' . $tableName[0] .'`
+    SELECT CommentUserId, Content, DateTime, PostTitle, ProfileImageFileName FROM `' . $tableName[0] .'`
     UNION ALL
 ';
 }
@@ -102,12 +104,18 @@ while($comment = mysqli_fetch_array($allComments)){
   if($index++ > 10){
     break;
   }
-  $commentsElements .= RecentComments::ShowComments($comment['PostTitle'], $comment['DateTime'], $comment['Content'], $comment['CommentUserId']);
+  $commentsElements .= RecentComments::ShowComments(
+    $comment['PostTitle'],
+    $comment['DateTime'],
+    $comment['Content'],
+    $comment['CommentUserId'],
+    $comment['ProfileImageFileName']
+  );
 }
 
 echo sprintf('
   <div class="list-group">
-    <a href="#" class="list-group-item active">최근 생성된 댓글</a>
+    <a class="list-group-item active" style="background-color: #474747!important; color: #ffffff; border: none !important;">최근 생성된 댓글</a>
     <div class="list-group-item">
       <div class="list-group">
         <div class="list-group">

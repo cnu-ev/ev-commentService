@@ -31,6 +31,15 @@ a.navbar-brand{
   font-family: 'Jeju Gothic';
 }
 
+.commentProfile{
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	right: 13px;
+	bottom: 7px;
+	float: right;
+}
+
 /* 요소 위에 마우스를 올려 놓았을 때 변화 */
 .sizeUpOnHover:hover{
   transform: scale(1.35);
@@ -83,6 +92,18 @@ a.navbar-brand{
   display: block;
   bottom: 0px;
   left: 0px;
+}
+
+#AnalysisButtons a{
+	background-color: #ffffff;
+	border: none;
+	color: #000000;
+}
+
+#AnalysisButtons a.active{
+	background-color: #474747;
+	border: none;
+	color: #ffffff;
 }
 
 #Copyright{
