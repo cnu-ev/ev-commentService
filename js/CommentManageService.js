@@ -44,7 +44,23 @@ function selectButtons(clickedButton){
 
       break;
     case "Analysis-postsSortingByCommentsNumber":
+      $.ajax({
+        type: "POST",
+        url : "../php-Action/CommentManageService/PostsSortingByCommentsNumber.php",
+        data: {
+          URLID : urlID,
+        },
 
+        success : function(data, status, xhr) {
+          $('#ServiceSection').html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+        }
+      });
+      break;
+
+    case "Analysis-popularness":
       break;
   }
 

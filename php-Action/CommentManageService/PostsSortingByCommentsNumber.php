@@ -15,6 +15,17 @@ $URLID = $_POST['URLID'];
 
 require_once('../MySQLConection.php');
 
+class Post{
+  public $PostTitle;
+  public $CommentNumber;
+
+  function __construct($_PostTitle, $_CommentNumber){
+    $this->PostTitle = $_PostTitle;
+    $this->CommentNumber = $_CommentNumber;
+  }
+}
+
+
 class PostsSortingByCommentsNumber{
 
   public static function WarnNoComments(){
@@ -50,12 +61,112 @@ $pq = new SplPriorityQueue();
 
 // 모든 테이블을 Union 하는 쿼리문을 생성
 while($tableName = mysqli_fetch_array($allTableName)){
-  $countRows = '
-    SELECT TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '$tableName[0]';
-  ';
 
-  $ret = mysqli_query($connect_object, $countRows);
-  $number = mysqli_fetch_array($ret);
+  if($tableName[0] == 'pagetitlepairs') continue;
 
-  $pq->insert(, $number[0]);
+  $selectTitle = "
+    SELECT Title FROM pagetitlepairs WHERE PageID = '$tableName[0]'
+  ";
+  $countRows = "
+    SELECT TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '$tableName[0]'
+  ";
+
+  $countRowsRet = mysqli_query($connect_object, $countRows);
+  $selectTitleRet = mysqli_query($connect_object, $selectTitle);
+
+  $rowNumber = mysqli_fetch_array($countRowsRet);
+  $title = mysqli_fetch_array($selectTitleRet);
+  $pq->insert(new Post($title[0], $rowNumber[0]), $rowNumber[0]);
 }
+
+// DB에 따로 테이블로 두긴 양이 너무 적어 (10개로 고정) 코드에 넣었다
+$backgroundColors = "
+  rgba(255, 99, 132, 0.2)|
+  rgba(54, 162, 235, 0.2)|
+  rgba(255, 206, 86, 0.2)|
+  rgba(75, 192, 192, 0.2)|
+  rgba(226, 255, 163, 0.2)|
+  rgba(168, 196, 255, 0.2)|
+  rgba(211, 140, 255, 0.2)|
+  rgba(240, 92, 242, 0.2)|
+  rgba(57, 250, 215, 0.2)|
+  rgba(219, 219, 219, 0.2)|
+";
+
+$borderColors = "
+  rgba(255, 99, 132, 1)|
+  rgba(54, 162, 235, 1)|
+  rgba(255, 206, 86, 1)|
+  rgba(75, 192, 192, 1)|
+  rgba(226, 255, 163, 1)|
+  rgba(168, 196, 255, 1)|
+  rgba(211, 140, 255, 1)|
+  rgba(240, 92, 242, 1)|
+  rgba(57, 250, 215, 1)|
+  rgba(219, 219, 219, 1)|
+";
+
+$backgroundColorsArr = explode('|', preg_replace("/\s+/","", $backgroundColors));
+$borderColorsArr = explode('|', preg_replace("/\s+/","", $borderColors));
+
+// 우선순위큐가 빌 때 까지 꺼냄
+// 랭킹 10위 까지 나타내기 위해, 10개가 넘으면 break
+$index = 0;
+
+$labels = '';
+$data = '';
+$backgroundColorStr = '';
+$borderColorsStr = '';
+
+while($pq->valid()){
+
+  // 최근의 댓글을 10개 까지 가져옴
+  if($index > 10) break;
+
+  $iterator = $pq->current();
+  $labels .= '\''. $iterator->PostTitle . '\',';
+  $backgroundColorStr .= '\''. $backgroundColorsArr[$index] . '\',';
+  $borderColorsStr .= '\''. $borderColorsArr[$index] . '\',';
+  $data .= $iterator->CommentNumber . ',';
+  $pq->next();
+  $index++;
+}
+
+$barGraphScipts = sprintf("
+  <script>
+  var ctxB = document.getElementById(\"bar-graph\").getContext('2d');
+  var myBarChart = new Chart(ctxB, {
+      type: 'bar',
+      data: {
+          labels: [%s],
+          datasets: [{
+              label: '댓글 순으로 정렬',
+              data: [%s],
+              backgroundColor: [%s],
+              borderColor: [%s],
+              borderWidth: 1
+          }]
+      },
+      optionss: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
+  </script>",
+  $labels, $data, $backgroundColorStr, $borderColorsStr);
+
+
+echo sprintf('
+  <div class="list-group">
+    <a class="list-group-item active" style="background-color: #474747!important; color: #ffffff; border: none !important;">댓글이 많이 달린 게시글</a>
+    <div class="list-group-item">
+      <canvas id="bar-graph"></canvas>
+      %s
+    </div>
+  </div>
+  ', $barGraphScipts);

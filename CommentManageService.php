@@ -94,6 +94,7 @@
           <div id="AnalysisButtons" class="list-group">
             <a id="Analysis-recentComments" href="#" class="list-group-item active" onclick="selectButtons(this.id)">최근 생성된 댓글</a>
             <a id="Analysis-positiveness" href="#" class="list-group-item" onclick="selectButtons(this.id)">긍정도 분석</a>
+            <a id="Analysis-popularness" href="#" class="list-group-item" onclick="selectButtons(this.id)">인기 포스팅 분석</a>
             <a id="Analysis-postsSortingByCommentsNumber" href="#" class="list-group-item" onclick="selectButtons(this.id)">댓글이 많은 게시물</a>
           </div>
         </div>
