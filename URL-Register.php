@@ -96,7 +96,7 @@ if(mysqli_num_rows($ret_userID) < 1){
           <button type="button" class="side_btn sizeUpOnHover" data-toggle="modal" data-target="#HomePageAddModal"><img src="img/plus.svg" alt="Service Add Button"></button>
           <button type="button" class="btn-sm side_btn dropdown-toggle sizeUpOnHover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/menu.svg" alt="sidebar menu"></button>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item active" href="./php-Action/SignOutAction.php">로그아웃</a>
+            <a class="dropdown-item" href="./php-Action/SignOutAction.php">로그아웃</a>
             <a class="dropdown-item" data-toggle="modal" data-target="#UserInfoModal">내 정보</a>
             <a class="dropdown-item" href="./UserEdit.php">정보 수정</a>
           </div>

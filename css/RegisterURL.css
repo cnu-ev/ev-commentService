@@ -47,6 +47,11 @@ a.navbar-brand{
   background-color: #e9ecef;
 }
 
+.dropdown-menu a:hover{
+	background-color: #666666 !important;
+	color: #ffffff !important;
+}
+
 .dropdown-menu-right {
   right: 0;
   left: auto;
