@@ -68,7 +68,7 @@
     </section>
 
     <!-- Sign Up 표시 -->
-    <a id="AnchorForSignUp" href="SignUp.html">Sign Up</a>
+    <a id="AnchorForSignUp" href="SignUp.html" style="color: #7a7a7a">Sign Up</a>
 
     <!-- 스크롤바 에러를 피하기 위해 공간을 둠. 더 적당한 방법을 찾아 고치고 싶음-->
     <div id="WhiteSpaceForResponsivePage"></div>

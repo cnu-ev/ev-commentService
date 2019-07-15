@@ -75,7 +75,7 @@
         <!-- 텍스트를 중간에 배치하기 위해 버튼들을 absoulte로 놓고 오른쪽엔 div로 따로 공간을 두었음 -->
         <!-- sizeUpOnHover가 들어간 엘리먼트는 hover 하면 크기가 커짐 -->
         <div class="btn-group float-right responsiveNone">
-          <button type="button" class="side_btn"><img src="img/arrow-left.svg" alt="return login page" onclick="location.href='URL-Register.php'"></img></button>
+          <button type="button" class="side_btn sizeUpOnHover"><img src="img/arrow-left.svg" alt="return login page" onclick="location.href='URL-Register.php'"></img></button>
           <button type="button" class="btn-sm side_btn dropdown-toggle sizeUpOnHover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/menu.svg" alt="sidebar menu"></button>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item active" href="./php-Action/SignOutAction.php">로그아웃</a>
