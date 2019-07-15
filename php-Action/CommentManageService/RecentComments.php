@@ -16,6 +16,16 @@ $URLID = $_POST['URLID'];
 require_once('Comment.php');
 require_once('../MySQLConection.php');
 
+$connect_userdb = MySQLConnection::DB_Connect('userdb') or die("Error Occured in Connection to DB");
+
+// show tables로 모든 테이블 이름을 가져온다.
+$fetchURL = "
+  SELECT URL FROM usersurltbl WHERE URLID = '$URLID'
+";
+
+$urlSelect = mysqli_query($connect_userdb, $fetchURL);
+$url = mysqli_fetch_array($urlSelect);
+
 class RecentCommentService{
 
   public static function WarnNoComments(){
@@ -30,7 +40,12 @@ class RecentCommentService{
     ');
   }
 
-  public static function ShowComments($postTitle, $dateTime, $comment, $commentUserID, $profileImageFileName){
+  public static function ShowComments($postTitle, $dateTime, $comment, $commentUserID, $profileImageFileName, $pageID){
+
+    global $url;
+
+    $postURL = $url[0] . $pageID;
+
     // comment가 너무 길면 앞 내용만 잘라 나타냄
     if(mb_strlen($comment) > 40){
       $comment = mb_substr($comment, 0, 45, 'utf-8') . '...';
@@ -44,7 +59,7 @@ class RecentCommentService{
     }
 
     return sprintf('
-      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <a target="_blank" href="%s" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">%s</h5>
             <small style="width: 120px; text-align: right;">%s</small>
@@ -54,6 +69,7 @@ class RecentCommentService{
           <small>%s</small>
       </a>
     ',
+    $postURL,
     $postTitle,
     $dateTime,
     $comment,
@@ -133,7 +149,8 @@ while($pq->valid()){
     $iterator->DateTime,
     $iterator->Content,
     $iterator->CommentUserId,
-    $iterator->ProfileImageFileName
+    $iterator->ProfileImageFileName,
+    $iterator->PageID
   );
 
   $pq->next();
