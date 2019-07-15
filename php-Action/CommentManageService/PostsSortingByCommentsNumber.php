@@ -68,15 +68,15 @@ while($tableName = mysqli_fetch_array($allTableName)){
     SELECT Title FROM pagetitlepairs WHERE PageID = '$tableName[0]'
   ";
   $countRows = "
-    SELECT TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '$tableName[0]'
+    SELECT CommentIndex FROM `$tableName[0]`
   ";
 
   $countRowsRet = mysqli_query($connect_object, $countRows);
   $selectTitleRet = mysqli_query($connect_object, $selectTitle);
 
-  $rowNumber = mysqli_fetch_array($countRowsRet);
+  $rowNumber = mysqli_num_rows($countRowsRet);
   $title = mysqli_fetch_array($selectTitleRet);
-  $pq->insert(new Post($title[0], $rowNumber[0]), $rowNumber[0]);
+  $pq->insert(new Post($title[0], $rowNumber), $rowNumber);
 }
 
 // DB에 따로 테이블로 두긴 양이 너무 적어 (10개로 고정) 코드에 넣었다
@@ -147,7 +147,7 @@ $barGraphScipts = sprintf("
               borderWidth: 1
           }]
       },
-      optionss: {
+      options: {
           scales: {
               yAxes: [{
                   ticks: {

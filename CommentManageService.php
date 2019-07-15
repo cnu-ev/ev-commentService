@@ -144,6 +144,8 @@
     <script src="./lib/mdb.min.js"></script>
     <!-- 커스텀 자바스크립트 추가하기 -->
     <script src="./js/CommentManageService.js"></script>
+    <!-- Chart JS 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 
   </body>
 </html>
