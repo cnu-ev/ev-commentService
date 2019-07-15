@@ -88,7 +88,7 @@
       </nav>
     </div>
 
-    <section class="container mt-1" style="padding-top: 75px;">
+    <section class="mt-1" style="padding-top: 75px; padding-left: 5%; padding-right: 5%;">
       <div class="row">
         <div class="col-md-3" style="margin-bottom: 15px;">
           <div id="AnalysisButtons" class="list-group">

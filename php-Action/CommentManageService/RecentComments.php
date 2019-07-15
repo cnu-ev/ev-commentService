@@ -96,7 +96,7 @@ $pq = new SplPriorityQueue();
 // 모든 테이블을 Union 하는 쿼리문을 생성
 while($tableName = mysqli_fetch_array($allTableName)){
 
-  if($tableName[0] == 'pagetitlepairs') continue;
+  if($tableName[0] == 'pagetitlepairs' || $tableName[0] == 'visitorcounter') continue;
 
   $fetchOneTable = '
     SELECT * FROM `' . $tableName[0] . '`
@@ -140,7 +140,7 @@ $index = 0;
 while($pq->valid()){
 
   // 최근의 댓글을 10개 까지 가져옴
-  if($index++ > 10) break;
+  if($index++ >= 10) break;
 
   $iterator = $pq->current();
 

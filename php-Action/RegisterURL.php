@@ -61,12 +61,23 @@ $createPageTitlePairTable = "
   )
 ";
 
+$createVisitorTable = "
+  CREATE TABLE visitorcounter (
+    `I` INT(11) NOT NULL AUTO_INCREMENT,
+    `PageID` MEDIUMTEXT NOT NULL,
+    `REGDATE` DATETIME NOT NULL,
+    `REGIP` VARCHAR(30) NULL,
+    `REFERER` TEXT NULL,
+    PRIMARY KEY(`I`)
+);"
+
 $ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
 $ret = mysqli_query($connect_object, $createNewService) or die("Error Occured in Creating DB");
 
 $connect_url = MySQLConnection::DB_Connect($URL_ID) or die("Error Occured in Connection to DB");
 
 $ret = mysqli_query($connect_url, $createPageTitlePairTable) or die("Error Occured in Creating Table");
+$ret = mysqli_query($connect_url, $createVisitorTable) or die("Error Occured in Creating Table");
 
 function Hashing($Algorithm, $URL){
   return hash($Algorithm, $URL);
