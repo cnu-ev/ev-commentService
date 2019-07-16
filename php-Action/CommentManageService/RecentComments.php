@@ -129,8 +129,7 @@ while($tableName = mysqli_fetch_array($allTableName)){
       ->setPageID($TitleAndPageID['PageID'])
       ->setURL($tableName[0])
       ->setPostTitle($TitleAndPageID['Title'])
-      ->build()
-    ), $weight);
+      ->build(), $weight);
   }
 }
 

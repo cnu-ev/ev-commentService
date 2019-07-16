@@ -131,11 +131,11 @@ $barGraphScipts = sprintf("
   <script>
   var ctxB = document.getElementById(\"bar-graph\").getContext('2d');
   var myBarChart = new Chart(ctxB, {
-      type: 'bar',
+      type: 'doughnut',
       data: {
           labels: [%s],
           datasets: [{
-              label: '댓글 갯수 순으로 정렬',
+              label: '댓글 갯수',
               data: [%s],
               backgroundColor: [%s],
               borderColor: [%s],
