@@ -15,6 +15,11 @@
   margin-bottom: 20px;
 }
 
+.comment-avatar{
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
 .comment-content{
   display: block;
   margin-top: 0px;
@@ -74,7 +79,7 @@
 }
 
 #EV-comment{
-  margin-left: 5px;
+  margin-left: 0px;
   margin-right: 35px;
 }
 
@@ -82,6 +87,7 @@
   list-style-type: none;
   margin: 5px;
   overflow: hidden;
+  padding-left: 5%;
 }
 
 #EV-comment ul li {
@@ -125,7 +131,7 @@
   padding: 0;
   overflow: hidden;
   border-radius: 2px;
-  background-color: #545454;
+  background-color: #9c9c9c;
   font-size: 14px;
 }
 
@@ -134,10 +140,10 @@
   display: block;
   color: white;
   text-align: center;
-  padding: 14px;
+  padding: 7px;
   font-size: 16px;
   text-decoration: none;
-  width: 75px;
+  width: 50px;
 }
 
 #EV-Buttons ul li:hover {
@@ -219,4 +225,18 @@
 #smallModal{
   padding: 15px;
   background-image: url("../img/userProfileBackImage.png");
+}
+
+
+@media screen and (max-width: 411px) {
+  .comment-avatar{
+    display: absolute;
+    right: 15px;
+  }
+}
+
+@media screen and (min-width: 412px) {
+  .comment-avatar{
+    float: left;
+  }
 }

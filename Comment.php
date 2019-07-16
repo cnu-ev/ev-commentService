@@ -63,7 +63,7 @@
       }
 
       $profileImageElement = sprintf(
-        '<img class="comment-avatar col-1.5" width="48px" height="48px" class="img-fluid rounded-circle" src="%s" alt="Image For User Profile">',
+        '<img class="comment-avatar rounded-circle" width="48px" height="48px" class="img-fluid rounded-circle" src="%s" alt="Image For User Profile">',
         $ProfileImageFileName
       );
 
@@ -84,7 +84,7 @@
       '
         <li id="ev-comment-%s" class="row comment">
           %s
-          <div class="comment col-10">
+          <div class="comment">
             <span class="comment-userID">%s</span>
             <span style="color: #777777; font-size: 12px;">&nbsp;&nbsp;&nbsp;%s</span>
             <br>
