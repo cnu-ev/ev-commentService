@@ -99,7 +99,7 @@ else {
 
       <!-- 아래의 버튼은 데스크톱에서 사용할 버튼 -->
       <div class="btn-group float-right responsiveNone">
-        <button type="button" class="side_btn"><img src="img/arrow-left.svg" alt="return login page" onclick="ToMainPage();"></img></button>
+        <button type="button" class="side_btn sizeUpOnHover"><img src="img/arrow-left.svg" alt="return login page" onclick="ToMainPage();"></img></button>
       </div>
   </nav>
 

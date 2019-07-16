@@ -13,8 +13,6 @@
   $PaginationID = $_GET['paginationID'];
   // 어떻게 감정분석 결과를 나타낼 것인지 나타내는 mode
   $EmotionalAnalysisMode = $_GET['mode'];
-  // 포스팅 제목
-  $PostTitle = $_GET['title'];
   // 몇 개의 댓글을 기준으로 Pagination 할 것인지를 나타내는 int 값. 나중에 get 방식으로 받아오게 따로 빼서 확장해도 괜찮을 거 같다.
   $PaginationDivision = 10;
 
@@ -26,6 +24,17 @@
   }
 
   $connect_object = MySQLConnection::DB_Connect($URL_ID);
+
+  $selectTitle = "
+    SELECT Title FROM pagetitlepairs WHERE PageID = '$PageID'
+  ";
+
+  $selectTitleRet = mysqli_query($connect_object, $selectTitle);
+
+  $title = mysqli_fetch_array($selectTitleRet);
+
+  // 포스팅 제목
+  $PostTitle = $title[0];
 
   // 최근 작성된 댓글부터 출력하기 위해 내림차순으로 조회한다
   $fetchAllComments = "
