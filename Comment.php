@@ -25,6 +25,7 @@
 
   $connect_object = MySQLConnection::DB_Connect($URL_ID);
 
+  // 포스팅 제목을 DB에서 가져옴
   $selectTitle = "
     SELECT Title FROM pagetitlepairs WHERE PageID = '$PageID'
   ";
@@ -72,7 +73,7 @@
       }
 
       $profileImageElement = sprintf(
-        '<img class="comment-avatar rounded-circle" width="48px" height="48px" class="img-fluid rounded-circle" src="%s" alt="Image For User Profile">',
+        '<img class="comment-avatar rounded-circle" class="img-fluid rounded-circle" src="%s" alt="Image For User Profile">',
         $ProfileImageFileName
       );
 

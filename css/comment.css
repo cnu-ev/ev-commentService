@@ -18,6 +18,8 @@
 .comment-avatar{
   margin-right: 5px;
   margin-top: 5px;
+  width: 48px;
+  height: 48px;
 }
 
 .comment-content{
@@ -230,13 +232,12 @@
 
 @media screen and (max-width: 411px) {
   .comment-avatar{
-    display: absolute;
-    right: 15px;
+    display: none;
   }
 }
 
 @media screen and (min-width: 412px) {
   .comment-avatar{
-    float: left;
+    display: default;
   }
 }

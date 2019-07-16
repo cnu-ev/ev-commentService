@@ -93,9 +93,6 @@ $allTableName = mysqli_query($connect_object, $showTables);
 // 날짜와 시간을 가중치로 하는 우선순위 큐
 $pq = new SplPriorityQueue();
 
-// comment의 생성을 돕는 빌더 객체
-$commentBuilder = new CommentBuilder(new Comment());
-
 // 모든 테이블을 Union 하는 쿼리문을 생성
 while($tableName = mysqli_fetch_array($allTableName)){
 
@@ -120,16 +117,21 @@ while($tableName = mysqli_fetch_array($allTableName)){
 
     $TitleAndPageID = mysqli_fetch_array($TitleAndPageIDRet);
 
-    $pq->insert(
-      $commentBuilder
-      ->setCommentUserID($comment['CommentUserId'])
-      ->setContent($comment['Content'])
-      ->setDateTime($comment['DateTime'])
-      ->setProfileImageFileName($comment['ProfileImageFileName'])
-      ->setPageID($TitleAndPageID['PageID'])
-      ->setURL($tableName[0])
-      ->setPostTitle($TitleAndPageID['Title'])
-      ->build(), $weight);
+    // comment의 생성을 돕는 빌더 객체
+    $commentBuilder = new CommentBuilder();
+    
+    $commentObj = $commentBuilder
+    ->setCommentUserID($comment['CommentUserId'])
+    ->setContent($comment['Content'])
+    ->setDateTime($comment['DateTime'])
+    ->setProfileImageFileName($comment['ProfileImageFileName'])
+    ->setPageID($TitleAndPageID['PageID'])
+    ->setPostTitle($TitleAndPageID['Title'])
+    ->setURL($tableName[0])
+    ->build();
+
+    $pq->insert($commentObj, $weight);
+
   }
 }
 

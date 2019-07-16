@@ -20,8 +20,8 @@ class CommentBuilder{
   public $comment;
 
   // Comment 객체를 인자로 받음
-  function __construct($_comment){
-    $this->comment = $_comment;
+  function __construct(){
+    $this->comment = new Comment();
   }
 
   public function build(){
