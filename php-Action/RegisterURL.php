@@ -54,6 +54,8 @@ $createNewService = "
   CREATE DATABASE `$URL_ID` CHARSET 'utf8mb4' COLLATE utf8mb4_unicode_ci
 ";
 
+// 특정 서비스의 특정 PageID 테이블이 갖는 게시글 Title 정보를 갖고 있다.
+// 즉, 어떤 게시글의 제목 정보를 담고 있는 테이블이다.
 $createPageTitlePairTable = "
   CREATE TABLE pagetitlepairs(
     `PageID` MEDIUMTEXT NOT NULL,
@@ -61,6 +63,7 @@ $createPageTitlePairTable = "
   )
 ";
 
+// 세션을 통해 특정 게시글의 방문 수를 관리하는 테이블
 $createVisitorTable = "
   CREATE TABLE visitorcounter (
     `I` INT(11) NOT NULL AUTO_INCREMENT,

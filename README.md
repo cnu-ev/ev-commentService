@@ -23,7 +23,7 @@ https://feathericons.com
 >
 >phpMyAdmin 4.9.0.1
 >
->Bootstrap 4.3.1, popper.js, mdb.js
+>Bootstrap 4.3.1, popper.js, mdb.js, chart.js
 >
 >JQuery 3.2.1
 
@@ -44,7 +44,7 @@ URL을 등록할 때 https:{domain}.ga 처럼 등록해야 하고, 뒤에 / 가 
 
 ev_username: {User ID}
 
-3 - EV-Script.html 파일을 post layout 또는 원하는 페이지에 추가한다. 
+3 - EV-Script.html 파일을 post layout 또는 원하는 페이지에 추가한다.
 ({% include EV-Script.html %}를 추가하거나 직접 스크립트 내용을 붙여넣는다.)
 
 4 - 댓글 창을 넣을 공간에 div 태그를 만들고 id를 EV-Start로 설정한다.
@@ -55,7 +55,7 @@ ev_username: {User ID}
 블로거는 자신의 블로그 댓글 서비스에 감정 분석 서비스를 적용할 지 안 할지, 적용한다면 어떻게 스타일링 될 지를 결정할 수 있다. 사용법은 아래와 같다.
 
 ```
-_config.yml 내 ev_mode에 아래와 같은 값을 설정한다. 
+_config.yml 내 ev_mode에 아래와 같은 값을 설정한다.
 
 ev_username: {full, binary, none}
 
@@ -65,5 +65,3 @@ binary : 댓글 내용의 부정, 긍정 여부에 따라 색상을 두 단계�
 
 none : 댓글 감정 분석 서비스를 이용하지 않는다.
 ```
-
-

@@ -38,7 +38,6 @@ function selectButtons(clickedButton){
       });
       break;
     case "Analysis-visitorsNumber":
-
       break;
     case "Analysis-positiveness":
 
@@ -61,6 +60,20 @@ function selectButtons(clickedButton){
       break;
 
     case "Analysis-popularness":
+      $.ajax({
+        type: "POST",
+        url : "../php-Action/CommentManageService/PopularPosting.php",
+        data: {
+          URLID : urlID,
+        },
+
+        success : function(data, status, xhr) {
+          $('#ServiceSection').html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+        }
+      });
       break;
   }
 

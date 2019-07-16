@@ -25,7 +25,6 @@ class Post{
   }
 }
 
-
 class PostsSortingByCommentsNumber{
 
   public static function WarnNoComments(){
@@ -38,10 +37,6 @@ class PostsSortingByCommentsNumber{
         <p id="NoCommentsWarning" class="lead" style="font-size: 14px; color: #4c4c4c;">블로그에 등록된 댓글이 없습니다.</p>
       </div>
     ');
-  }
-
-  public static function ShowComments($postTitle, $dateTime, $comment, $commentUserID, $profileImageFileName){
-
   }
 }
 
@@ -59,7 +54,6 @@ $allTableName = mysqli_query($connect_object, $showTables);
 // 갯수를 가중치로 하는 우선순위 큐
 $pq = new SplPriorityQueue();
 
-// 모든 테이블을 Union 하는 쿼리문을 생성
 while($tableName = mysqli_fetch_array($allTableName)){
 
   if($tableName[0] == 'pagetitlepairs' || $tableName[0] == 'visitorcounter') continue;
@@ -132,6 +126,7 @@ while($pq->valid()){
   $index++;
 }
 
+// ChartJS 스크립트를 전송해, 해당 화면에 차트를 띄운다.
 $barGraphScipts = sprintf("
   <script>
   var ctxB = document.getElementById(\"bar-graph\").getContext('2d');
@@ -140,7 +135,7 @@ $barGraphScipts = sprintf("
       data: {
           labels: [%s],
           datasets: [{
-              label: '댓글 순으로 정렬',
+              label: '댓글 갯수 순으로 정렬',
               data: [%s],
               backgroundColor: [%s],
               borderColor: [%s],
