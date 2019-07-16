@@ -25,6 +25,38 @@
 
   $connect_object = MySQLConnection::DB_Connect($URL_ID);
 
+  // 방문 정보를 기록한다.
+  date_default_timezone_set('Asia/Seoul');
+
+  // 데이터가 전송된 시간 (방문 시간)
+  $visitDateTime = date("Y-m-d H:i:s");
+  // 방문한 클라이언트의 IP 주소
+  $visitorIP = $_SERVER['REMOTE_ADDR'];
+
+  // 어떤 홈페이지에서 방문한 것인지 정보가 있다면 가져온다.
+  if(isset($_SERVER['HTTP_REFERER'])) $prevPage = $_SERVER['HTTP_REFERER'];
+  else $prevPage = "";
+
+  if(empty($_SESSION['visit-' . $PageID])) {
+
+    $_SESSION['visit-' . $PageID] = 1;
+
+    $insertVisitorInfo = "
+      insert into visitorcounter (
+        REGDATE,
+        REGIP,
+        REFERER,
+        PageID
+        ) values(
+        '$visitDateTime',
+        '$visitorIP',
+        '$prevPage',
+        '$PageID'
+      )";
+
+    $ret = mysqli_query($connect_object, $insertVisitorInfo) or die("Error Occured in Inserting Data to DB");
+  }
+
   // 포스팅 제목을 DB에서 가져옴
   $selectTitle = "
     SELECT Title FROM pagetitlepairs WHERE PageID = '$PageID'
@@ -136,12 +168,12 @@
      if(empty($myProfileImageName)){
        $myProfileImageElement = '
        <li id="EV-Logout" style="float:right;" onclick="location.href=\'./php-Action/CommentPageLogout.php\'">Logout</li>
-       <li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" data-toggle="modal" data-target="#UserInfoModal" width="25px" height="25px" class="img-fluid rounded-circle" src="img/userDefaultProfile.svg" alt="Image For User Profile"></li>';
+       <li id="connectedUser-AvatarList" style="float:right;"><img id="connectedUser-Avatar" data-toggle="modal" data-target="#UserInfoModal" class="img-fluid" src="img/userDefaultProfile.svg" alt="Image For User Profile"></li>';
      }
      else{
       $myProfileImageElement ='
       <li id="EV-Logout" style="float:right;" onclick="location.href=\'./php-Action/CommentPageLogout.php\'">Logout</li>
-      <li style="float:right;"><img id="connectedUser-Avatar" class="comment-avatar" data-toggle="modal" data-target="#UserInfoModal" width="25px" height="25px" class="img-fluid rounded-circle" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
+      <li id="connectedUser-AvatarList" style="float:right;"><img id="connectedUser-Avatar" data-toggle="modal" data-target="#UserInfoModal" class="img-fluid" src="profileImages/'. $myProfileImageName .'" alt="Image For User Profile"></li>';
      }
    }
 
@@ -196,8 +228,6 @@
       <header id="EV-nav">
         <ul>
           <li id="EV-CommentNumber" class="nav-tab">Comments</li>
-          <li id="EV-UserID" class="nav-tab"></li>
-          <li id="EV-Feedback" class="nav-tab"></li>
           <?php
             if(empty($myProfileImageElement)){
               echo $LoginButton;

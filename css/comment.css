@@ -211,6 +211,8 @@
 
 #connectedUser-Avatar{
   display: default;
+  width: 30px;
+  height: 30px;
 }
 
 #recommendLoginAlert p{
