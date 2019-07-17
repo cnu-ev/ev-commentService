@@ -158,6 +158,7 @@ echo sprintf('
   <div class="list-group">
     <a class="list-group-item active" style="background-color: #474747!important; color: #ffffff; border: none !important;">좋은 평가를 받은 게시물</a>
     <div class="list-group-item">
+      <p class="lead">댓글들의 감정분석치 결과가 가장 높은 게시물들은 아래와 같습니다.</p>
       <canvas id="bar-graph"></canvas>
       %s
     </div>

@@ -160,6 +160,7 @@ echo sprintf('
   <div class="list-group">
     <a class="list-group-item active" style="background-color: #474747!important; color: #ffffff; border: none !important;">댓글이 많이 달린 게시글</a>
     <div class="list-group-item">
+      <p class="lead">가장 많은 댓글이 달린 게시물들 입니다.</p>
       <canvas id="bar-graph"></canvas>
       %s
     </div>

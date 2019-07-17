@@ -68,6 +68,7 @@
 
 #EV-Pagination a:hover:not(.active) {
   background-color: #ddd;
+  transition: background-color .3s;
 }
 
 #NoCommentWarning{

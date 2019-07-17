@@ -151,6 +151,7 @@ echo sprintf('
   <div class="list-group">
     <a class="list-group-item active" style="background-color: #474747!important; color: #ffffff; border: none !important;">인기 포스팅 분석</a>
     <div class="list-group-item">
+      <p class="lead">조회수를 기준으로 인기 포스팅을 분석합니다.</p>
       <canvas id="bar-graph"></canvas>
       %s
     </div>

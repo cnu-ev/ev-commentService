@@ -31,6 +31,14 @@ a.navbar-brand{
   font-family: 'Jeju Gothic';
 }
 
+.service{
+	background-color: #ffffff !important;
+}
+.service:hover{
+	background-color: #ebebeb !important;
+	transition: background-color .3s;
+}
+
 /* 요소 위에 마우스를 올려 놓았을 때 변화 */
 .sizeUpOnHover:hover{
   transform: scale(1.35);

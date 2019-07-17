@@ -147,13 +147,14 @@ if(mysqli_num_rows($ret_userID) < 1){
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">새 웹 사이트 추가</h5>
+            <h5 class="modal-title">새 서비스 추가</h5>
             <!-- data-dismiss 속성을 통해, 취소 버튼을 누르면 모달 박스가 없어지는 것을 구현 -->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <!-- times를 x 버튼 대신 이용함 -->
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <p style="margin-left :15px; margin-top: 8px; color: #333333;"><b style="color: red;">*</b> Jekyll 기반의 블로그 URL을 추가해주세요!</p>
           <div class="modal-body">
             <form action="./php-Action/RegisterURL.php" onsubmit="return AddURLButtonClicked()" method="post" accept-charset="utf-8">
               <div class="form-group">

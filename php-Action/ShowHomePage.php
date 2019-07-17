@@ -19,7 +19,7 @@ class ShowHomePage{
   public static function ShowHomePages($HomePage_Title, $HomePage_URL, $HomePage_ID){
 
     return sprintf('
-      <div id="%s" class="jumbotron" style="background-color: #e8f9ff !important; padding: 33px 32px 30px 32px">
+      <div id="%s" class="jumbotron service" style="padding: 33px 32px 30px 32px;">
         <div class="row">
           <div class="col-sm-11">
             <h1 class="display-6">Title : %s</h1>
@@ -30,7 +30,7 @@ class ShowHomePage{
         </div>
         <hr class="my-2">
         <p class="MessageContent">URL : %s</p>
-        <button class="btn btn-secondary btn-lg Buttons" type="button" name="RoomID" onclick="ToCommentManagePage(\'%s\', \'%s\')">댓글 관리 페이지로 이동</button>
+        <button class="btn btn-secondary btn-lg Buttons" type="button" name="RoomID" onclick="ToCommentManagePage(\'%s\', \'%s\')">댓글 분석 페이지로 이동</button>
         <button class="btn btn-danger btn-lg Buttons responsiveSmallReverse" type="button" data-toggle="modal" onclick="setIndexToDeleteRoom(this.parentNode.id)" data-target="#DeleteConfirmModal">댓글 서비스 삭제</button>
       </div>
     ',
