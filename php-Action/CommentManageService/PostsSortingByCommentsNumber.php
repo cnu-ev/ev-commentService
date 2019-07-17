@@ -131,7 +131,7 @@ $barGraphScipts = sprintf("
   <script>
   var ctxB = document.getElementById(\"bar-graph\").getContext('2d');
   var myBarChart = new Chart(ctxB, {
-      type: 'doughnut',
+      type: 'polarArea',
       data: {
           labels: [%s],
           datasets: [{

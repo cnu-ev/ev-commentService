@@ -18,7 +18,6 @@ require_once('../MySQLConection.php');
 
 $connect_userdb = MySQLConnection::DB_Connect('userdb') or die("Error Occured in Connection to DB");
 
-// show tables로 모든 테이블 이름을 가져온다.
 $fetchURL = "
   SELECT URL FROM usersurltbl WHERE URLID = '$URLID'
 ";
@@ -93,7 +92,6 @@ $allTableName = mysqli_query($connect_object, $showTables);
 // 날짜와 시간을 가중치로 하는 우선순위 큐
 $pq = new SplPriorityQueue();
 
-// 모든 테이블을 Union 하는 쿼리문을 생성
 while($tableName = mysqli_fetch_array($allTableName)){
 
   if($tableName[0] == 'pagetitlepairs' || $tableName[0] == 'visitorcounter') continue;
@@ -119,7 +117,7 @@ while($tableName = mysqli_fetch_array($allTableName)){
 
     // comment의 생성을 돕는 빌더 객체
     $commentBuilder = new CommentBuilder();
-    
+
     $commentObj = $commentBuilder
     ->setCommentUserID($comment['CommentUserId'])
     ->setContent($comment['Content'])
