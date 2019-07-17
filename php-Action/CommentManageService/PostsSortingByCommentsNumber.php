@@ -13,6 +13,7 @@ if(!isset($UserID)){
 
 $URLID = $_POST['URLID'];
 
+require_once('Comment.php');
 require_once('../MySQLConection.php');
 
 class Post{
@@ -105,6 +106,12 @@ $borderColorsArr = explode('|', preg_replace("/\s+/","", $borderColors));
 
 // 우선순위큐가 빌 때 까지 꺼냄
 // 랭킹 10위 까지 나타내기 위해, 10개가 넘으면 break
+
+if($pq->count() < 1){
+  echo Comment::WarnNoComments();
+  exit();
+}
+
 $index = 0;
 
 $labels = '';

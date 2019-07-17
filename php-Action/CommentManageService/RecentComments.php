@@ -27,18 +27,6 @@ $url = mysqli_fetch_array($urlSelect);
 
 class RecentCommentService{
 
-  public static function WarnNoComments(){
-
-    return sprintf('
-      <div class="alert alert-success alert-dismissible fade show">
-        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <p id="NoCommentsWarning" class="lead" style="font-size: 14px; color: #4c4c4c;">블로그에 등록된 댓글이 없습니다.</p>
-      </div>
-    ');
-  }
-
   public static function ShowComments($postTitle, $dateTime, $comment, $commentUserID, $profileImageFileName, $pageID){
 
     global $url;
@@ -115,20 +103,15 @@ while($tableName = mysqli_fetch_array($allTableName)){
 
     $TitleAndPageID = mysqli_fetch_array($TitleAndPageIDRet);
 
-    // comment의 생성을 돕는 빌더 객체
-    $commentBuilder = new CommentBuilder();
-
-    $commentObj = $commentBuilder
-    ->setCommentUserID($comment['CommentUserId'])
-    ->setContent($comment['Content'])
+    // comment의 생성을 돕는 빌더 객체를 생성해 우선순위 큐에 넣는다.
+    $pq->insert((new CommentBuilder())
+    ->setPostTitle($TitleAndPageID['Title'])
     ->setDateTime($comment['DateTime'])
+    ->setContent($comment['Content'])
+    ->setCommentUserID($comment['CommentUserId'])
     ->setProfileImageFileName($comment['ProfileImageFileName'])
     ->setPageID($TitleAndPageID['PageID'])
-    ->setPostTitle($TitleAndPageID['Title'])
-    ->setURL($tableName[0])
-    ->build();
-
-    $pq->insert($commentObj, $weight);
+    ->build(), $weight);
 
   }
 }
@@ -136,7 +119,7 @@ while($tableName = mysqli_fetch_array($allTableName)){
 $commentsElements = '';
 
 if($pq->count() < 1){
-  echo RecentCommentService::WarnNoComments();
+  echo Comment::WarnNoComments();
   exit();
 }
 

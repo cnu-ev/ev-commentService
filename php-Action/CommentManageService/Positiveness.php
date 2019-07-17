@@ -13,6 +13,7 @@ if(!isset($UserID)){
 
 $URLID = $_POST['URLID'];
 
+require_once('Comment.php');
 require_once('../MySQLConection.php');
 
 class Post{
@@ -110,6 +111,11 @@ $labels = '';
 $data = '';
 $backgroundColorStr = '';
 $borderColorsStr = '';
+
+if($pq->count() < 1){
+  echo Comment::WarnNoComments();
+  exit();
+}
 
 while($pq->valid()){
 

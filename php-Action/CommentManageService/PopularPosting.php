@@ -23,6 +23,7 @@ class Post{
 
 $URLID = $_POST['URLID'];
 
+require_once('Comment.php');
 require_once('../MySQLConection.php');
 
 $connect_object = MySQLConnection::DB_Connect($URLID) or die("Error Occured in Connection to DB");
@@ -102,6 +103,11 @@ $labels = '';
 $data = '';
 $backgroundColorStr = '';
 $borderColorsStr = '';
+
+if($pq->count() < 1){
+  echo Comment::WarnNoComments();
+  exit();
+}
 
 while($pq->valid()){
 
