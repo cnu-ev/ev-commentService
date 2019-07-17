@@ -4,6 +4,8 @@
 
 * {
 	outline: none !important;
+	box-sizing: border-box;
+	font-family: 'Nanum Gothic';
 }
 
 /* 아래쪽 사이드바 스타일 */
@@ -37,8 +39,8 @@ a.navbar-brand{
 }
 
 .commentProfile{
-	width: 60px;
-	height: 60px;
+	width: 55px;
+	height: 55px;
 	position: absolute;
 	right: 13px;
 	bottom: 7px;
@@ -99,8 +101,15 @@ a.navbar-brand{
   left: 0px;
 }
 
+.sideButton:not(.active){
+	background-color: #ffffff !important;
+}
+.sideButton:hover:not(.active){
+	background-color: #f7f7f7 !important;
+}
+
 #AnalysisButtons a{
-	background-color: #ffffff;
+	background-color: #f0f0f0;
 	border: none;
 	color: #000000;
 }

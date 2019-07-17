@@ -40,7 +40,7 @@ if(mysqli_num_rows($ret_userID) < 1){
 <!DOCTYPE html>
 <html lang="kr">
   <head>
-    <title>등록 URL 목록</title>
+    <title>등록된 서비스</title>
     <!-- meta 데이터 정의 -->
     <meta charset="utf-8">
     <meta name="description" content="Register Your Homepage">
@@ -59,8 +59,8 @@ if(mysqli_num_rows($ret_userID) < 1){
     <div class="container">
       <!-- 인라인으로 스타일을 준 것은, bootstrap.css에서 색상 속성이 !important로 선언되어 있기 때문임. boostrap 파일을 변경하기보단, 인라인으로 새 속성을 주었음 -->
       <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
-
-        <a class="navbar-brand" href="#"><img src="img/smile.svg" style="margin-right: 10px;">서비스 중인 홈페이지</a>
+        <img src="img/smile.svg" style="margin-right: 10px;">
+        <a class="navbar-brand" href="#">서비스 중인 홈페이지</a>
 
         <!-- 창 너비에 따라 버튼이 미디어 쿼리로, 두 종류로 나뉜다. -->
         <!-- 아래의 버튼은 창이 작을 때, 핸드폰이나 태블릿 같은 환경에서 사용할 버튼 및 a 태그 들이다.-->

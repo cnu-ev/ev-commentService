@@ -44,8 +44,8 @@
     <div class="container">
       <!-- 인라인으로 스타일을 준 것은, bootstrap.css에서 색상 속성이 !important로 선언되어 있기 때문임. boostrap 파일을 변경하기보단, 인라인으로 새 속성을 주었음 -->
       <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
-
-        <a class="navbar-brand" href="#"><img src="img/smile.svg" style="margin-right: 10px;"><?=$Title;?></a>
+        <img src="img/smile.svg" style="margin-right: 10px;">
+        <a class="navbar-brand" href="#"><?=$Title;?></a>
 
         <!-- 창 너비에 따라 버튼이 미디어 쿼리로, 두 종류로 나뉜다. -->
         <!-- 아래의 버튼은 창이 작을 때, 핸드폰이나 태블릿 같은 환경에서 사용할 버튼 및 a 태그 들이다.-->
@@ -92,10 +92,10 @@
       <div class="row">
         <div class="col-md-3" style="margin-bottom: 15px;">
           <div id="AnalysisButtons" class="list-group">
-            <a id="Analysis-recentComments" href="#" class="list-group-item active" onclick="selectButtons(this.id)">최근 생성된 댓글</a>
-            <a id="Analysis-positiveness" href="#" class="list-group-item" onclick="selectButtons(this.id)">좋은 평가를 받은 게시물</a>
-            <a id="Analysis-popularness" href="#" class="list-group-item" onclick="selectButtons(this.id)">인기 포스팅 분석</a>
-            <a id="Analysis-postsSortingByCommentsNumber" href="#" class="list-group-item" onclick="selectButtons(this.id)">댓글이 많은 게시물</a>
+            <a id="Analysis-recentComments" href="#" class="list-group-item sideButton active" onclick="selectButtons(this.id)">최근 생성된 댓글</a>
+            <a id="Analysis-positiveness" href="#" class="list-group-item sideButton" onclick="selectButtons(this.id)">좋은 평가를 받은 게시물</a>
+            <a id="Analysis-popularness" href="#" class="list-group-item sideButton" onclick="selectButtons(this.id)">인기 포스팅 분석</a>
+            <a id="Analysis-postsSortingByCommentsNumber" href="#" class="list-group-item sideButton" onclick="selectButtons(this.id)">댓글이 많은 게시물</a>
           </div>
         </div>
 
