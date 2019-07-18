@@ -26,18 +26,21 @@ function containerLoad(){
 // B, I, U, S 등 편집기의 각 버튼이 클릭 되었을 때의 이벤트 처리를
 // 모두 담당하는 함수
 function editButtonClicked(clickedButton){
+
+  selectedText = $('#CommentArea').html();
+
   switch (clickedButton) {
     case "EV-Buttons-B":
-      $('#CommentArea').html("<b>" + $('#CommentArea').html() + "</b>");
+      $('#CommentArea').html("&ltb&gt" + selectedText + "&lt/b&gt");
       break;
     case "EV-Buttons-I":
-      $('#CommentArea').html("<i>" + $('#CommentArea').html() + "</i>");
+      $('#CommentArea').html("&lti&gt" + selectedText + "&lt/i&gt");
       break;
     case "EV-Buttons-U":
-      $('#CommentArea').html("<u>" + $('#CommentArea').html() + "</u>");
+    $('#CommentArea').html("&ltu&gt" + selectedText + "&lt/u&gt");
       break;
     case "EV-Buttons-S":
-      $('#CommentArea').html("<s>" + $('#CommentArea').html() + "</s>");
+      $('#CommentArea').html("&lts&gt" + selectedText + "&lt/s&gt");
       break;
     case "EV-Buttons-CommentSubmit":
       if(verifyComment() == true){

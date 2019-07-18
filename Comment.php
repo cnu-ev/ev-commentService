@@ -141,7 +141,7 @@
           $CommentUserId,
           $DateTime,
           $CommentIndex,
-          $Content,
+          html_entity_decode($Content),
           $ElementsOnMyComment
         );
       }
@@ -191,8 +191,6 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <!-- 댓글 서비스의 css 시트. -->
     <link rel="stylesheet" href="./css/comment.css">
-    <!-- loader에 대한 css 시트. https://loading.io/css/ 를 사용했다.-->
-    <link rel="stylesheet" href="./css/loader.css">
     <!-- 감정 분석 서비스의 css 시트 -->
     <link rel="stylesheet" href="./css/EV-Style.css">
   </head>
@@ -216,13 +214,6 @@
     }
     ?>
 
-    <!-- Loading 창. 로딩이 끝나면 컨테이너를 show 한다. -->
-    <div id="EV-Loader" style="display: none;">
-      <!-- 아래 div 태그 지우지 말 것 -->
-      <div id="EV-Loader" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-      <p>Loading..</p>
-    </div>
-
     <div id="EV-Container" class="container">
       <!-- 현재 댓글의 갯수, 로그인 되어 있는 ID를 나타내는 NavBar -->
       <header id="EV-nav">
@@ -245,7 +236,7 @@
             <!-- 댓글 입력 창 -->
             <div class="textarea-outer col-sm-12">
               <span id="Textarea-placeholder" onclick="textAreaClicked()">여기에 텍스트를 입력하세요..</span>
-              <div id="CommentArea" class="alignLeft" width="100%" tabindex="0" role="textbox" aria-multiline="true" contenteditable="PLAINTEXT-ONLY" data-role="editable" class="text-right" title="Join the discussion..."></div>
+              <p id="CommentArea" class="alignLeft" width="100%" tabindex="0" role="textbox" aria-multiline="true" contenteditable="PLAINTEXT-ONLY" data-role="editable" class="text-right" title="Join the discussion..."></p>
             </div>
           <!-- 텍스트 에디터 내에 해당 태그를 붙여주는 버튼들이다. -->
           <div id="EV-Buttons">
