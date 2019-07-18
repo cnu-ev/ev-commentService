@@ -72,7 +72,7 @@ $createVisitorTable = "
     `REGIP` VARCHAR(30) NULL,
     `REFERER` TEXT NULL,
     PRIMARY KEY(`I`)
-);"
+)";
 
 $ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
 $ret = mysqli_query($connect_object, $createNewService) or die("Error Occured in Creating DB");

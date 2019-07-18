@@ -8,6 +8,10 @@
 	font-family: 'Nanum Gothic';
 }
 
+html, body {
+
+}
+
 /* 아래쪽 사이드바 스타일 */
 footer{
   color: #ffffff;
@@ -196,6 +200,12 @@ a.navbar-brand{
   .responsiveNone2 *{
     display: default;
   }
+
+	#Loader{
+		position: absolute;
+		left: 42%;
+		top: 55%;
+	}
 }
 
 @media screen and (min-width: 767px) {
@@ -211,6 +221,11 @@ a.navbar-brand{
   .responsiveNone2 *{
     display: none;
   }
+	#Loader{
+		position: absolute;
+		left: 55%;
+		top: 25%;
+	}
 }
 
 @media screen and (max-width: 580px) {

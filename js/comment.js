@@ -81,7 +81,7 @@ function postComment(){
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
       $.ajax({
         type: "POST",
-        url : "localhost/comment",
+        url : "https://emotionanalysisservice.ga/comment",
         data: {
           commentContent : commentContent,
         },

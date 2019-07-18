@@ -38,9 +38,19 @@
     <link rel="stylesheet" href="./css/CommentManageService.css">
     <!-- Favicon 적용 -->
     <link rel="shortcut icon" size="16x16" href="./img/favicon.ico" />
+    <!-- loader에 대한 css 시트. https://loading.io/css/ 를 사용했다.-->
+    <link rel="stylesheet" href="./css/loader.css">
   </head>
 
   <body id="Background">
+
+    <!-- Loading 창. 로딩이 끝나면 컨테이너를 show 한다. -->
+    <div id="Loader">
+      <!-- 아래 div 태그 지우지 말 것 -->
+      <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <p>Loading..</p>
+    </div>
+
     <div class="container">
       <!-- 인라인으로 스타일을 준 것은, bootstrap.css에서 색상 속성이 !important로 선언되어 있기 때문임. boostrap 파일을 변경하기보단, 인라인으로 새 속성을 주었음 -->
       <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
@@ -99,7 +109,7 @@
           </div>
         </div>
 
-        <div id="ServiceSection" class="col-md-9">
+        <div id="ServiceSection" class="col-md-9" style="display: none;">
         </div>
 
       </div>

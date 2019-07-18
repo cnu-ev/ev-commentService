@@ -17,11 +17,11 @@ class Comment{
   public static function WarnNoComments(){
 
     return sprintf('
-      <div class="alert alert-success alert-dismissible fade show">
-        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <p id="NoCommentsWarning" class="lead" style="font-size: 14px; color: #4c4c4c;">블로그에 등록된 댓글이 없습니다.</p>
+      <div class="list-group">
+        <a class="list-group-item active" style="background-color: #474747!important; color: #ffffff; border: none !important;">에러</a>
+        <div class="list-group-item">
+          <p class="lead">아직 등록된 댓글이 없습니다!</p>
+        </div>
       </div>
     ');
   }
