@@ -33,6 +33,8 @@ class RecentCommentService{
 
     $postURL = $url[0] . $pageID;
 
+    $comment = html_entity_decode($comment);
+
     // comment가 너무 길면 앞 내용만 잘라 나타냄
     if(mb_strlen($comment) > 40){
       $comment = mb_substr($comment, 0, 45, 'utf-8') . '...';
