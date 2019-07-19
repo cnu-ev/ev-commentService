@@ -86,7 +86,7 @@
       ');
     }
 
-    static public function CreateComment($CommentUserId, $Content, $DateTime, $ProfileImageFileName, $CommentIndex){
+    static public function CreateComment($CommentUserId, $Content, $DateTime, $ProfileImageFileName, $CommentIndex, $Positiveness){
 
       global $connectedUserID;
       global $connectedUserProfileFileName;
@@ -122,9 +122,48 @@
         $ElementsOnMyComment = "";
       }
 
+      $positiveClass = "";
+
+      // 댓글의 긍정도에 따라, class를 달리 붙임.
+      switch($Positiveness / 10){
+        case 0:
+          $positiveClass = "comment-negative05";
+          break;
+        case 1:
+          $positiveClass = "comment-negative04";
+          break;
+        case 2:
+          $positiveClass = "comment-negative03";
+          break;
+        case 3:
+          $positiveClass = "comment-negative02";
+          break;
+        case 4:
+          $positiveClass = "comment-negative01";
+          break;
+        case 5:
+          $positiveClass = "comment-positive01";
+          break;
+        case 6:
+          $positiveClass = "comment-positive02";
+          break;
+        case 7:
+          $positiveClass = "comment-positive03";
+          break;
+        case 8:
+          $positiveClass = "comment-positive04";
+          break;
+        case 9:
+        case 10:
+          $positiveClass = "comment-positive05";
+          break;
+        default:
+          $positiveClass = "comment-neutral";
+      }
+
       return sprintf(
       '
-        <li id="ev-comment-%s" class="row comment">
+        <li id="ev-comment-%s" class="row comment %s">
           %s
           <div class="comment">
             <span class="comment-userID">%s</span>
@@ -137,6 +176,7 @@
         <hr>
         ',
           $CommentIndex,
+          $positiveClass,
           $profileImageElement,
           $CommentUserId,
           $DateTime,
@@ -297,7 +337,8 @@
                   $CommentContent,
                   $comment['DateTime'],
                   $comment['ProfileImageFileName'],
-                  $comment['CommentIndex']
+                  $comment['CommentIndex'],
+                  $comment['EmotionalAnalysisValue'];
                 );
               }
             ?>
