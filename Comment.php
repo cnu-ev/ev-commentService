@@ -122,43 +122,50 @@
         $ElementsOnMyComment = "";
       }
 
+      // 댓글의 긍정도에 따라, class를 달리 붙임.
       $positiveClass = "";
 
-      // 댓글의 긍정도에 따라, class를 달리 붙임.
-      switch($Positiveness / 10){
-        case 0:
-          $positiveClass = "comment-negative05";
-          break;
-        case 1:
-          $positiveClass = "comment-negative04";
-          break;
-        case 2:
-          $positiveClass = "comment-negative03";
-          break;
-        case 3:
-          $positiveClass = "comment-negative02";
-          break;
-        case 4:
-          $positiveClass = "comment-negative01";
-          break;
-        case 5:
-          $positiveClass = "comment-positive01";
-          break;
-        case 6:
-          $positiveClass = "comment-positive02";
-          break;
-        case 7:
-          $positiveClass = "comment-positive03";
-          break;
-        case 8:
-          $positiveClass = "comment-positive04";
-          break;
-        case 9:
-        case 10:
-          $positiveClass = "comment-positive05";
-          break;
-        default:
-          $positiveClass = "comment-neutral";
+      if($Positiveness < 0){
+        switch((int)((-1) * $Positiveness / 10)){
+          case 0:
+            $positiveClass = "comment-negative01";
+            break;
+          case 1:
+            $positiveClass = "comment-negative02";
+            break;
+          case 2:
+            $positiveClass = "comment-negative03";
+            break;
+          case 3:
+            $positiveClass = "comment-negative04";
+            break;
+          case 4:
+            $positiveClass = "comment-negative05";
+            break;
+        }
+      }
+      else if($Positiveness > 0){
+        switch((int) ($Positiveness / 10)){
+          case 0:
+            $positiveClass = "comment-positive01";
+            break;
+          case 1:
+            $positiveClass = "comment-positive02";
+            break;
+          case 2:
+            $positiveClass = "comment-positive03";
+            break;
+          case 3:
+            $positiveClass = "comment-positive04";
+            break;
+          case 4:
+            $positiveClass = "comment-positive05";
+            break;
+        }
+      }
+      // 긍정도 값이 셋팅되지 않은 경우
+      else {
+        $positiveClass = "comment-neutral";
       }
 
       return sprintf(
@@ -338,7 +345,7 @@
                   $comment['DateTime'],
                   $comment['ProfileImageFileName'],
                   $comment['CommentIndex'],
-                  $comment['EmotionalAnalysisValue'];
+                  $comment['EmotionalAnalysisValue']
                 );
               }
             ?>
