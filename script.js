@@ -7,10 +7,8 @@ var evCommentServiceURL = "https://evcommentservice.ga";
   // evMode는 기본값으로 full을 갖는다.
   if(evMode == null) evMode = 'full';
   // 나머지 인자들은 기본값을 가질 수 없으므로, 해당 인자로 전송된 값이 없다면 서버로 전송하지 않는다.
-  if(blogOwner == null || pageIdentifier == null || siteURL == null || pageTitle == null){
-    return;
-  }
-
+  if(blogOwner == null || pageIdentifier == null || siteURL == null || pageTitle == null) return;
+  
   $.ajax({
       crossOrigin: true,
       type: "GET",

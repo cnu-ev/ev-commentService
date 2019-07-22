@@ -64,7 +64,6 @@ function verifyComment(){
   return true;
 }
 
-
 // 제출 버튼을 클릭해 댓글을 달 때 실행되는 함수
 function postComment(){
 
@@ -184,7 +183,9 @@ function postComment(){
       break;
 
     default:
+      // 디폴트 값은 full이지만, 예외처리는 넣어놓았다
       console.log("Error:: mode value is one of 'full, binary, none'");
+      throw new Error("Assert failed: mode value is one of 'full, binary, none'");
       break;
   }
 }
