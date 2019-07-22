@@ -194,9 +194,7 @@ if(mysqli_num_rows($ret_userID) < 1){
     </div>
 
     <!-- p는 padding, mt는 margin-top란 의미 (Bootstrap 4 API spacing 참고) -->
-    <div id="FooterDiv" class="navbar p-1 fixed-bottom" style="background-color: #333333 !important">
-      <footer id="Copyright" class="p-3 text-center"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub>&nbsp;</footer>
-    </div>
+    <footer id="Copyright" class="bg-dark p-3 text-center fixed-bottom" style="background-color: #333333 !important"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub>&nbsp;</footer>
 
     <!-- 제이쿼리 자바스크립트 추가하기 -->
     <script src="./lib/jquery-3.2.1.min.js"></script>

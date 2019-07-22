@@ -2,6 +2,7 @@
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 @import "TopNavbar.scss";
+@import "BottomFixedNavbar.scss";
 
 $backgroundColor : #e3e3e3;
 
@@ -29,17 +30,4 @@ $backgroundColor : #e3e3e3;
 
 #Background{
   background-color: $backgroundColor !important;
-}
-
-#Copyright{
-  font-family: 'Jeju Gothic';
-  font-size: 12pt;
-  text-align: center;
-  color: #f2f2f2;
-  width: 100%;
-  bottom: 0px;
-}
-
-#Copyright em{
-  font-size: 12pt;
 }

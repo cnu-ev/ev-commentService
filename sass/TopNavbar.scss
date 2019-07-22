@@ -1,3 +1,6 @@
+$TopNavbarColor : #333333;
+$IconMagnificationScale : 1.35;
+
 a.navbar-brand{
   font-family: 'Jeju Gothic';
   float: left !important;
@@ -5,14 +8,14 @@ a.navbar-brand{
 
 .side_btn{
   border: none;
-  background-color: #333333;
+  background-color: $TopNavbarColor;
 }
 
 .sizeUpOnHover:hover{
-  transform: scale(1.35);
+  transform: scale($IconMagnificationScale);
 }
 
 #FixedNavbar{
   border-bottom: #f8fc25 3px solid;
-  background-color: #333333 !important;
+  background-color: $TopNavbarColor !important;
 }

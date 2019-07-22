@@ -36,8 +36,7 @@
 
     <!-- bg-dark는 배경색을 지정, navbar-dark는 위쪽 nav 바의 색상을 지정 -->
     <!-- 크기에 관해선 다음을 참조 => They work for all breakpoints: xs (<=576px), sm (>=576px), md (>=768px), lg (>=992px) or xl (>=1200px)): -->
-    <!-- bootstrap 파일을 수정하기보단 (그렇게 할 수도 있음), Inline !important로 속성을 넣음 -->
-    <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
+    <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
       <!-- navbar-brand는 brand를 나타내는 일종의 강조 표시 -->
 
       <a class="navbar-brand" href="./SignIn.php" style="float: left !important;"><img src="img/smile.svg" style="margin-right: 10px;">감정분석 댓글 서비스</a>
@@ -75,7 +74,7 @@
 
   </div>
 
-  <footer id="Copyright" class="bg-dark p-3 text-center fixed-bottom" style="background-color: #333333 !important"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub>&nbsp;</footer>
+  <footer id="Copyright" class="bg-dark p-3 text-center fixed-bottom"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub>&nbsp;</footer>
 
   <!-- 제이쿼리 자바스크립트 추가하기 -->
   <script src="./lib/jquery-3.2.1.min.js"></script>

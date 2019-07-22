@@ -53,7 +53,7 @@
 
     <div class="container">
       <!-- 인라인으로 스타일을 준 것은, bootstrap.css에서 색상 속성이 !important로 선언되어 있기 때문임. boostrap 파일을 변경하기보단, 인라인으로 새 속성을 주었음 -->
-      <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
+      <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <img src="img/smile.svg" style="margin-right: 10px;">
         <a class="navbar-brand" href="#"><?=$Title;?></a>
 
@@ -140,9 +140,7 @@
     </div>
 
     <!-- p는 padding, mt는 margin-top란 의미 (Bootstrap 4 API spacing 참고) -->
-    <div id="FooterDiv" class="navbar p-1 fixed-bottom" style="background-color: #333333 !important">
-      <footer id="Copyright" class="p-3 text-center"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub>&nbsp;</footer>
-    </div>
+    <footer id="Copyright" class="bg-dark p-3 text-center fixed-bottom"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub>&nbsp;</footer>
 
     <!-- 제이쿼리 자바스크립트 추가하기 -->
     <script src="./lib/jquery-3.2.1.min.js"></script>

@@ -15,6 +15,17 @@ a.navbar-brand {
   border-bottom: #f8fc25 3px solid;
   background-color: #333333 !important; }
 
+#Copyright {
+  font-family: 'Jeju Gothic';
+  font-size: 12px;
+  text-align: center;
+  color: #f2f2f2;
+  width: 100%;
+  bottom: 0px;
+  background-color: #333333 !important; }
+  #Copyright em {
+    font-size: 12pt; }
+
 * {
   outline: none !important; }
 
@@ -29,16 +40,6 @@ label {
 
 #Background {
   background-color: #e3e3e3 !important; }
-
-#Copyright {
-  font-family: 'Jeju Gothic';
-  font-size: 12pt;
-  text-align: center;
-  color: #f2f2f2;
-  align: "center";
-  width: 100%; }
-  #Copyright em {
-    font-size: 12pt; }
 
 #IDDuplicateCheckButton {
   margin-top: 5px;

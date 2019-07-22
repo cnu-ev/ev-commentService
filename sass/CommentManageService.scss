@@ -2,6 +2,7 @@
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 @import "TopNavbar.scss";
+@import "BottomFixedNavbar.scss";
 
 $backgroundColor : #e3e3e3;
 
@@ -56,8 +57,11 @@ textarea{
 .jumbotron{
   margin-top: 15px;
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+
+	padding: {
+		top: 10px;
+		bottom: 10px;
+	}
 
 	h1{
 	  font-size: 28px;
@@ -66,13 +70,17 @@ textarea{
 }
 
 .MessageContent{
-  font-size: 16px;
-  font-family: 'Jeju Gothic';
+	font: {
+		family: 'Jeju Gothic';
+		size: 16px;
+	}
 }
 
 .Buttons{
-  font-size: 14px;
-  font-family: 'Jeju Gothic';
+	font: {
+		family: 'Jeju Gothic';
+		size: 14px;
+	}
 }
 
 .dropdown-toggle::after {
@@ -109,22 +117,12 @@ textarea{
 	}
 }
 
-#Copyright{
-  font-family: 'Jeju Gothic';
-  font-size: 12pt;
-  text-align: center;
-  color: #f2f2f2;
-  width: 100%;
-
-	em{
-	  font-size: 12pt;
-	}
-}
-
 #Header {
   color: #ffffff;
-  padding-top: 7px;
-  padding-bottom: 7px;
+	padding: {
+		top: 7px;
+		bottom: 7px;
+	}
   margin-bottom: 10px;
 }
 
@@ -133,8 +131,10 @@ textarea{
 }
 
 #NoServiceWarning{
-  font-family: 'Jeju Gothic';
-  font-size: 12pt;
+	font: {
+		family: 'Jeju Gothic';
+		size: 12px;
+	}
   text-align: center;
 }
 

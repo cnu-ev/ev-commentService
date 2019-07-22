@@ -44,7 +44,6 @@ else {
   $LastName = '';
 }
 
-
 ?>
 <!DOCTYPE html>
 <html lang="kr">
@@ -70,7 +69,7 @@ else {
 
   <!-- bg-dark는 배경색을 지정, navbar-dark는 위쪽 nav 바의 색상을 지정 -->
   <!-- fixed-top은 위쪽에 고정시키는데 사용함 -->
-  <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #333333 !important">
+  <nav id="FixedNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
 
       <!-- navbar-brand는 brand를 나타내는 일종의 강조 표시 -->
       <a class="navbar-brand" href="./UserEdit.html"><img src="img/smile.svg" style="margin-right: 10px;">회원 정보 수정</a>
@@ -199,7 +198,7 @@ else {
   <!-- 스크롤바 에러를 피하기 위해 공간을 둠 -->
   <div id="WhiteSpaceForResponsivePage"></div>
 
-  <footer id="Copyright" class="bg-dark p-3 text-center" style="background-color: #333333 !important"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub> </footer>
+  <footer id="Copyright" class="bg-dark p-3 text-center"> &copy; 2019 바텀업 프로젝트 <sub>Team EV</sub> </footer>
 
   <!-- 제이쿼리 자바스크립트 추가하기 -->
   <script src="./lib/jquery-3.2.1.min.js"></script>
