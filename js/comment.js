@@ -1,5 +1,5 @@
-// var evDjangoURL = "";
-var evEmotionalAnalysisServiceURL = "localhost/comment";
+// 쟝고 감정 분석 서버 URL (full, binary 모드에서 사용)
+var evEmotionalAnalysisServiceURL = "https://rinha7.pythonanywhere.com/comment";
 
 var connectedUserID;
 var profileImageFileName;
@@ -84,7 +84,7 @@ function postComment(){
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
       $.ajax({
         type: "POST",
-        url : "https://emotionanalysisservice.ga/comment",
+        url : evEmotionalAnalysisServiceURL,
         data: {
           commentContent : commentContent,
         },
@@ -115,9 +115,51 @@ function postComment(){
           console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
         }
       });
+      break;
 
-    // binary는 full과 동일하게 작동
     case "binary":
+      // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
+      $.ajax({
+        type: "POST",
+        url : evEmotionalAnalysisServiceURL,
+        data: {
+          commentContent : commentContent,
+        },
+
+        // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
+        success : function(data, status, xhr) {
+
+          if(parseInt(data) > 0){
+            data = 30;
+          }
+          else {
+            data = -30;
+          }
+
+          $.ajax({
+            type: "POST",
+            url : "../php-Action/AddComment.php",
+            data: {
+              commentContent : commentContent,
+              urlID : urlID,
+              pageID : pageID,
+              profileImageFileName : profileImageFileName,
+              emotionalAnalysisValue : data,
+              postTitle: postTitle
+            },
+
+            success : function(data, status, xhr) {
+              location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+            }
+          });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+        }
+      });
       break;
 
     case "none":
