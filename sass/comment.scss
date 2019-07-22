@@ -1,33 +1,39 @@
 @import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 * {
   box-sizing: border-box;
   font-family: 'Jeju Gothic';
-  outline: none !important; }
+  outline: none !important;
+}
 
-.comment {
+.comment{
   border-radius: 5px;
   padding-top: 5px;
   padding-left: 5px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+}
 
-.comment-avatar {
+.comment-avatar{
   margin-right: 5px;
   margin-top: 5px;
   width: 48px;
-  height: 48px; }
+  height: 48px;
+}
 
-.comment-content {
+.comment-content{
   display: block;
   margin-top: 0px;
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+}
 
-.comment-userID {
+.comment-userID{
   color: #678ac2;
   font-size: 10;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
-.editArea {
+.editArea{
   overflow-x: hidden;
   overflow-wrap: break-word;
   min-height: 50px;
@@ -37,77 +43,104 @@
   border: 2px solid #616161;
   line-height: 1.4;
   font-size: 14px;
-  cursor: text; }
+  cursor: text;
+}
 
 #EV-Pagination {
   display: inline-block;
   text-align: center;
   margin: 0px auto;
   width: 100%;
-  margin-bottom: 10px; }
-  #EV-Pagination a {
+  margin-bottom: 10px;
+
+  a {
     color: black;
     padding: 8px 16px;
-    text-decoration: none; }
-    #EV-Pagination a.active {
-      background-color: #9c9c9c;
-      color: white; }
-    #EV-Pagination a:hover:not(.active) {
-      background-color: #ddd;
-      transition: background-color .3s; }
+    text-decoration: none;
 
-#NoCommentWarning {
+    &.active {
+      background-color: #9c9c9c;
+      color: white;
+    }
+    &:hover:not(.active) {
+      background-color: #ddd;
+      transition: background-color .3s;
+    }
+  }
+
+}
+
+
+#NoCommentWarning{
   font-family: 'Jeju Gothic';
   font-size: 12pt;
-  text-align: center; }
+  text-align: center;
+}
 
-#PW {
-  font-family: 'Standard font, Serif font: Times New Roman' !important; }
+#PW{
+  font-family: 'Standard font, Serif font: Times New Roman' !important;
+}
 
-#EV-comment {
+#EV-comment{
+
   margin-left: 0px;
-  margin-right: 35px; }
-  #EV-comment ul {
+  margin-right: 35px;
+
+  ul {
     list-style-type: none;
     margin: 5px;
     overflow: hidden;
-    padding-left: 5%; }
-    #EV-comment ul li {
+    padding-left: 5%;
+
+    li {
       list-style-type: none;
       margin: 5px;
       overflow: hidden;
-      text-decoration: none; }
+      text-decoration: none;
+    }
+  }
+}
 
-#EV-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333333; }
-  #EV-nav ul li {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none; }
-    #EV-nav ul li:hover {
-      background-color: #111111; }
+#EV-nav{
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
 
-#EV-Buttons {
+    li {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #111111;
+      }
+    }
+  }
+}
+
+#EV-Buttons{
+
   margin-top: 12px;
   margin-left: 25px;
   margin-right: 25px;
-  margin-bottom: 20px; }
-  #EV-Buttons ul {
+  margin-bottom: 20px;
+
+  ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     border-radius: 2px;
     background-color: #9c9c9c;
-    font-size: 14px; }
-    #EV-Buttons ul li {
+    font-size: 14px;
+
+    li{
       float: left;
       display: block;
       color: white;
@@ -115,11 +148,16 @@
       padding: 7px;
       font-size: 16px;
       text-decoration: none;
-      width: 50px; }
-      #EV-Buttons ul li:hover {
-        background-color: #111111; }
+      width: 50px;
 
-#CommentArea {
+      &:hover {
+        background-color: #111111;
+      }
+    }
+  }
+}
+
+#CommentArea{
   overflow-x: hidden;
   overflow-wrap: break-word;
   min-height: 50px;
@@ -131,65 +169,81 @@
   line-height: 1.4;
   font-size: 14px;
   resize: none;
-  cursor: text; }
+  cursor: text;
+}
 
-#EV-Container {
+#EV-Container{
   background-color: #f2f2f2;
   padding: 0px;
-  max-width: 850px; }
+  max-width: 850px;
+}
 
-#EV-UserInputArea {
-  margin-top: 5px; }
+#EV-UserInputArea{
+  margin-top: 5px;
+}
 
-#EV-PostTitle {
-  display: none; }
+#EV-PostTitle{
+  display: none;
+}
 
-#EV-ConnectedUserID {
-  display: none; }
+#EV-ConnectedUserID{
+  display: none;
+}
 
-#EV-ConnectedUserIDProfileImageFileName {
-  display: none; }
+#EV-ConnectedUserIDProfileImageFileName{
+  display: none;
+}
 
-#EV-Footer {
+#EV-Footer{
   background-color: #333333;
   height: 35px;
   color: #ffffff;
   font-size: 14px;
   text-align: center;
-  vertical-align: middle; }
+  vertical-align: middle;
+}
 
-#Textarea-placeholder {
+#Textarea-placeholder{
   position: absolute;
   top: 9px;
   left: 24px;
-  color: #858585; }
+  color: #858585;
+}
 
-#post-button {
-  float: right !important; }
+#post-button{
+  float: right !important;
+}
 
-#connectedUser-Avatar {
+#connectedUser-Avatar{
   display: default;
   width: 30px;
-  height: 30px; }
+  height: 30px;
+}
 
-#recommendLoginAlert p {
+#recommendLoginAlert p{
   font-size: 12pt;
-  text-align: center; }
+  text-align: center;
+}
 
-#userDefaultProfile {
+#userDefaultProfile{
   width: 100px;
   height: 100px;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
-#smallModal {
+#smallModal{
   padding: 15px;
-  background-image: url("../img/userProfileBackImage.png"); }
+  background-image: url("../img/userProfileBackImage.png");
+}
 
 @media screen and (max-width: 411px) {
-  .comment-avatar {
-    display: none; } }
-@media screen and (min-width: 412px) {
-  .comment-avatar {
-    display: default; } }
+  .comment-avatar{
+    display: none;
+  }
+}
 
-/*# sourceMappingURL=comment.css.map */
+@media screen and (min-width: 412px) {
+  .comment-avatar{
+    display: default;
+  }
+}

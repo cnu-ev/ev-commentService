@@ -1,0 +1,45 @@
+@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+@import "TopNavbar.scss";
+
+$backgroundColor : #e3e3e3;
+
+* {
+  box-sizing: border-box;
+}
+
+.stikyFooter{
+  position: sticky;
+  display: block;
+  bottom: 0px;
+  left: 0px;
+}
+
+#WhiteSpaceForResponsivePage{
+  width: 100%;
+  height: 250px;
+}
+
+#AnchorForSignUp{
+  font-size: 30px;
+  margin-top:70px;
+  display: block;
+}
+
+#Background{
+  background-color: $backgroundColor !important;
+}
+
+#Copyright{
+  font-family: 'Jeju Gothic';
+  font-size: 12pt;
+  text-align: center;
+  color: #f2f2f2;
+  width: 100%;
+  bottom: 0px;
+}
+
+#Copyright em{
+  font-size: 12pt;
+}

@@ -1,50 +1,50 @@
-/* CDN 방식으로 폰트를 가져온다 */
 @import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+a.navbar-brand {
+  font-family: 'Jeju Gothic';
+  float: left !important; }
+
+.side_btn {
+  border: none;
+  background-color: #333333; }
+
+.sizeUpOnHover:hover {
+  transform: scale(1.35); }
+
+#FixedNavbar {
+  border-bottom: #f8fc25 3px solid;
+  background-color: #333333 !important; }
 
 * {
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
-a.navbar-brand{
-  font-family: 'Jeju Gothic';
-}
-
-.stikyFooter{
+.stikyFooter {
   position: sticky;
   display: block;
   bottom: 0px;
-  left: 0px;
-}
+  left: 0px; }
 
-#WhiteSpaceForResponsivePage{
+#WhiteSpaceForResponsivePage {
   width: 100%;
-  height: 250px;
-}
+  height: 250px; }
 
-#AnchorForSignUp{
+#AnchorForSignUp {
   font-size: 30px;
-  margin-top:70px;
-  display: block;
-}
+  margin-top: 70px;
+  display: block; }
 
-#Background{
-  background-color: #e3e3e3 !important;
-}
+#Background {
+  background-color: #e3e3e3 !important; }
 
-#Copyright{
+#Copyright {
   font-family: 'Jeju Gothic';
   font-size: 12pt;
   text-align: center;
   color: #f2f2f2;
   width: 100%;
-  bottom: 0px;
-}
+  bottom: 0px; }
 
-#Copyright em{
-  font-size: 12pt;
-}
+#Copyright em {
+  font-size: 12pt; }
 
-#FixedNavbar{
-  border-bottom: #f8fc25 3px solid;
-}
+/*# sourceMappingURL=SignIn.css.map */
