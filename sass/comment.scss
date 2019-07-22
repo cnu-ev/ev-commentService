@@ -1,10 +1,16 @@
 @import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+@import "EV-Style.scss";
+
+@mixin overall-Font-Style{
+	font-family: 'Jeju Gothic';
+}
+
 * {
   box-sizing: border-box;
-  font-family: 'Jeju Gothic';
   outline: none !important;
+  @include overall-Font-Style;
 }
 
 .comment{
@@ -82,11 +88,11 @@
 
 #NoCommentWarning{
   font: {
-    family: 'Jeju Gothic';
     size: 12pt;
   }
 
   text-align: center;
+  @include overall-Font-Style;
 }
 
 #PW{

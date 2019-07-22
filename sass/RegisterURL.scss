@@ -4,6 +4,10 @@
 @import "TopNavbar.scss";
 @import "BottomFixedNavbar.scss";
 
+@mixin overall-Font-Style{
+	font-family: 'Jeju Gothic';
+}
+
 $backgroundColor : #e3e3e3;
 
 * {
@@ -63,22 +67,22 @@ textarea{
 
 	h1{
 	  font-size: 28px;
-	  font-family: 'Jeju Gothic';
+	  @include overall-Font-Style;
 	}
 }
 
 .MessageContent{
 	font: {
-		family: 'Jeju Gothic';
 		size: 16px;
 	}
+	@include overall-Font-Style;
 }
 
 .Buttons{
 	font: {
-		family: 'Jeju Gothic';
 		size: 14px;
 	}
+	@include overall-Font-Style;
 }
 
 .dropdown-toggle::after {
@@ -107,21 +111,20 @@ textarea{
 
 #NoServiceWarning{
 	font: {
-		family: 'Jeju Gothic';
 		size: 12pt;
 	}
-
   text-align: center;
+	@include overall-Font-Style;
 }
 
 #Modal_USER_ID{
   display: inline;
-  font-family: 'Jeju Gothic';
+	@include overall-Font-Style;
 }
 
 #Modal_SIGNUP_DATE{
   display: inline;
-  font-family: 'Jeju Gothic';
+  @include overall-Font-Style;
 }
 
 #userDefaultProfile{

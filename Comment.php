@@ -238,8 +238,7 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <!-- 댓글 서비스의 css 시트. -->
     <link rel="stylesheet" href="./css/comment.css">
-    <!-- 감정 분석 서비스의 css 시트 -->
-    <link rel="stylesheet" href="./css/EV-Style.css">
+
   </head>
   <body>
 
