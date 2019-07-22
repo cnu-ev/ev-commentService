@@ -19,13 +19,15 @@ https://feathericons.com
 >
 >Apache 2.4.39
 >
->MariaDB 10.3.16 (mySQL)
+>MariaDB 10.3.16 (MySQL)
 >
 >phpMyAdmin 4.9.0.1
 >
 >Bootstrap 4.3.1, popper.js, mdb.js, chart.js
 >
 >JQuery 3.2.1
+>
+>Ruby Sass 3.7.4 
 
 그 외 도메인 임대는 freenom (https://www.freenom.com/en/index.html?lang=en),  
 
