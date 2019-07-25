@@ -17,7 +17,8 @@ $PostTitle = $_POST['postTitle'];
 
 // $CommentContent에 XSS 공격이 가해질 경우에 대한 대처로, strip_tags를 사용했다
 // 댓글을 올릴 때와, echo할 때 모두 적용한다.
-$CommentContent = strip_tags($CommentContent, '<b><i><s><u>');
+$PermitTags = '<b><i><s><u><a><strong>';
+$CommentContent = strip_tags(html_entity_decode($CommentContent), $PermitTags);
 
 if(empty($_POST['emotionalAnalysisValue'])){
   $EmotionalAnalysisValue = 0;
