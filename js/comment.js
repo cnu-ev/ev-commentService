@@ -1,5 +1,5 @@
 // 쟝고 감정 분석 서버 URL (full, binary 모드에서 사용)
-var evEmotionalAnalysisServiceURL = "https://rinha7.pythonanywhere.com/comment";
+var evEmotionalAnalysisServiceURL = "https://emotionanalysisservice.ga/changer/comment";
 
 var connectedUserID;
 var profileImageFileName;
@@ -90,6 +90,7 @@ function postComment(){
 
         // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
         success : function(data, status, xhr) {
+          console.log(data);
           $.ajax({
             type: "POST",
             url : "../php-Action/AddComment.php",
