@@ -69,6 +69,9 @@
           <!-- ml은 margin-left. -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+              <a class="nav-link" href="./URL-Register.php">뒤로 가기</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="./php-Action/SignOutAction.php">로그아웃</a>
             </li>
             <li class="nav-item">
