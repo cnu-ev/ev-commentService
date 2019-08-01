@@ -26,6 +26,10 @@ a.navbar-brand {
   #Copyright em {
     font-size: 12pt; }
 
+#Background {
+  background: url("../img/space_edit.jpg") repeat-x fixed;
+  background-color: #e3e3e3 !important; }
+
 * {
   box-sizing: border-box;
   outline: none !important; }
@@ -36,6 +40,14 @@ a.navbar-brand {
   bottom: 0px;
   left: 0px; }
 
+#Title {
+  font-size: 80px;
+  color: #000000; }
+
+#Title-lead {
+  font-size: 14px;
+  color: #000000; }
+
 #WhiteSpaceForResponsivePage {
   width: 100%;
   height: 250px; }
@@ -43,9 +55,7 @@ a.navbar-brand {
 #AnchorForSignUp {
   font-size: 30px;
   margin-top: 70px;
-  display: block; }
-
-#Background {
-  background-color: #e3e3e3 !important; }
+  display: block;
+  color: #ebf4ff; }
 
 /*# sourceMappingURL=SignIn.css.map */

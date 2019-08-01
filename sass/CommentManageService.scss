@@ -3,8 +3,7 @@
 
 @import "TopNavbar.scss";
 @import "BottomFixedNavbar.scss";
-
-$backgroundColor : #e3e3e3;
+@import "Background.scss";
 
 * {
 	outline: none !important;
@@ -124,10 +123,6 @@ textarea{
 		bottom: 7px;
 	}
   margin-bottom: 10px;
-}
-
-#Background{
-  background-color: $backgroundColor;
 }
 
 #NoServiceWarning{

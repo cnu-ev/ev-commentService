@@ -1,0 +1,7 @@
+$backgroundColor : #e3e3e3;
+$backgroundImage : '../img/space_edit.jpg';
+
+#Background {
+  background: url($backgroundImage) repeat-x fixed;
+  background-color: $backgroundColor !important;
+}

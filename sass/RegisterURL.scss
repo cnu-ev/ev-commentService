@@ -3,12 +3,11 @@
 
 @import "TopNavbar.scss";
 @import "BottomFixedNavbar.scss";
+@import "Background.scss";
 
 @mixin overall-Font-Style{
 	font-family: 'Jeju Gothic';
 }
-
-$backgroundColor : #e3e3e3;
 
 * {
   box-sizing: border-box;
@@ -104,10 +103,6 @@ textarea{
 		bottom: 7px;
 	}
   margin-bottom: 10px;
-}
-
-#Background{
-  background-color: $backgroundColor;
 }
 
 #NoServiceWarning{

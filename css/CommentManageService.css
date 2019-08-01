@@ -26,6 +26,10 @@ a.navbar-brand {
   #Copyright em {
     font-size: 12pt; }
 
+#Background {
+  background: url("../img/space_edit.jpg") repeat-x fixed;
+  background-color: #e3e3e3 !important; }
+
 * {
   outline: none !important;
   box-sizing: border-box;
@@ -108,9 +112,6 @@ textarea {
   padding-top: 7px;
   padding-bottom: 7px;
   margin-bottom: 10px; }
-
-#Background {
-  background-color: #e3e3e3; }
 
 #NoServiceWarning {
   font-family: 'Jeju Gothic';

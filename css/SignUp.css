@@ -26,6 +26,10 @@ a.navbar-brand {
   #Copyright em {
     font-size: 12pt; }
 
+#Background {
+  background: url("../img/space_edit.jpg") repeat-x fixed;
+  background-color: #e3e3e3 !important; }
+
 * {
   box-sizing: border-box;
   outline: none !important; }
@@ -39,8 +43,9 @@ label {
 .bg-dark * {
   color: #ffffff; }
 
-#Background {
-  background-color: #e3e3e3 !important; }
+#Title {
+  font-size: 60px;
+  color: #ebf4ff; }
 
 #IDDuplicateCheckButton {
   margin-top: 5px;

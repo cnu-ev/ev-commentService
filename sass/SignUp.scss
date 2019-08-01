@@ -3,12 +3,13 @@
 
 @import "TopNavbar.scss";
 @import "BottomFixedNavbar.scss";
+@import "Background.scss";
 
 @mixin overall-Font-Style{
 	font-family: 'Jeju Gothic';
 }
 
-$backgroundColor : #e3e3e3;
+$fontColor : #ebf4ff;
 
 * {
   box-sizing: border-box;
@@ -27,8 +28,9 @@ label{
   color: #ffffff;
 }
 
-#Background{
-  background-color: $backgroundColor !important;
+#Title{
+	font-size: 60px;
+	color: $fontColor;
 }
 
 #IDDuplicateCheckButton{

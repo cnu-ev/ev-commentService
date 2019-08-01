@@ -45,8 +45,8 @@
 
     <section style="padding-top:100px;">
       <!-- lead는 강조 표시 및 글자 크기를 키우는 역할을 함 -->
-      <p class="lead" style="font-size: 60px;">Login</p>
-      <p class="lead" style="font-size: 14px; color: #4c4c4c;">감정 분석 댓글 서비스를 이용하기 위해 로그인하세요.</p>
+      <p id="Title" class="lead">Login</p>
+      <p id="Title-lead" class="lead">감정 분석 댓글 서비스를 이용하기 위해 로그인하세요.</p>
 
       <!-- form 태그를 통해 SignInAction.php를 거쳐 로그인 함 -->
       <!-- form-group 및 form-control 은 부트스트랩 css를 적용하기 위한 태그 -->
@@ -67,7 +67,7 @@
     </section>
 
     <!-- Sign Up 표시 -->
-    <a id="AnchorForSignUp" href="SignUp.html" style="color: #7a7a7a">Sign Up</a>
+    <a id="AnchorForSignUp" href="SignUp.html">Sign Up</a>
 
     <!-- 스크롤바 에러를 피하기 위해 공간을 둠. 더 적당한 방법을 찾아 고치고 싶음-->
     <div id="WhiteSpaceForResponsivePage"></div>
