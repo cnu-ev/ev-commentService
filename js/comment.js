@@ -1,5 +1,6 @@
 // 쟝고 감정 분석 서버 URL (full, binary 모드에서 사용)
-var evEmotionalAnalysisServiceURL = "https://emotionanalysisservice.ga/changer/comment";
+var EmotionalAnalysisServiceURL = "https://emotionanalysisservice.ga/changer/comment";
+var EmotionalAnalysisServiceReportURL = "https://emotionanalysisservice.ga/changer/report";
 
 var connectedUserID;
 var profileImageFileName;
@@ -83,7 +84,7 @@ function postComment(){
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
       $.ajax({
         type: "POST",
-        url : evEmotionalAnalysisServiceURL,
+        url : EmotionalAnalysisServiceURL,
         data: {
           commentContent : commentContent,
         },
@@ -189,6 +190,39 @@ function postComment(){
       throw new Error("Assert failed: mode value is one of 'full, binary, none'");
       break;
   }
+}
+
+var reportCommentID;
+var reportCommentContent;
+var isPositive;
+
+function reportButtonClicked(id, content, isPositive){
+  // id 중 숫자만 추출
+  reportCommentID = id.replace(/[^0-9]/g,"");
+  reportCommentContent = content;
+
+  let reverse = (isPositive > 0) ? "부정" : "긍정";
+  $('#ReportCommentContent').html('"' + content + '"' + " 다음 댓글을 " + reverse + "으로 평가하시겠습니까?");
+}
+
+function reportComment(){
+
+  $.ajax({
+    type: "POST",
+    url : EmotionalAnalysisServiceReportURL,
+    data: {
+      CommentID : reportCommentID,
+      CommentContent : reportCommentContent
+    },
+
+    success : function(data, status, xhr) {
+      console.log("Report 전송 성공!");
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+    }
+  });
+
 }
 
 function deleteComment(id){

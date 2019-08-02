@@ -111,15 +111,18 @@
 
       // 본인이 단 댓글인 경우, Edit, Delete Button을 활성화 함
       if(isset($connectedUserID) && $connectedUserID == $CommentUserId){
+
         $ElementsOnMyComment =
         '
+        <span><img src="./img/report.svg" width="16px" height="16px" data-toggle="modal" data-target="#ReportConfirmModal" onclick="reportButtonClicked($(this).closest(\'li\').attr(\'id\'), $(this).parent().parent().children(\'.comment-content\').html(),'.$Positiveness.')"></span>
         <span><img src="./img/trash-2.svg" width="16px" height="16px" onclick="deleteComment($(this).closest(\'li\').attr(\'id\'))"></span>
         <span><img src="./img/edit.svg" width="16px" height="16px" onclick="editComment($(this).parent().prevAll(\'p\').attr(\'id\'), $(this).parent().next())"></span>
         <span style="display: none;" class="sendCommentUpdateButton"><img src="./img/send.svg" width="16px" height="16px" onclick="sendCommentUpdateMessage($(this).parent().prevAll(\'p\').attr(\'id\'))"></span>
         ';
       }
       else {
-        $ElementsOnMyComment = "";
+        $ElementsOnMyComment =
+        '<span><img src="./img/report.svg" width="16px" height="16px" data-toggle="modal" data-target="#ReportConfirmModal" onclick="reportButtonClicked($(this).closest(\'li\').attr(\'id\'), $(this).parent().parent().children(\'.comment-content\').html(),'.$Positiveness.')"></span>';
       }
 
       // 댓글의 긍정도에 따라, class를 달리 붙임.
@@ -456,6 +459,22 @@
         ?>
 
       </div>
+
+      <div id="ReportConfirmModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <h4 id="ReportCommentContent" class="text-center" style="font-size: 15px; margin-bottom: 20px;"></h4>
+                <div class="text-center" style="width: 70%; margin: 0 auto">
+                  <a class="btn btn-sm btn-danger btn-yes btn-block" style="color:#ffffff;" data-dismiss="modal" onclick="ReportComment()">네</a>
+                  <!-- data dismiss란 attribute를 줌으로써, 모달 박스를 닫는 이벤트를 구현할 수 있음 -->
+                  <a class="btn btn-sm btn-success btn-no btn-block" style="color:#ffffff;" data-dismiss="modal">아니오</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
       <footer id="EV-Footer">
         <p style="padding-top: 7px;">&copy; 2019 Team EV</p>
       </footer>
