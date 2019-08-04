@@ -5,11 +5,13 @@
 
 <script type="text/javascript">
 
-    var blogOwner = "{{site.ev_username}}";
-    var siteURL = "{{site.url}}";
-    var evMode = "{{site.ev_mode}}";
-    var pageIdentifier = "{{page.id}}";
-    var pageTitle = "{{page.title}}";
+    var $JekyllParams = {
+      blogOwner: "{{site.ev_username}}",
+      siteURL: "{{site.url}}",
+      evMode: "{{site.ev_mode}}",
+      pageIdentifier: "{{page.id}}",
+      pageTitle: "{{page.title}}"
+    };
 
     (function() {
         var embededd_js = document.createElement('script');

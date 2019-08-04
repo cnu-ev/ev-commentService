@@ -90,6 +90,7 @@
 
       global $connectedUserID;
       global $connectedUserProfileFileName;
+      global $EmotionalAnalysisMode;
 
       #############################################################
       #                                                           #
@@ -111,18 +112,22 @@
 
       // 본인이 단 댓글인 경우, Edit, Delete Button을 활성화 함
       if(isset($connectedUserID) && $connectedUserID == $CommentUserId){
-
         $ElementsOnMyComment =
-        '
-        <span><img src="./img/report.svg" width="16px" height="16px" data-toggle="modal" data-target="#ReportConfirmModal" onclick="reportButtonClicked($(this).closest(\'li\').attr(\'id\'), $(this).parent().parent().children(\'.comment-content\').html(),'.$Positiveness.')"></span>
-        <span><img src="./img/trash-2.svg" width="16px" height="16px" onclick="deleteComment($(this).closest(\'li\').attr(\'id\'))"></span>
-        <span><img src="./img/edit.svg" width="16px" height="16px" onclick="editComment($(this).parent().prevAll(\'p\').attr(\'id\'), $(this).parent().next())"></span>
-        <span style="display: none;" class="sendCommentUpdateButton"><img src="./img/send.svg" width="16px" height="16px" onclick="sendCommentUpdateMessage($(this).parent().prevAll(\'p\').attr(\'id\'))"></span>
-        ';
+          '
+          <span><img src="./img/trash-2.svg" width="16px" height="16px" onclick="deleteComment($(this).closest(\'li\').attr(\'id\'))"></span>
+          <span><img src="./img/edit.svg" width="16px" height="16px" onclick="editComment($(this).parent().prevAll(\'p\').attr(\'id\'), $(this).parent().next())"></span>
+          <span style="display: none;" class="sendCommentUpdateButton"><img src="./img/send.svg" width="16px" height="16px" onclick="sendCommentUpdateMessage($(this).parent().prevAll(\'p\').attr(\'id\'))"></span>
+          ';
       }
       else {
-        $ElementsOnMyComment =
-        '<span><img src="./img/report.svg" width="16px" height="16px" data-toggle="modal" data-target="#ReportConfirmModal" onclick="reportButtonClicked($(this).closest(\'li\').attr(\'id\'), $(this).parent().parent().children(\'.comment-content\').html(),'.$Positiveness.')"></span>';
+        $ElementsOnMyComment = '';
+      }
+
+      // $EmotionalAnalysisMode가 none이 아닐 경우 감정 평가 리포트를 제출할 수 있는 버튼을 추가한다
+      if($EmotionalAnalysisMode != "none"){
+        $ElementsOnMyComment .=
+          '<span><img src="./img/report.svg" width="16px" height="16px" data-toggle="modal" data-target="#ReportConfirmModal" onclick="reportButtonClicked($(this).closest(\'li\').attr(\'id\'), $(this).parent().parent().children(\'.comment-content\').html(),'.$Positiveness.')"></span>';
+        ;
       }
 
       // 댓글의 긍정도에 따라, class를 달리 붙임.
