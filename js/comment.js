@@ -51,6 +51,17 @@ function editButtonClicked(clickedButton){
   }
 }
 
+// 코드 양, 중복을 없애기 위해 사용
+function ajaxRequest(type, url, dataArr, success, error){
+  $.ajax({
+    type: type,
+    url : url,
+    data: dataArr,
+    success : success,
+    error: error
+  });
+}
+
 // 클릭되거나, 텍스트가 입력되면 placeholder를 숨김
 function textAreaClicked(){
   $('#CommentArea').focus();
@@ -78,110 +89,44 @@ function postComment(){
   // url을 PHP로 넘겨야 하기 때문에 주소 값을 파싱해서 파라미터 값을 php로 전송해야 한다
   const commentContent = $('#CommentArea').html();
 
+  let arg = {
+    commentContent : commentContent,
+    urlID : urlID,
+    pageID : pageID,
+    profileImageFileName : profileImageFileName,
+    postTitle: postTitle
+  };
+
   switch (evMode) {
 
     case "full":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      $.ajax({
-        type: "POST",
-        url : EmotionalAnalysisServiceURL,
-        data: {
-          commentContent : commentContent,
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, {commentContent : commentContent},
+        // Success
+        (data)=>{
+            arg.emotionalAnalysisValue = data;
+            ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); }, ()=>{});
         },
+        // Error
+        ()=>{});
 
-        // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
-        success : function(data, status, xhr) {
-          console.log(data);
-          $.ajax({
-            type: "POST",
-            url : "../php-Action/AddComment.php",
-            data: {
-              commentContent : commentContent,
-              urlID : urlID,
-              pageID : pageID,
-              profileImageFileName : profileImageFileName,
-              emotionalAnalysisValue : data,
-              postTitle: postTitle
-            },
-
-            success : function(data, status, xhr) {
-              location.reload();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-              console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-            }
-          });
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
       break;
 
     case "binary":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      $.ajax({
-        type: "POST",
-        url : evEmotionalAnalysisServiceURL,
-        data: {
-          commentContent : commentContent,
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, {commentContent : commentContent},
+        // Success
+        (data)=>{
+            arg.emotionalAnalysisValue = (parseInt(data)) > 0 ? 30 : -30;
+            ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); }, ()=>{});
         },
-
-        // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
-        success : function(data, status, xhr) {
-
-          if(parseInt(data) > 0){
-            data = 30;
-          }
-          else {
-            data = -30;
-          }
-
-          $.ajax({
-            type: "POST",
-            url : "../php-Action/AddComment.php",
-            data: {
-              commentContent : commentContent,
-              urlID : urlID,
-              pageID : pageID,
-              profileImageFileName : profileImageFileName,
-              emotionalAnalysisValue : data,
-              postTitle: postTitle
-            },
-
-            success : function(data, status, xhr) {
-              location.reload();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-              console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-            }
-          });
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+        // Error
+        ()=>{});
       break;
 
     case "none":
-      $.ajax({
-        type: "POST",
-        url : "../php-Action/AddComment.php",
-        data: {
-          commentContent : $('#CommentArea').html(),
-          urlID : urlID,
-          pageID : pageID,
-          profileImageFileName : profileImageFileName,
-          postTitle: postTitle
-        },
 
-        success : function(data, status, xhr) {
-          location.reload();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+      ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); }, ()=>{});
       break;
 
     default:
@@ -207,46 +152,36 @@ function reportButtonClicked(id, content, isPositive){
 
 function reportComment(){
 
-  $.ajax({
-    type: "POST",
-    url : EmotionalAnalysisServiceReportURL,
-    data: {
-      CommentID : reportCommentID,
-      CommentContent : reportCommentContent
-    },
+  let arg = {
+    CommentID : reportCommentID,
+    CommentContent : reportCommentContent
+  };
 
-    success : function(data, status, xhr) {
-      console.log("Report 전송 성공!");
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-    }
-  });
+  ajaxRequest("POST", EmotionalAnalysisServiceReportURL, arg,
+    // Success
+    ()=>{},
+    // Fail
+    ()=>{}
+  );
 
 }
 
 function deleteComment(id){
 
   // id 중 숫자만 추출
-  let commentID = id.replace(/[^0-9]/g,"");
+  let arg = {
+    userID : connectedUserID,
+    CommentID : id.replace(/[^0-9]/g,""),
+    urlID : urlID,
+    pageID : pageID
+  };
 
-  $.ajax({
-    type: "POST",
-    url : "../php-Action/DeleteComment.php",
-    data: {
-      userID : connectedUserID,
-      CommentID : commentID,
-      urlID : urlID,
-      pageID : pageID
-    },
-
-    success : function(data, status, xhr) {
-      location.reload();
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-    }
-  });
+  ajaxRequest("POST", "../php-Action/DeleteComment.php", arg,
+    // Success
+    ()=>{location.reload();},
+    // Fail
+    ()=>{}
+  );
 
 }
 
@@ -330,77 +265,44 @@ function editComment(id, submitButton){
 // DB 에서 해당 레코드 Comment Content를 수정한다
 function sendCommentUpdateMessage(contentID){
 
-  let userID = connectedUserID;
-  // id 중 숫자만 추출
-  let commentID = contentID.replace(/[^0-9]/g,"");
-  let content = $('#' + contentID).html();
+  let arg = {
+    userID : connectedUserID,
+    CommentID : contentID.replace(/[^0-9]/g,""),
+    urlID : urlID,
+    pageID : pageID,
+    updatedContent : $('#' + contentID).html()
+  }
 
   switch (evMode) {
 
     case "full":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      $.ajax({
-        type: "POST",
-        url : "localhost/comment",
-        data: {
-          commentContent : commentContent,
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, {commentContent : commentContent},
+        (data, status, xhr) => {
+          arg.emotionalAnalysisValue = data;
+          ajaxRequest("POST", "../php-Action/EditComment.php", arg,
+            // Success
+            ()=>{location.reload();},
+            // Fail
+            ()=>{}
+          );
         },
-
-        // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
-        success : function(data, status, xhr) {
-            $.ajax({
-              type: "POST",
-              url : "../php-Action/EditComment.php",
-              data: {
-                userID : userID,
-                CommentID : commentID,
-                urlID : urlID,
-                pageID : pageID,
-                updatedContent : content,
-                emotionalAnalysisValue : data
-              },
-
-              success : function(data, status, xhr) {
-                location.reload();
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-              }
-            });
-          },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+        ()=>{}
+      );
 
     // binary는 full과 동일하게 작동
     case "binary":
       break;
 
     case "none":
-      $.ajax({
-        type: "POST",
-        url : "../php-Action/EditComment.php",
-        data: {
-          userID : userID,
-          CommentID : commentID,
-          urlID : urlID,
-          pageID : pageID,
-          updatedContent : content
-        },
-
-        success : function(data, status, xhr) {
-          location.reload();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+      ajaxRequest("POST", "../php-Action/EditComment.php", arg,
+        ()=>{location.reload();},
+        ()=>{}
+      );
       break;
 
     default:
       console.log("Error:: mode value is one of 'full, binary, none'");
       break;
   }
-
 }
