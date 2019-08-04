@@ -4,7 +4,7 @@ function AddURLButtonClicked(){
   if(checkUrlForm($('#URL').val())){
     return true;
   }
-  alert('올바른 URL 입력이 아닙니다. URL 입력을 확인해주세요.');
+  alert('올바른 URL이 아닙니다. 블로그의 URL 형식이 맞는지 확인해주세요.');
   return false;
 }
 
@@ -38,5 +38,5 @@ function setIndexToDeleteRoom(urlID){
 }
 
 function ToCommentManagePage(serviceTitle, urlID){
-  location.href='CommentManageService.php?db=' + urlID + '&title=' + serviceTitle;
+  location.href=`CommentManageService.php?db=${urlID}&title=${serviceTitle}`;
 }

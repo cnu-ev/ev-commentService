@@ -40,7 +40,8 @@ if($_FILES['ProfileImage']['size'] != 0) {
 
   // 기존의 프로필 사진 삭제
   if(!empty($_POST['OldProfileImageFileName'])){
-    unlink("../profileImages/" . $_POST['OldProfileImageFileName']);
+    var_dump("..\\" . $_POST['OldProfileImageFileName']);
+    unlink("..\\" . $_POST['OldProfileImageFileName']);
   }
 
   // 중복 ID가 없는 경우, 프로필 사진 업로드 처리 및 폴더에 저장

@@ -27,17 +27,23 @@ $row = mysqli_fetch_array($ret);
 
 $ID = $row['ID'];
 $PW = $row['PW'];
-$ProfileImageFileName = $row['ProfileImageFileName'];
 $Address = $row['Address'];
 $PhoneNumber = $row['PhoneNumber'];
 $Gender = $row['Gender'];
 $Name = $row['Name'];
 $Email = $row['Email'];
 
+if(!empty($row['ProfileImageFileName'])){
+  $ProfileImageFileNamePath = "profileImages/". $row['ProfileImageFileName'];
+}
+else{
+  $ProfileImageFileNamePath = "img/userDefaultProfile.svg";
+}
+
 if(isset($Name)){
   $NameArr = explode(' ', $row['Name']);
-  $LastName = $NameArr[0];
-  $FirstName = $NameArr[1];
+  $FirstName = $NameArr[0];
+  $LastName = $NameArr[1];
 }
 else {
   $FirstName = '';
@@ -116,7 +122,7 @@ else {
         <label class="custom-file" for="ProfileImage">프로필 사진</label>
         <!-- rounded-circle로 이미지를 원형으로 예쁘게 넣어줌 -->
         <!-- canvas 태그는 이미지 파일 선택 전 숨겨져 있는 엘리먼트이며, 이미지 파일을 선택하면 img 엘리먼트 (디폴트 프로필 이미지) 가 숨겨짐 -->
-        <img id="userDefaultProfile" width="80px" height="80px" class="img-fluid rounded-circle" src="./profileImages/<?=$ProfileImageFileName;?>" alt="Image For User Profile">
+        <img id="userDefaultProfile" width="80px" height="80px" class="img-fluid rounded-circle" src="<?=$ProfileImageFileNamePath;?>" alt="Image For User Profile">
         <canvas id="userProfileImage" style="display: none;" class="img-fluid rounded-circle" width="100px" height="100px" alt="Image For User Profile"></canvas>
         <!-- 프로필 파일로 선택 가능한 확장자 알림 -->
         <p style="float:right; display:inline; font-size: 12px;"><strong>* </strong>선택 가능한 파일 확장자는 png, jpg, jpeg 입니다.</p>
@@ -124,7 +130,7 @@ else {
         <!-- accept를 통해, 특정 확장자의 파일만 선택가능하게 구현 -->
         <input class="form-control mt-3 mb-1" type="file" name="ProfileImage" onchange="changeProfileImage(this)" accept=".png,.jpg,.jpeg" />
         <!-- Old ProfileImageFileName -->
-        <input type="text" name="OldProfileImageFileName" value="<?=$ProfileImageFileName;?>" style="display: none;">
+        <input type="text" name="OldProfileImageFileName" value="<?=$ProfileImageFileNamePath;?>" style="display: none;">
       </div>
 
       <!-- form 태그를 통해 SignInAction.php를 거쳐 로그인 함 -->

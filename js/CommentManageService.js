@@ -75,8 +75,8 @@ function selectButtons(clickedButton){
   }
 
   ajaxRequest("POST", `../php-Action/CommentManageService/${selectedService}`, { URLID : urlID },
-    (data)=>{
-      $('#ServiceSection').html(data);
+    (serviceHTML)=>{
+      $('#ServiceSection').html(serviceHTML);
       containerLoad();
     });
 }
