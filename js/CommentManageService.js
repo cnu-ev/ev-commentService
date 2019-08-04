@@ -51,44 +51,34 @@ function selectButtons(clickedButton){
 
   Loading();
 
+  let selectedService;
   switch (clickedButton) {
 
     case "Analysis-recentComments":
-      ajaxRequest("POST", "../php-Action/CommentManageService/recentComments.php", { URLID : urlID },
-        (data)=>{
-          $('#ServiceSection').html(data);
-          containerLoad();
-        }, ()=>{});
+      selectedService = "recentComments.php";
       break;
 
     case "Analysis-visitorsNumber":
       break;
 
     case "Analysis-positiveness":
-      ajaxRequest("POST", "../php-Action/CommentManageService/Positiveness.php", { URLID : urlID },
-        (data)=>{
-          $('#ServiceSection').html(data);
-          containerLoad();
-        }, ()=>{});
+      selectedService = "Positiveness.php";
       break;
 
     case "Analysis-postsSortingByCommentsNumber":
-      ajaxRequest("POST", "../php-Action/CommentManageService/PostsSortingByCommentsNumber.php", { URLID : urlID },
-        (data)=>{
-          $('#ServiceSection').html(data);
-          containerLoad();
-        }, ()=>{});
+      selectedService = "PostsSortingByCommentsNumber.php";
       break;
 
     case "Analysis-popularness":
-      ajaxRequest("POST", "../php-Action/CommentManageService/PopularPosting.php", { URLID : urlID },
-        (data)=>{
-          $('#ServiceSection').html(data);
-          containerLoad();
-        }, ()=>{});
+      selectedService = "PopularPosting.php";
       break;
   }
 
+  ajaxRequest("POST", `../php-Action/CommentManageService/${selectedService}`, { URLID : urlID },
+    (data)=>{
+      $('#ServiceSection').html(data);
+      containerLoad();
+    });
 }
 
 // get 방식 파라미터 값을 가져오는 함수

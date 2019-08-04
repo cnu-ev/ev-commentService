@@ -2,24 +2,38 @@
 var EmotionalAnalysisServiceURL = "https://emotionanalysisservice.ga/changer/comment";
 var EmotionalAnalysisServiceReportURL = "https://emotionanalysisservice.ga/changer/report";
 
-var connectedUserID;
-var profileImageFileName;
-var postTitle;
+// onload 이벤트 후 값을 갖는 객체
+// php에서 특정 태그에 값을 채우는 방식으로 js로 변수를 전달함
+var phpVars;
 
-var urlID = getParameterByName('db');
-var pageID = getParameterByName('pageID');
-var evMode = getParameterByName('mode');
+var params = {
+  urlID: getParameterByName('db'),
+  pageID: getParameterByName('pageID'),
+  evMode: getParameterByName('mode')
+}
+
+// reportCommentID, reportCommentContent를 갖고 있는 객체
+var reportComment;
+
+// editMode에 관련된 객체
+var editMode = {
+   isEditMode: false
+};
+
+const log = console.log;
 
 window.onload = function(){
 
-  connectedUserID = $('#EV-ConnectedUserID').html();
-  profileImageFileName = $('#EV-ConnectedUserIDProfileImageFileName').html();
-  postTitle = $('#EV-PostTitle').html();
+  phpVars = {
+    connectedUserID : $('#EV-ConnectedUserID').html(),
+    profileImageFileName : $('#EV-ConnectedUserIDProfileImageFileName').html(),
+    postTitle : $('#EV-PostTitle').html()
+  };
+
   containerLoad();
 }
 
 function containerLoad(){
-  $('#EV-Loader').hide();
   $('#EV-Container').show();
   onHeightChange();
 }
@@ -79,6 +93,8 @@ function verifyComment(){
 // 제출 버튼을 클릭해 댓글을 달 때 실행되는 함수
 function postComment(){
 
+  let { postTitle, profileImageFileName, connectedUserID } = phpVars;
+
   // 로그인 되어 있지 않은 경우 우선 로그인을 권유하는 알림을 띄운다
   if(connectedUserID == '' && !($('#recommendLoginAlert').is(":visible"))){
     $('#recommendLoginAlert').show();
@@ -91,8 +107,8 @@ function postComment(){
 
   let arg = {
     commentContent : commentContent,
-    urlID : urlID,
-    pageID : pageID,
+    urlID : params.urlID,
+    pageID : params.pageID,
     profileImageFileName : profileImageFileName,
     postTitle: postTitle
   };
@@ -101,50 +117,46 @@ function postComment(){
 
     case "full":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      ajaxRequest("POST", EmotionalAnalysisServiceURL, {commentContent : commentContent},
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, { commentContent : commentContent },
         // Success
-        (data)=>{
-            arg.emotionalAnalysisValue = data;
+        (score)=>{
+            arg.emotionalAnalysisValue = score;
             ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); }, ()=>{});
         },
         // Error
-        ()=>{});
+        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다");});
 
       break;
 
     case "binary":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      ajaxRequest("POST", EmotionalAnalysisServiceURL, {commentContent : commentContent},
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, { commentContent : commentContent },
         // Success
-        (data)=>{
-            arg.emotionalAnalysisValue = (parseInt(data)) > 0 ? 30 : -30;
-            ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); }, ()=>{});
+        (score)=>{
+            arg.emotionalAnalysisValue = (parseInt(score)) > 0 ? 30 : -30;
+            ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); });
         },
         // Error
-        ()=>{});
+        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다");});
       break;
 
     case "none":
 
-      ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); }, ()=>{});
+      ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); });
       break;
 
     default:
       // 디폴트 값은 full이지만, 예외처리는 넣어놓았다
-      console.log("Error:: mode value is one of 'full, binary, none'");
+      log("Error:: mode value is one of 'full, binary, none'");
       throw new Error("Assert failed: mode value is one of 'full, binary, none'");
       break;
   }
 }
 
-var reportCommentID;
-var reportCommentContent;
-var isPositive;
-
 function reportButtonClicked(id, content, isPositive){
   // id 중 숫자만 추출
-  reportCommentID = id.replace(/[^0-9]/g,"");
-  reportCommentContent = content;
+  reportComment.reportCommentID = id.replace(/[^0-9]/g,"");
+  reportComment.reportCommentContent = content;
 
   let reverse = (isPositive > 0) ? "부정" : "긍정";
   $('#ReportCommentContent').html('"' + content + '"' + " 다음 댓글을 " + reverse + "으로 평가하시겠습니까?");
@@ -152,35 +164,29 @@ function reportButtonClicked(id, content, isPositive){
 
 function reportComment(){
 
+  let { reportCommentID, reportCommentContent } = reportComment;
+
   let arg = {
     CommentID : reportCommentID,
     CommentContent : reportCommentContent
   };
 
-  ajaxRequest("POST", EmotionalAnalysisServiceReportURL, arg,
-    // Success
-    ()=>{},
-    // Fail
-    ()=>{}
-  );
+  ajaxRequest("POST", EmotionalAnalysisServiceReportURL, arg);
 
 }
 
 function deleteComment(id){
 
-  // id 중 숫자만 추출
   let arg = {
-    userID : connectedUserID,
+    userID : phpVars.connectedUserID,
+    // id 중 숫자만 추출
     CommentID : id.replace(/[^0-9]/g,""),
-    urlID : urlID,
-    pageID : pageID
+    urlID : params.urlID,
+    pageID : params.pageID
   };
 
   ajaxRequest("POST", "../php-Action/DeleteComment.php", arg,
-    // Success
-    ()=>{location.reload();},
-    // Fail
-    ()=>{}
+    ()=>{ location.reload(); }
   );
 
 }
@@ -205,7 +211,6 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-
 // 커서를 마지막 위치로 이동시킴
 // 지금 당장은 필요 없지만 댓글에 이미지를 포함시키는 기능을 추가한다면 필요해질 것
 // https://stackoverflow.com/questions/4609405/set-focus-after-last-character-in-text-box
@@ -228,32 +233,31 @@ function focusCampo(id){
     }
 }
 
-// 현재 댓글을 수정 중인지를 나타내는 boolean 변수
-var isEditMode = false;
-
-// 수정 중인 (수정 중이었던) Comment의 ContentID
-var editCommentContentID;
-var editCommentContent;
-
 // 현재 수정 상태라면 수정을 취소하는 명령으로,
 // 현재 수정 상태가 아니라면 editArea로 만드는 명령으로 작동
 function editComment(id, submitButton){
+
+  //  editMode는 현재 댓글을 수정 중인지를 나타내는 boolean 변수
+  //  editCommentContentID : 수정 중인 (수정 중이었던) Comment의 ContentID
+  //  commentBuffer는 해당 수정 중이던 Comment의 내용
+  let { isEditMode, commentBuffer, editCommentContentID } = editMode;
+
   if(isEditMode){
     $('#' + editCommentContentID).removeAttr('contenteditable');
     $('#' + editCommentContentID).removeClass('editArea');
-    $('#' + editCommentContentID).html(editCommentContent);
+    $('#' + editCommentContentID).html(editMode.commentBuffer);
     $('#' + editCommentContentID).nextAll('.sendCommentUpdateButton').hide();
 
     if(id == editCommentContentID) {
-      isEditMode = false;
+      editMode.isEditMode = false;
       onHeightChange();
       return;
     }
   }
 
-  isEditMode = true;
-  editCommentContentID = id;
-  editCommentContent = $('#' + id).html();
+  editMode.isEditMode = true;
+  editMode.editCommentContentID = id;
+  editMode.commentBuffer = $('#' + id).html();
   submitButton.show();
   $('#' + id).attr('contenteditable', 'PLAINTEXT-ONLY');
   $('#' + id).addClass('editArea');
@@ -266,28 +270,27 @@ function editComment(id, submitButton){
 function sendCommentUpdateMessage(contentID){
 
   let arg = {
-    userID : connectedUserID,
+    userID : phpVars.connectedUserID,
     CommentID : contentID.replace(/[^0-9]/g,""),
-    urlID : urlID,
-    pageID : pageID,
+    urlID : params.urlID,
+    pageID : params.pageID,
     updatedContent : $('#' + contentID).html()
   }
 
-  switch (evMode) {
+  switch (params.evMode) {
 
     case "full":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      ajaxRequest("POST", EmotionalAnalysisServiceURL, {commentContent : commentContent},
-        (data, status, xhr) => {
-          arg.emotionalAnalysisValue = data;
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, arg.updatedContent,
+        (score) => {
+          arg.emotionalAnalysisValue = score;
           ajaxRequest("POST", "../php-Action/EditComment.php", arg,
             // Success
-            ()=>{location.reload();},
+            ()=>{ location.reload(); },
             // Fail
-            ()=>{}
+            ()=>{ log("EmotionalAnalysisServiceURL 접속에 실패했습니다"); }
           );
-        },
-        ()=>{}
+        }
       );
 
     // binary는 full과 동일하게 작동
@@ -296,13 +299,12 @@ function sendCommentUpdateMessage(contentID){
 
     case "none":
       ajaxRequest("POST", "../php-Action/EditComment.php", arg,
-        ()=>{location.reload();},
-        ()=>{}
+        ()=>{ location.reload(); }
       );
       break;
 
     default:
-      console.log("Error:: mode value is one of 'full, binary, none'");
+      log("Error:: mode value is one of 'full, binary, none'");
       break;
   }
 }
