@@ -2,6 +2,17 @@
 var urlID = getParameterByName('db');
 var isloading = false;
 
+// 코드 양, 중복을 없애기 위해 사용
+function ajaxRequest(type, url, dataArr, success, error){
+  $.ajax({
+    type: type,
+    url : url,
+    data: dataArr,
+    success : success,
+    error: error
+  });
+}
+
 // 디폴트로 Analysis-recentComments가 클릭되게 한다.
 window.onload = function(){
   selectButtons('Analysis-recentComments');
@@ -41,76 +52,40 @@ function selectButtons(clickedButton){
   Loading();
 
   switch (clickedButton) {
-    case "Analysis-recentComments":
-      $.ajax({
-        type: "POST",
-        url : "../php-Action/CommentManageService/recentComments.php",
-        data: {
-          URLID : urlID,
-        },
 
-        success : function(data, status, xhr) {
+    case "Analysis-recentComments":
+      ajaxRequest("POST", "../php-Action/CommentManageService/recentComments.php", { URLID : urlID },
+        (data)=>{
           $('#ServiceSection').html(data);
           containerLoad();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+        }, ()=>{});
       break;
+
     case "Analysis-visitorsNumber":
       break;
+
     case "Analysis-positiveness":
-      $.ajax({
-        type: "POST",
-        url : "../php-Action/CommentManageService/Positiveness.php",
-        data: {
-          URLID : urlID,
-        },
-
-        success : function(data, status, xhr) {
+      ajaxRequest("POST", "../php-Action/CommentManageService/Positiveness.php", { URLID : urlID },
+        (data)=>{
           $('#ServiceSection').html(data);
           containerLoad();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+        }, ()=>{});
       break;
-    case "Analysis-postsSortingByCommentsNumber":
-      $.ajax({
-        type: "POST",
-        url : "../php-Action/CommentManageService/PostsSortingByCommentsNumber.php",
-        data: {
-          URLID : urlID,
-        },
 
-        success : function(data, status, xhr) {
+    case "Analysis-postsSortingByCommentsNumber":
+      ajaxRequest("POST", "../php-Action/CommentManageService/PostsSortingByCommentsNumber.php", { URLID : urlID },
+        (data)=>{
           $('#ServiceSection').html(data);
           containerLoad();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+        }, ()=>{});
       break;
 
     case "Analysis-popularness":
-      $.ajax({
-        type: "POST",
-        url : "../php-Action/CommentManageService/PopularPosting.php",
-        data: {
-          URLID : urlID,
-        },
-
-        success : function(data, status, xhr) {
+      ajaxRequest("POST", "../php-Action/CommentManageService/PopularPosting.php", { URLID : urlID },
+        (data)=>{
           $('#ServiceSection').html(data);
           containerLoad();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-        }
-      });
+        }, ()=>{});
       break;
   }
 
