@@ -21,7 +21,7 @@ $reg_Email = preg_match('/^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*.[a-zA-Z]{2,3}$/i'
 if(!empty($Email)){
   if($reg_Email == 0){
     echo ("<script language=javascript>alert('잘못된 형식의 이메일 입력입니다.')</script>");
-    echo ("<script>location.href='../UserEdit.php';</script>");
+    echo ("<script>location.href='../SignUp.html';</script>");
     exit();
   }
 }
@@ -29,7 +29,7 @@ if(!empty($Email)){
 // 매칭되지 않는 값이 들어올 경우 UserEdit을 실행하지 않는다
 if($reg_ID == 0){
   echo ("<script language=javascript>alert('잘못된 형식의 ID 입력입니다.')</script>");
-  echo ("<script>location.href='../UserEdit.php';</script>");
+  echo ("<script>location.href='../SignUp.html';</script>");
   exit();
 }
 
@@ -51,7 +51,8 @@ while($row = mysqli_fetch_array($ret)){
 
 if($_FILES['ProfileImage']['size'] != 0){
   // 중복 ID가 없는 경우, 프로필 사진 업로드 처리 및 폴더에 저장
-  $ProfileImageUploadDir = 'C:\xampp\ev-commentService\profileImages\\';
+
+  $ProfileImageUploadDir = $_SERVER['DOCUMENT_ROOT'] . '\profileImages\\';
 
   // 아래 코드에서 mb_stristr가 파일 확장자만 잘라 ID와 붙인다
   $ProfileImageFileName = $ID . mb_stristr($_FILES['ProfileImage']['name'], '.');

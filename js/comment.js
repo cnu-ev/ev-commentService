@@ -20,7 +20,7 @@ var editMode = {
    isEditMode: false
 };
 
-const log = console.log;
+const log = (logContent) => { console.log("Log from evCommentService : " + logContent); };
 
 window.onload = function(){
 
