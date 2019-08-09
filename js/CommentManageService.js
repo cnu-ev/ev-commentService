@@ -1,16 +1,11 @@
 // 왼쪽 버튼을 누르면 해당하는 php Action을 실행해 serviceSection에 띄운다.
 var urlID = getParameterByName('db');
+// 현재 로딩 중인지 나타내는 bool형 변수
 var isloading = false;
 
 // 코드 양, 중복을 없애기 위해 사용
 function ajaxRequest(type, url, dataArr, success, error){
-  $.ajax({
-    type: type,
-    url : url,
-    data: dataArr,
-    success : success,
-    error: error
-  });
+  $.ajax({ type: type, url : url, data: dataArr, success : success, error: error });
 }
 
 // 디폴트로 Analysis-recentComments가 클릭되게 한다.
@@ -32,7 +27,7 @@ function containerLoad(){
 
 function selectButtons(clickedButton){
 
-  var selectedButton = $('#AnalysisButtons').children('.active');
+  let selectedButton = $('#AnalysisButtons').children('.active');
 
   // 이미 로딩 상태라면, 버튼 클릭에 반응하지 않는다.
   if(isloading){
@@ -58,6 +53,7 @@ function selectButtons(clickedButton){
       selectedService = "recentComments.php";
       break;
 
+    // 미구현 서비스
     case "Analysis-visitorsNumber":
       break;
 

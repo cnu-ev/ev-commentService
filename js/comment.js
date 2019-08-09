@@ -33,6 +33,11 @@ window.onload = function(){
   containerLoad();
 }
 
+// 코드 양, 중복을 없애기 위해 사용
+function ajaxRequest(type, url, dataArr, success, error){
+  $.ajax({ type: type, url : url, data: dataArr, success : success, error: error });
+}
+
 function containerLoad(){
   $('#EV-Container').show();
   onHeightChange();
@@ -63,17 +68,6 @@ function editButtonClicked(clickedButton){
       }
       break;
   }
-}
-
-// 코드 양, 중복을 없애기 위해 사용
-function ajaxRequest(type, url, dataArr, success, error){
-  $.ajax({
-    type: type,
-    url : url,
-    data: dataArr,
-    success : success,
-    error: error
-  });
 }
 
 // 클릭되거나, 텍스트가 입력되면 placeholder를 숨김
@@ -113,19 +107,44 @@ function postComment(){
     postTitle: postTitle
   };
 
-  switch (evMode) {
+  switch (params.evMode) {
 
     case "full":
-      // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      ajaxRequest("POST", EmotionalAnalysisServiceURL, { commentContent : commentContent },
-        // Success
-        (score)=>{
-            arg.emotionalAnalysisValue = score;
-            ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); }, ()=>{});
-        },
-        // Error
-        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다");});
+    // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
+    $.ajax({
+      type: "POST",
+      url : EmotionalAnalysisServiceURL,
+      data: {
+        commentContent : commentContent,
+      },
 
+      // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
+      success : function(data, status, xhr) {
+        console.log(data);
+        $.ajax({
+          type: "POST",
+          url : "../php-Action/AddComment.php",
+          data: {
+            commentContent : commentContent,
+            urlID : urlID,
+            pageID : pageID,
+            profileImageFileName : profileImageFileName,
+            emotionalAnalysisValue : data,
+            postTitle: postTitle
+          },
+
+          success : function(data, status, xhr) {
+            location.reload();
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+          }
+        });
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
+      }
+    });
       break;
 
     case "binary":
@@ -153,22 +172,24 @@ function postComment(){
   }
 }
 
+// id는 현재 쓰이지 않음
 function reportButtonClicked(id, content, isPositive){
-  // id 중 숫자만 추출
-  reportComment.reportCommentID = id.replace(/[^0-9]/g,"");
+
   reportComment.reportCommentContent = content;
+  reportComment.isPositive = (isPositive > 0) ? "1" : "0";
 
   let reverse = (isPositive > 0) ? "부정" : "긍정";
+
   $('#ReportCommentContent').html('"' + content + '"' + " 다음 댓글을 " + reverse + "으로 평가하시겠습니까?");
 }
 
 function reportComment(){
 
-  let { reportCommentID, reportCommentContent } = reportComment;
+  let { reportCommentContent, isPositive } = reportComment;
 
   let arg = {
-    CommentID : reportCommentID,
-    CommentContent : reportCommentContent
+    CommentContent : reportCommentContent,
+    IsPositive : isPositive
   };
 
   ajaxRequest("POST", EmotionalAnalysisServiceReportURL, arg);
