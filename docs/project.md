@@ -9,8 +9,9 @@
   2019 BottomUp
 </p>
 
-<img src="eevee.jpg" width="120px" height="120px">
-
+<p align="center">
+    <img src="eevee.jpg" width="120px" height="120px">
+</p>
 
 
 CNU-EV는 감정 분석 기능을 제공하는 댓글 컴포넌트 서비스를 제공하기 위해 구성된 3개의 프로젝트입니다.
