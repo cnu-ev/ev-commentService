@@ -1,21 +1,19 @@
 <h2>Outline</h2>
-ev-commentService는 Jekyll 기반의 블로그에 댓글 서비스를 쉽게 추가할 수 있도록 하기 위해 만든 댓글 컴포넌트와 해당 사이트에 달린 댓글들에 대한 분석 기능을 제공하고 있다.  
+ev-commentService는 Jekyll 기반의 블로그에 댓글 서비스를 쉽게 추가할 수 있도록 하기 위해 만든 댓글 컴포넌트와 해당 사이트에 달린 댓글들에 대한 분석 기능을 제공한다.
 
 사이트에서 제공하는 분석 기능은 '최근 생성된 댓글', '좋은 평가를 받은 게시물', '인기 포스팅 분석', '댓글이 많은 게시물' 이다.
 
 
 
-<h2>Details</h2>
-백엔드는 모두 php를 사용해 작성했고, DB는 mySQL을 사용했다.
-
-evcommentservice.ga 홈페이지엔 모바일 환경에서도 용이하게 사용할 수 있도록 Bootstrap을 적용했다.
+<h2>Asset</h2>
 
 프로젝트에 사용된 svg 아이콘은 모두 아래 페이지에서 다운로드해 사용한 것이다.
 
 https://feathericons.com
 
 
-<h2>Environment Details</h2>
+
+<h2>Development Environment</h2>
 
 >xampp for windows 7.1.30, xampp control panel 3.2.4
 >
@@ -31,9 +29,15 @@ https://feathericons.com
 >
 >Ruby Sass 3.7.4 
 
+백엔드는 모두 php를 사용해 작성했고, DB는 mySQL을 사용했다.
+
+evcommentservice.ga 홈페이지엔 모바일 환경에서도 용이하게 사용할 수 있도록 Bootstrap을 적용했다.
+
 그 외 도메인 임대는 freenom (https://www.freenom.com/en/index.html?lang=en),  
 
 https 프로토콜 등록은 cloudFlare (https://jsdev.kr/t/https-cloudflare-flexible-ssl/1973) 를 이용했다.
+
+
 
 <h2>How to Use</h2>
 EV-Script.html은 Github Page 등 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
@@ -71,3 +75,33 @@ binary : 댓글 내용의 부정, 긍정 여부에 따라 색상을 두 단계�
 
 none : 댓글 감정 분석 서비스를 이용하지 않는다.
 ```
+
+
+
+
+
+## Screen Shots
+
+* 로그인 화면
+<img src="screenshot/login.png">
+<br>
+
+* 회원가입 화면
+<img src="screenshot/signup.png">
+<br>
+
+* 정보 수정
+<img src="screenshot/useredit.png">
+<br>
+
+* 차트를 통한 분석 서비스
+<img src="screenshot/chart.png">
+<br>
+
+* 서비스 추가
+<img src="screenshot/addService.png">
+<br>
+
+* 서비스 홈페이지
+<img src="screenshot/mainservice.png">
+
