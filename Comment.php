@@ -180,7 +180,7 @@
       '
         <li id="ev-comment-%s" class="row comment %s">
           %s
-          <div class="comment">
+          <div class="comment col-10">
             <span class="comment-userID">%s</span>
             <span style="color: #777777; font-size: 12px;">&nbsp;&nbsp;&nbsp;%s</span>
             <br>

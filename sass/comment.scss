@@ -32,6 +32,8 @@
 }
 
 .comment-content{
+	word-break: keep-all;
+	word-wrap: break-word;
   display: block;
   margin: {
     top: 0px;
