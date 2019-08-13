@@ -17,13 +17,13 @@ require_once('MySQLConection.php');
 $connect_object = MySQLConnection::DB_Connect('userdb');
 
 // Post 방식으로 유저 데이터를 가져옴
-$PW = $_POST["PW"];
-$PW_Confirm = $_POST["PW_Confirm"];
-$Address = $_POST["Address"];
-$PhoneNumber = $_POST["PhoneNumber"];
-$Gender = $_POST["Gender"];
-$Name = $_POST["FirstName"] . ' '. $_POST["LastName"];
-$Email = $_POST["Email"];
+$PW           = $_POST["PW"];
+$PW_Confirm   = $_POST["PW_Confirm"];
+$Address      = $_POST["Address"];
+$PhoneNumber  = $_POST["PhoneNumber"];
+$Gender       = $_POST["Gender"];
+$Name         = $_POST["FirstName"] . ' '. $_POST["LastName"];
+$Email        = $_POST["Email"];
 
 $reg_Email = preg_match('/^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*.[a-zA-Z]{2,3}$/i', $Email, $r2);
 

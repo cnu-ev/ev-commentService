@@ -5,17 +5,17 @@ require_once('MySQLConection.php');
 $connect_object = MySQLConnection::DB_Connect('userdb');
 
 // Post 방식으로 유저 데이터를 가져옴
-$ID = $_POST["ID"];
-$PW = $_POST["PW"];
-$PW_Confirm = $_POST["PW_Confirm"];
-$Address = $_POST["Address"];
-$PhoneNumber = $_POST["PhoneNumber"];
-$Gender = $_POST["Gender"];
-$Name = $_POST["FirstName"] . ' '. $_POST["LastName"];
-$Email = $_POST["Email"];
+$ID           = $_POST["ID"];
+$PW           = $_POST["PW"];
+$PW_Confirm   = $_POST["PW_Confirm"];
+$Address      = $_POST["Address"];
+$PhoneNumber  = $_POST["PhoneNumber"];
+$Gender       = $_POST["Gender"];
+$Name         = $_POST["FirstName"] . ' '. $_POST["LastName"];
+$Email        = $_POST["Email"];
 
-$reg_ID = preg_match('/^[a-zA-z]{1}[\w]{3,19}$/', $ID, $r1);
-$reg_Email = preg_match('/^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*.[a-zA-Z]{2,3}$/i', $Email, $r2);
+$reg_ID       = preg_match('/^[a-zA-z]{1}[\w]{3,19}$/', $ID, $r1);
+$reg_Email    = preg_match('/^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*.[a-zA-Z]{2,3}$/i', $Email, $r2);
 
 // 매칭되지 않는 값이 들어올 경우 UserEdit을 실행하지 않는다
 if(!empty($Email)){
@@ -60,7 +60,7 @@ if($_FILES['ProfileImage']['size'] != 0){
 
   // 임시 디렉터리의 tmp 파일을 위 위치로 옮김
   if(move_uploaded_file($_FILES['ProfileImage']['tmp_name'], $ProfileImageFilePath)){
-    echo "프로필 이미지 파일 전송 성공";
+    // 프로필 이미지 파일 전송 성공
   }
   else{
     print "프로필 이미지 파일 전송 실패!\n";

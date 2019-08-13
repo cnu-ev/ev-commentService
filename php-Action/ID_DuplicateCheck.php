@@ -1,7 +1,7 @@
 <?php
 require_once('MySQLConection.php');
 
-$UserNewID = $_GET["userID"];
+$UserNewID      = $_GET["userID"];
 
 // DB 연결
 $connect_object = MySQLConnection::DB_Connect('userdb');

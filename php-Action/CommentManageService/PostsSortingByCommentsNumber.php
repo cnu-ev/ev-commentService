@@ -101,8 +101,8 @@ $borderColors = "
   rgba(219, 219, 219, 1)|
 ";
 
-$backgroundColorsArr = explode('|', preg_replace("/\s+/","", $backgroundColors));
-$borderColorsArr = explode('|', preg_replace("/\s+/","", $borderColors));
+$backgroundColorsArr  = explode('|', preg_replace("/\s+/","", $backgroundColors));
+$borderColorsArr      = explode('|', preg_replace("/\s+/","", $borderColors));
 
 // 우선순위큐가 빌 때 까지 꺼냄
 // 랭킹 10위 까지 나타내기 위해, 10개가 넘으면 break
@@ -112,23 +112,23 @@ if($pq->count() < 1){
   exit();
 }
 
-$index = 0;
+$index              = 0;
 
-$labels = '';
-$data = '';
+$labels             = '';
+$data               = '';
 $backgroundColorStr = '';
-$borderColorsStr = '';
+$borderColorsStr    = '';
 
 while($pq->valid()){
 
   // 최근의 댓글을 8개 까지 가져옴
   if($index >= 8) break;
 
-  $iterator = $pq->current();
-  $labels .= '\''. $iterator->PostTitle . '\',';
-  $backgroundColorStr .= '\''. $backgroundColorsArr[$index] . '\',';
-  $borderColorsStr .= '\''. $borderColorsArr[$index] . '\',';
-  $data .= $iterator->CommentNumber . ',';
+  $iterator             = $pq->current();
+  $labels              .= '\''. $iterator->PostTitle . '\',';
+  $backgroundColorStr  .= '\''. $backgroundColorsArr[$index] . '\',';
+  $borderColorsStr     .= '\''. $borderColorsArr[$index] . '\',';
+  $data                .= $iterator->CommentNumber . ',';
   $pq->next();
   $index++;
 }

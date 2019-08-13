@@ -1,5 +1,5 @@
 // 쟝고 감정 분석 서버 URL (full, binary 모드에서 사용)
-var EmotionalAnalysisServiceURL = "https://emotionanalysisservice.ga/changer/comment";
+var EmotionalAnalysisServiceURL       = "https://emotionanalysisservice.ga/changer/comment";
 var EmotionalAnalysisServiceReportURL = "https://emotionanalysisservice.ga/changer/report";
 
 // onload 이벤트 후 값을 갖는 객체
@@ -7,9 +7,9 @@ var EmotionalAnalysisServiceReportURL = "https://emotionanalysisservice.ga/chang
 var phpVars;
 
 var params = {
-  urlID: getParameterByName('db'),
-  pageID: getParameterByName('pageID'),
-  evMode: getParameterByName('mode')
+  urlID   : getParameterByName('db'),
+  pageID  : getParameterByName('pageID'),
+  evMode  : getParameterByName('mode')
 }
 
 // reportCommentID, reportCommentContent를 갖고 있는 객체
@@ -25,9 +25,9 @@ const log = (logContent) => { console.log("Log from evCommentService : " + logCo
 window.onload = function(){
 
   phpVars = {
-    connectedUserID : $('#EV-ConnectedUserID').html(),
-    profileImageFileName : $('#EV-ConnectedUserIDProfileImageFileName').html(),
-    postTitle : $('#EV-PostTitle').html()
+    connectedUserID       : $('#EV-ConnectedUserID').html(),
+    profileImageFileName  : $('#EV-ConnectedUserIDProfileImageFileName').html(),
+    postTitle             : $('#EV-PostTitle').html()
   };
 
   containerLoad();
@@ -57,7 +57,7 @@ function editButtonClicked(clickedButton){
       $('#CommentArea').html("&lti&gt" + selectedText + "&lt/i&gt");
       break;
     case "EV-Buttons-U":
-    $('#CommentArea').html("&ltu&gt" + selectedText + "&lt/u&gt");
+      $('#CommentArea').html("&ltu&gt" + selectedText + "&lt/u&gt");
       break;
     case "EV-Buttons-S":
       $('#CommentArea').html("&lts&gt" + selectedText + "&lt/s&gt");
@@ -100,51 +100,26 @@ function postComment(){
   const commentContent = $('#CommentArea').html();
 
   let arg = {
-    commentContent : commentContent,
-    urlID : params.urlID,
-    pageID : params.pageID,
-    profileImageFileName : profileImageFileName,
-    postTitle: postTitle
+      commentContent        : commentContent,
+      urlID                 : params.urlID,
+      pageID                : params.pageID,
+      profileImageFileName  : profileImageFileName,
+      postTitle             : postTitle
   };
 
   switch (params.evMode) {
 
     case "full":
     // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-    $.ajax({
-      type: "POST",
-      url : EmotionalAnalysisServiceURL,
-      data: {
-        commentContent : commentContent,
-      },
-
       // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
-      success : function(data, status, xhr) {
-        console.log(data);
-        $.ajax({
-          type: "POST",
-          url : "../php-Action/AddComment.php",
-          data: {
-            commentContent : commentContent,
-            urlID : urlID,
-            pageID : pageID,
-            profileImageFileName : profileImageFileName,
-            emotionalAnalysisValue : data,
-            postTitle: postTitle
-          },
-
-          success : function(data, status, xhr) {
-            location.reload();
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-          }
-        });
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log("Ajax 전송에 실패했습니다!" + jqXHR.responseText);
-      }
-    });
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, { commentContent : commentContent },
+        // Success
+        (score)=>{
+            arg.emotionalAnalysisValue = (parseInt(score));
+            ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); });
+        },
+        // Error
+        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다");});
       break;
 
     case "binary":
@@ -175,8 +150,9 @@ function postComment(){
 // id는 현재 쓰이지 않음
 function reportButtonClicked(id, content, isPositive){
 
-  reportComment.reportCommentContent = content;
-  reportComment.isPositive = (isPositive > 0) ? "1" : "0";
+  reportComment.reportCommentContent  = content;
+  // isPositive엔, 긍정인 경우 부정 값(0)을, 부정인 경우 긍정 값(1)을 넣어 놓는다.
+  reportComment.isPositive            = (isPositive > 0) ? "0" : "1";
 
   let reverse = (isPositive > 0) ? "부정" : "긍정";
 
@@ -188,8 +164,8 @@ function reportComment(){
   let { reportCommentContent, isPositive } = reportComment;
 
   let arg = {
-    CommentContent : reportCommentContent,
-    IsPositive : isPositive
+    CommentContent  : reportCommentContent,
+    IsPositive      : isPositive
   };
 
   ajaxRequest("POST", EmotionalAnalysisServiceReportURL, arg);
@@ -199,11 +175,11 @@ function reportComment(){
 function deleteComment(id){
 
   let arg = {
-    userID : phpVars.connectedUserID,
+    userID    : phpVars.connectedUserID,
     // id 중 숫자만 추출
     CommentID : id.replace(/[^0-9]/g,""),
-    urlID : params.urlID,
-    pageID : params.pageID
+    urlID     : params.urlID,
+    pageID    : params.pageID
   };
 
   ajaxRequest("POST", "../php-Action/DeleteComment.php", arg,
@@ -291,11 +267,11 @@ function editComment(id, submitButton){
 function sendCommentUpdateMessage(contentID){
 
   let arg = {
-    userID : phpVars.connectedUserID,
-    CommentID : contentID.replace(/[^0-9]/g,""),
-    urlID : params.urlID,
-    pageID : params.pageID,
-    updatedContent : $('#' + contentID).html()
+      userID          : phpVars.connectedUserID,
+      CommentID       : contentID.replace(/[^0-9]/g,""),
+      urlID           : params.urlID,
+      pageID          : params.pageID,
+      updatedContent  : $('#' + contentID).html()
   }
 
   switch (params.evMode) {

@@ -6,8 +6,8 @@ session_start();
 require_once('MySQLConection.php');
 
 // Post 방식으로 유저 데이터를 가져옴
-$ID = $_POST["ID"];
-$PW = $_POST["PW"];
+$ID             = $_POST["ID"];
+$PW             = $_POST["PW"];
 
 $connect_object = MySQLConnection::DB_Connect('userdb');
 

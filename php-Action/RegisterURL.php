@@ -17,9 +17,9 @@ require_once('MySQLConection.php');
 $connect_object = MySQLConnection::DB_Connect('userdb') or die("Error Occured in Connection to DB");
 
 // Post 방식으로 유저 데이터를 가져옴
-$URL_Title = $_POST["URL-Title"];
-$URL = $_POST["URL"];
-$URL_ID = Hashing("sha256", $URL);
+$URL_Title  = $_POST["URL-Title"];
+$URL        = $_POST["URL"];
+$URL_ID     = Hashing("sha256", $URL);
 
 // 중복 레코드가 있는지 검사. 존재한다면 이전 페이지로 돌아감
 $searchURLID = "

@@ -3,10 +3,10 @@ require_once('MySQLConection.php');
 
 // CommentID는 Auto Index로, 삭제하고 다시 insert해도 중복된 값이 들어가지
 // 않으므로 ID 값으로 쓸 수 있음.
-$UserID = $_POST['userID'];
-$CommentID = $_POST['CommentID'];
-$URLID = $_POST['urlID'];
-$PageID = $_POST['pageID'];
+$UserID         = $_POST['userID'];
+$CommentID      = $_POST['CommentID'];
+$URLID          = $_POST['urlID'];
+$PageID         = $_POST['pageID'];
 $UpdatedContent = $_POST['updatedContent'];
 
 if(empty($_POST['emotionalAnalysisValue'])){

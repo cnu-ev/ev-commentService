@@ -6,8 +6,8 @@ function SubmitButtonClicked(){
   // 4 ~ 20자의 영문 대소문자 + 숫자만 ID로 유효한 값이 될 수 있음
   // 아이디는 대소문자 영문자로 시작해야한다 (숫자로 시작불가)
   // 아이디는 한글, 특수문자를 포함할 수 없다.
-  let validReg_ID = /^[a-zA-z]{1}[\w]{3,19}$/;
-  var validReg_Email = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*.[a-zA-Z]{2,3}$/i;
+  let validReg_ID     = /^[a-zA-z]{1}[\w]{3,19}$/;
+  var validReg_Email  = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*.[a-zA-Z]{2,3}$/i;
 
   // 비밀번호와 비밀번호 확인이 같은 값인지 검사
   if($('#PW').val() != $('#PW_Confirm').val()){

@@ -1,3 +1,8 @@
+<!-- 헤어진 그날로 끝인 건가요 -->
+
+
+
+
 <?php
 // 각 테이블 내 레코드들의 긍정, 부정 정도를 평균을 내서 상위 랭킹 10개 정도를 뽑아, 막대 그래프로 나타내자.
 session_start();
@@ -101,16 +106,16 @@ $borderColors = "
   rgba(219, 219, 219, 1)|
 ";
 
-$backgroundColorsArr = explode('|', preg_replace("/\s+/","", $backgroundColors));
-$borderColorsArr = explode('|', preg_replace("/\s+/","", $borderColors));
+$backgroundColorsArr  = explode('|', preg_replace("/\s+/","", $backgroundColors));
+$borderColorsArr      = explode('|', preg_replace("/\s+/","", $borderColors));
 
 // 우선순위큐가 빌 때 까지 꺼냄
 $index = 0;
 
-$labels = '';
-$data = '';
+$labels             = '';
+$data               = '';
 $backgroundColorStr = '';
-$borderColorsStr = '';
+$borderColorsStr    = '';
 
 if($pq->count() < 1){
   echo Comment::WarnNoComments();

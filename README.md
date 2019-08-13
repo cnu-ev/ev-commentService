@@ -27,7 +27,7 @@ https://feathericons.com
 >
 >JQuery 3.2.1
 >
->Ruby Sass 3.7.4 
+>Ruby Sass 3.7.4
 
 백엔드는 모두 php를 사용해 작성했고, DB는 mySQL을 사용했다.
 
@@ -40,7 +40,7 @@ https 프로토콜 등록은 cloudFlare (https://jsdev.kr/t/https-cloudflare-fle
 
 
 <h2>How to Use</h2>
-EV-Script.html은 Github Page 등 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
+Jekyll-Script.html은 Github Page 등 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
 
 지킬 기반의 블로그에서 URL을 서비스에 등록하고 사용하는 절차는 아래와 같다.
 
@@ -104,4 +104,3 @@ none : 댓글 감정 분석 서비스를 이용하지 않는다.
 
 * 서비스 홈페이지
 <img src="screenshot/mainservice.png">
-

@@ -12,8 +12,8 @@
   $connect_object = MySQLConnection::DB_Connect('userdb');
 
   // Post 방식으로 유저 데이터를 가져옴
-  $ID = $_POST["ID"];
-  $PW = $_POST["PW"];
+  $ID             = $_POST["ID"];
+  $PW             = $_POST["PW"];
 
   // DB에서 PK (ID) 를 찾음
   $searchUserID = "
@@ -35,7 +35,7 @@
     echo ("<script>location.href='../SignIn.php';</script>");
     exit();
   }
-  
+
   $_SESSION['user_id'] = $ID;
   $_SESSION['profileImageFileName'] = $row['ProfileImageFileName'];
 

@@ -6,20 +6,20 @@
   require_once('php-Action\MySQLConection.php');
 
   // 해당 홈페이지를 나타내는 파라미터
-  $URL_ID = $_GET['db'];
+  $URL_ID                       = $_GET['db'];
   // 해당 홈페이지의 서브 도메인을 가리키는 파라미터
-  $PageID = $_GET['pageID'];
+  $PageID                       = $_GET['pageID'];
   // 해당 블로그 홈페이지의 Pagination이 몇 페이지를 가리키는지 나타내는 파라미터 (디폴트 값은 항상 1)
-  $PaginationID = $_GET['paginationID'];
+  $PaginationID                 = $_GET['paginationID'];
   // 어떻게 감정분석 결과를 나타낼 것인지 나타내는 mode
-  $EmotionalAnalysisMode = $_GET['mode'];
+  $EmotionalAnalysisMode        = $_GET['mode'];
   // 몇 개의 댓글을 기준으로 Pagination 할 것인지를 나타내는 int 값. 나중에 get 방식으로 받아오게 따로 빼서 확장해도 괜찮을 거 같다.
-  $PaginationDivision = 10;
+  $PaginationDivision           = 10;
 
   $connectedUserProfileFileName = '';
 
   if(isset($_SESSION['user_id'])){
-    $connectedUserID = $_SESSION['user_id'];
+    $connectedUserID              = $_SESSION['user_id'];
     $connectedUserProfileFileName = $_SESSION['profileImageFileName'];
   }
 
@@ -29,9 +29,9 @@
   date_default_timezone_set('Asia/Seoul');
 
   // 데이터가 전송된 시간 (방문 시간)
-  $visitDateTime = date("Y-m-d H:i:s");
+  $visitDateTime  = date("Y-m-d H:i:s");
   // 방문한 클라이언트의 IP 주소
-  $visitorIP = $_SERVER['REMOTE_ADDR'];
+  $visitorIP      = $_SERVER['REMOTE_ADDR'];
 
   // 어떤 홈페이지에서 방문한 것인지 정보가 있다면 가져온다.
   if(isset($_SERVER['HTTP_REFERER'])) $prevPage = $_SERVER['HTTP_REFERER'];
@@ -102,10 +102,10 @@
         $ProfileImageFileName = 'img/userDefaultProfile.svg';
       }
       else{
-        $ProfileImageFileName =  'profileImages/' . $ProfileImageFileName;
+        $ProfileImageFileName = 'profileImages/' . $ProfileImageFileName;
       }
 
-      $profileImageElement = sprintf(
+      $profileImageElement    = sprintf(
         '<img class="comment-avatar rounded-circle" class="img-fluid rounded-circle" src="%s" alt="Image For User Profile">',
         $ProfileImageFileName
       );
@@ -471,7 +471,7 @@
               <div class="modal-body">
                 <h4 id="ReportCommentContent" class="text-center" style="font-size: 15px; margin-bottom: 20px;"></h4>
                 <div class="text-center" style="width: 70%; margin: 0 auto">
-                  <a class="btn btn-sm btn-danger btn-yes btn-block" style="color:#ffffff;" data-dismiss="modal" onclick="ReportComment()">네</a>
+                  <a class="btn btn-sm btn-danger btn-yes btn-block" style="color:#ffffff;" data-dismiss="modal" onclick="reportComment()">네</a>
                   <!-- data dismiss란 attribute를 줌으로써, 모달 박스를 닫는 이벤트를 구현할 수 있음 -->
                   <a class="btn btn-sm btn-success btn-no btn-block" style="color:#ffffff;" data-dismiss="modal">아니오</a>
                 </div>

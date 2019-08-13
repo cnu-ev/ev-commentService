@@ -7,12 +7,12 @@ require_once('MySQLConection.php');
 
 $connect_object = MySQLConnection::DB_Connect('userdb') or die("Error Occured in Connection to DB");
 
-$UserName = $_GET["UserName"];
-$PageIdentifier = $_GET["PageIdentifier"];
-$SiteURL = $_GET["SiteURL"];
-$URL_ID = Hashing("sha256", $SiteURL);
-$EmotionalAnalysisMode = $_GET["EmotionalAnalysisMode"];
-$PageTitle = $_GET["PageTitle"];
+$UserName               = $_GET["UserName"];
+$PageIdentifier         = $_GET["PageIdentifier"];
+$SiteURL                = $_GET["SiteURL"];
+$URL_ID                 = Hashing("sha256", $SiteURL);
+$EmotionalAnalysisMode  = $_GET["EmotionalAnalysisMode"];
+$PageTitle              = $_GET["PageTitle"];
 
 // DB에서 등록된 Site 인지 찾음
 $searchSite = "
