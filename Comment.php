@@ -141,47 +141,57 @@
       // 댓글의 긍정도에 따라, class를 달리 붙임.
       $positiveClass = "";
 
-      if($Positiveness < 0){
-        switch((int)((-1) * $Positiveness / 10)){
-          case 0:
-            $positiveClass = "comment-negative01";
-            break;
-          case 1:
-            $positiveClass = "comment-negative02";
-            break;
-          case 2:
-            $positiveClass = "comment-negative03";
-            break;
-          case 3:
-            $positiveClass = "comment-negative04";
-            break;
-          case 4:
-            $positiveClass = "comment-negative05";
-            break;
-        }
+      if($EmotionalAnalysisMode == "full"){
+          if($Positiveness < 0){
+            switch((int)((-1) * $Positiveness / 10)){
+              case 0:
+                $positiveClass = "comment-negative01";
+                break;
+              case 1:
+                $positiveClass = "comment-negative02";
+                break;
+              case 2:
+                $positiveClass = "comment-negative03";
+                break;
+              case 3:
+                $positiveClass = "comment-negative04";
+                break;
+              case 4:
+                $positiveClass = "comment-negative05";
+                break;
+            }
+          }
+          else if($Positiveness > 0){
+            switch((int) ($Positiveness / 10)){
+              case 0:
+                $positiveClass = "comment-positive01";
+                break;
+              case 1:
+                $positiveClass = "comment-positive02";
+                break;
+              case 2:
+                $positiveClass = "comment-positive03";
+                break;
+              case 3:
+                $positiveClass = "comment-positive04";
+                break;
+              case 4:
+                $positiveClass = "comment-positive05";
+                break;
+            }
+          }
+          // 0인 경우
+          else {
+            $positiveClass = "comment-neutral";
+          }
       }
-      else if($Positiveness > 0){
-        switch((int) ($Positiveness / 10)){
-          case 0:
-            $positiveClass = "comment-positive01";
-            break;
-          case 1:
-            $positiveClass = "comment-positive02";
-            break;
-          case 2:
-            $positiveClass = "comment-positive03";
-            break;
-          case 3:
-            $positiveClass = "comment-positive04";
-            break;
-          case 4:
-            $positiveClass = "comment-positive05";
-            break;
-        }
-      }
-      // 긍정도 값이 셋팅되지 않은 경우
-      else {
-        $positiveClass = "comment-neutral";
+      else if($EmotionalAnalysisMode == "binary"){
+          if($Positiveness > 20){
+              $positiveClass = "comment-positive03";
+          }
+          else{
+              $positiveClass = "comment-negative03";
+          }
       }
 
       return sprintf(

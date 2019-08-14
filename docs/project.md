@@ -52,11 +52,28 @@ User ID는 위에서 가입한 홈페이지의 ID를 등록한다.
 
 ev_username: {User ID}
 
-3 - EV-Script.html 파일을 post layout 또는 원하는 페이지에 추가한다.
+3 - Jekll-Script.html 파일을 post layout 또는 원하는 페이지에 추가한다.
 ({% include EV-Script.html %}를 추가하거나 직접 스크립트 내용을 붙여넣는다.)
 
 4 - 댓글 창을 넣을 공간에 div 태그를 만들고 id를 EV-Start로 설정한다.
 ```
+
+ev-mode에 대한 설명은 아래와 같음.
+
+```
+_config.yml 내 ev_mode에 아래와 같은 값을 설정한다.
+
+ev_username: {full, binary, none}
+
+full : 댓글 내용의 부정 ~ 긍정 정도에 따라 색상을 10 단계로 나눠 적용한다.
+
+binary : 댓글 내용에 따라 긍정, 부정, 중립 세 단계로만 나눠 스타일을 적용한다.
+
+none : 감정 분석 결과 값을 나타내지 않는다. (감정분석 값은 서버에 저장해 놓는다.)
+
+debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버에 저장하지 않음)
+```
+
 
 
 
