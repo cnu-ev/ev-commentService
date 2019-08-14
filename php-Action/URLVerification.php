@@ -54,11 +54,27 @@ if(empty($UserName) || empty($PageIdentifier) || empty($SiteURL) || empty($PageT
 // PageID의 테이블이 존재하는지 확인
 // 존재한다면 해당 테이블의 댓글 데이터를 반환
 if(MySQLConnection::isExist($URL_ID, $PageIdentifier)){
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // 페이지 제목이 변경되면 아래 DB에서도 변경되게 구조를 변경할 것
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  // 페이지 제목이 변경되면 (DB의 title과 다르면) DB에서도 변경
+  $connect_url = MySQLConnection::DB_Connect($URL_ID) or die("Error Occured in Connection to DB");
+
+  $confirmTitle = "
+    SELECT * FROM pagetitlepairs WHERE PageID = '$PageIdentifier'
+  ";
+
+  $ret = mysqli_query($connect_url, $confirmTitle);
+
+  $row = mysqli_fetch_array($ret);
+
+  if($row['Title'] != $PageTitle){
+    $updateTitle = "
+      UPDATE pagetitlepairs SET
+        Title = '$PageTitle'
+        WHERE PageID = '$PageIdentifier'
+    ";
+
+    mysqli_query($connect_url, $updateTitle);
+  }
 
   echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode&paginationID=1'></iframe>";
 }
