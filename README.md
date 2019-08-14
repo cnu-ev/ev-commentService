@@ -96,13 +96,26 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 <img src="screenshot/useredit.png">
 <br>
 
-* 차트를 통한 분석 서비스
-<img src="screenshot/chart.png">
-<br>
-
 * 서비스 추가
 <img src="screenshot/addService.png">
 <br>
 
 * 서비스 홈페이지
 <img src="screenshot/mainservice.png">
+<br>
+
+* 차트를 통한 분석 서비스 (좋은 평가를 받은 게시물)
+<img src="screenshot/service1.png">
+<br>
+
+* 차트를 통한 분석 서비스 (인기 포스팅 분석)
+<img src="screenshot/service2.png">
+<br>
+
+* 차트를 통한 분석 서비스 (댓글이 많이 달린 게시물)
+<img src="screenshot/service3.png">
+<br>
+
+* 차트를 통한 분석 서비스 (최근 생성된 댓글)
+<img src="screenshot/service4.png">
+<br>
