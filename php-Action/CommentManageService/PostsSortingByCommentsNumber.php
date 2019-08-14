@@ -74,7 +74,7 @@ while($tableName = mysqli_fetch_array($allTableName)){
     SELECT CommentIndex FROM `$tableName[0]`
   ";
 
-  $countRowsRet = mysqli_query($connect_object, $countRows);
+  $countRowsRet   = mysqli_query($connect_object, $countRows);
   $selectTitleRet = mysqli_query($connect_object, $selectTitle);
 
   $rowNumber = mysqli_num_rows($countRowsRet);

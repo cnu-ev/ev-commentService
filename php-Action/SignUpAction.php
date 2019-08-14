@@ -102,7 +102,7 @@ $insertData = "
     '$Email'
 )";
 
-$ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
+mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
 
 echo ("<script language=javascript>alert('회원가입이 완료되었습니다!')</script>");
 echo ("<script>location.href='../SignIn.php';</script>");

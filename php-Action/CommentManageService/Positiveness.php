@@ -129,11 +129,11 @@ while($pq->valid()){
 
   if($index >= 8) break;
 
-  $iterator = $pq->current();
-  $labels .= '\''. $iterator->PostTitle . '\',';
-  $backgroundColorStr .= '\''. $backgroundColorsArr[$index] . '\',';
-  $borderColorsStr .= '\''. $borderColorsArr[$index] . '\',';
-  $data .= $iterator->Positiveness . ',';
+  $iterator             = $pq->current();
+  $labels              .= '\''. $iterator->PostTitle . '\',';
+  $backgroundColorStr  .= '\''. $backgroundColorsArr[$index] . '\',';
+  $borderColorsStr     .= '\''. $borderColorsArr[$index] . '\',';
+  $data                .= $iterator->Positiveness . ',';
   $pq->next();
   $index++;
 }

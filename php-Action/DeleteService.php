@@ -32,10 +32,10 @@ $deleteService = "
   DELETE FROM usersurltbl WHERE URLID ='$URL_ID' AND UserID ='$UserID'
 ";
 
-$ret = mysqli_query($connect_object, $deleteService) or die("Error Occured in Deleting data in DB");
+mysqli_query($connect_object, $deleteService) or die("Error Occured in Deleting data in DB");
 
 $deleteDB = "
   DROP DATABASE $URL_ID
 ";
 
-$ret = mysqli_query($connect_object, $deleteDB) or die("Error Occured in Deleting DB");
+mysqli_query($connect_object, $deleteDB) or die("Error Occured in Deleting DB");

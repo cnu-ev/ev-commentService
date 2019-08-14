@@ -40,4 +40,4 @@ $deleteComment = "
   DELETE FROM `" . $PageID . "` WHERE CommentIndex = '$CommentID'
 ";
 
-$ret = mysqli_query($connect_object, $deleteComment) or die("Error Occured in deleteing Data");
+mysqli_query($connect_object, $deleteComment) or die("Error Occured in deleteing Data");

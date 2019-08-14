@@ -116,7 +116,7 @@ function postComment(){
   switch (params.evMode) {
 
     case "full":
-    // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
+      // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
       // data는 감정분석 결과 값 (긍정 ~ 부정 정도에 따라, -50 ~ 50으로 가정함)
       ajaxRequest("POST", EmotionalAnalysisServiceURL, { commentContent : commentContent },
         // Success
@@ -125,7 +125,9 @@ function postComment(){
             ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); });
         },
         // Error
-        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다");});
+        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다"); }
+      );
+
       break;
 
     case "binary":
@@ -137,10 +139,12 @@ function postComment(){
             ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); });
         },
         // Error
-        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다");});
+        ()=>{ log ("EmotionalAnalysisServiceURL 접속에 실패했습니다"); }
+      );
       break;
 
     case "none":
+    case "debug":
 
       ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); });
       break;

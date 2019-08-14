@@ -92,7 +92,7 @@ else{
   ";
 }
 
-$ret = mysqli_query($connect_object, $updateUserRecord) or die("Error Occured in Updating Data in DB");
+mysqli_query($connect_object, $updateUserRecord) or die("Error Occured in Updating Data in DB");
 
 echo ("<script language=javascript>alert('정보 수정이 완료되었습니다!')</script>");
 echo ("<script>location.href='../URL-Register.php';</script>");

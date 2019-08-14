@@ -105,8 +105,8 @@ else {
       '$PageTitle'
   )";
 
-  $ret = mysqli_query($connect_url, $createNewTable);
-  $ret = mysqli_query($connect_url, $insertComment);
+  mysqli_query($connect_url, $createNewTable);
+  mysqli_query($connect_url, $insertComment);
 
   echo "<iframe id='EV-Iframe' style='width:100%; min-height: 400px; border:none;' scrolling='no' src='https://evcommentservice.ga/Comment.php?db=$URL_ID&pageID=$PageIdentifier&mode=$EmotionalAnalysisMode&paginationID=1'></iframe>";
 }

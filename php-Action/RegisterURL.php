@@ -66,29 +66,29 @@ $createNewService = "
 // 즉, 어떤 게시글의 제목 정보를 담고 있는 테이블이다.
 $createPageTitlePairTable = "
   CREATE TABLE pagetitlepairs(
-    `PageID` MEDIUMTEXT NOT NULL,
-    `Title` MEDIUMTEXT NOT NULL
+    `PageID`  MEDIUMTEXT  NOT NULL,
+    `Title`   MEDIUMTEXT  NOT NULL
   )
 ";
 
 // 세션을 통해 특정 게시글의 방문 수를 관리하는 테이블
 $createVisitorTable = "
   CREATE TABLE visitorcounter (
-    `I` INT(11) NOT NULL AUTO_INCREMENT,
-    `PageID` MEDIUMTEXT NOT NULL,
-    `REGDATE` DATETIME NOT NULL,
-    `REGIP` VARCHAR(30) NULL,
-    `REFERER` TEXT NULL,
-    PRIMARY KEY(`I`)
+    `I`       INT(11)     NOT NULL AUTO_INCREMENT,
+    `PageID`  MEDIUMTEXT  NOT NULL,
+    `REGDATE` DATETIME    NOT NULL,
+    `REGIP`   VARCHAR(30) NULL,
+    `REFERER` TEXT        NULL,
+    PRIMARY   KEY(`I`)
 )";
 
-$ret = mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
-$ret = mysqli_query($connect_object, $createNewService) or die("Error Occured in Creating DB");
+mysqli_query($connect_object, $insertData) or die("Error Occured in Inserting Data to DB");
+mysqli_query($connect_object, $createNewService) or die("Error Occured in Creating DB");
 
 $connect_url = MySQLConnection::DB_Connect($URL_ID) or die("Error Occured in Connection to DB");
 
-$ret = mysqli_query($connect_url, $createPageTitlePairTable) or die("Error Occured in Creating Table");
-$ret = mysqli_query($connect_url, $createVisitorTable) or die("Error Occured in Creating Table");
+mysqli_query($connect_url, $createPageTitlePairTable) or die("Error Occured in Creating Table");
+mysqli_query($connect_url, $createVisitorTable) or die("Error Occured in Creating Table");
 
 function Hashing($Algorithm, $URL){
   return hash($Algorithm, $URL);
