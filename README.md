@@ -1,35 +1,100 @@
-<h2>Outline</h2>
-ev-commentService는 Jekyll 기반의 블로그에 댓글 서비스를 쉽게 추가할 수 있도록 하기 위해 만든 댓글 컴포넌트와 해당 사이트에 달린 댓글들에 대한 분석 기능을 제공한다.
+<h1 align="center">
+    <a href="https://ev-commentService.ga">
+    Emotion Visualization Comment Service
+  </a>
+</h1>
 
-사이트에서 제공하는 분석 기능은 '최근 생성된 댓글', '좋은 평가를 받은 게시물', '인기 포스팅 분석', '댓글이 많은 게시물' 이다.
+<p align="center">
+  <strong>ⓒ Team EV</strong><br>
+  2019 BottomUp
+</p>
+
+<p align="center">
+    <img src="img/eevee.jpg" width="120px" height="120px">
+</p>
+
+## ⛷️ Outline
+
+CNU-EV는 감정 분석 기능을 제공하는 댓글 컴포넌트 서비스를 제공하기 위해 구성된 3개의 프로젝트입니다.
+
+- [**ev-commentService**][a] :  지킬형 블로그에 댓글을 달 수 있게 컴포넌트 스크립트를 제공합니다. 그 외 '최근 생성된 댓글', '좋은 평가를 받은 게시물', '인기 포스팅 분석', '댓글이 많은 게시물' 서비스를 제공합니다.
+
+- [**ev-backend**][b] : 분석사이트를 제작하는 Team-Ev의 backend repository 입니다. Django를 기반으로 제작되었으며, konlpy와 tensorflow 를 기반으로 하는 감정분석 판별기를 포함합니다.
+
+- [**ev-sentimentalAnalysis**][c] : 쟝고 서버 내 댓글 감정 분석 모듈입니다.
 
 
 
-<h2>Asset</h2>
+## 📋 Asset
+
 프로젝트에 사용된 svg 아이콘은 모두 아래 페이지에서 다운로드해 사용한 것이다.
 
 https://feathericons.com
 
 
 
-<h2>Development Environment</h2>
->xampp for windows 7.1.30, xampp control panel 3.2.4
->
->Apache 2.4.39
->
->MariaDB 10.3.16 (MySQL)
->
->phpMyAdmin 4.9.0.1
->
->Bootstrap 4.3.1, popper.js, mdb.js, chart.js
->
->JQuery 3.2.1
->
->Ruby Sass 3.7.4
+##  ✔️ Development Environment Details
 
-백엔드는 모두 php를 사용해 작성했고, DB는 mySQL을 사용했다.
+```
+##### Front, PHP Server #####
+xampp for windows 7.1.30, xampp control panel 3.2.4
+Apache 2.4.39
+MariaDB 10.3.16 (MySQL)
+phpMyAdmin 4.9.0.1
+Bootstrap 4.3.1, popper.js, mdb.js, chart.js
+JQuery 3.2.1
+Ruby Sass 3.7.4
 
-evcommentservice.ga 홈페이지엔 모바일 환경에서도 용이하게 사용할 수 있도록 Bootstrap을 적용했다.
+##### Emotion Analasis Djanjo Server #####
+absl-py==0.7.1
+astor==0.8.0
+boto==2.49.0
+boto3==1.9.194
+botocore==1.12.194
+certifi==2019.6.16
+chardet==3.0.4
+Django==2.0.13
+django-cors-headers==3.0.2
+docutils==0.14
+gast==0.2.2
+gensim==3.8.0
+google-pasta==0.1.7
+grpcio==1.22.0
+h5py==2.9.0
+idna==2.8
+jmespath==0.9.4
+joblib==0.13.2
+JPype1==0.7.0
+Keras-Applications==1.0.8
+Keras-Preprocessing==1.1.0
+konlpy==0.5.1
+Markdown==3.1.1
+mecab-python==0.996
+numpy==1.16.4
+pkg-resources==0.0.0
+protobuf==3.9.0
+pybind11==2.3.0
+python-dateutil==2.8.0
+pytz==2019.1
+requests==2.22.0
+s3transfer==0.2.1
+scikit-learn==0.21.2
+scipy==1.3.0
+six==1.12.0
+smart-open==1.8.4
+tensorboard==1.14.0
+tensorflow==1.14.0
+tensorflow-estimator==1.14.0
+termcolor==1.1.0
+urllib3==1.25.3
+uWSGI==2.0.18
+Werkzeug==0.15.5
+wrapt==1.11.2
+```
+
+백엔드는 php 서버 (evCommentService.ga) 와 쟝고 서버  (emotionanalysisservice.ga) 로 구성되어 있다.
+
+evcommentservice.ga 홈페이지 및 Comment.php엔 모바일 환경에서도 용이하게 사용할 수 있도록 Bootstrap을 적용했다.
 
 그 외 도메인 임대는 freenom (https://www.freenom.com/en/index.html?lang=en),  
 
@@ -37,8 +102,9 @@ https 프로토콜 등록은 cloudFlare (https://jsdev.kr/t/https-cloudflare-fle
 
 
 
-<h2>How to Use</h2>
-Jekyll-Script.html은 Github Page 등 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
+## 🏄 How to use
+
+`Jekyll-Script.html`은 Github Page 등 지킬 기반의 블로그에서 쉽게 댓글 서비스를 추가할 수 있도록 만든 컴포넌트 파일이다.  
 
 지킬 기반의 블로그에서 URL을 서비스에 등록하고 사용하는 절차는 아래와 같다.
 
@@ -78,8 +144,15 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 
 
 
-<h2>How to Work</h2>
+## 📖 How to evaluate comment
 
+
+
+## 📉 Performance evaluation
+
+<br>
+
+<h2>How to Work</h2>
 * **회원가입, 로그인, 로그아웃, 정보변경**
 
 evCommentService.ga에 회원가입할 땐 필수 입력 값으로 ID, PW, PW 확인을 입력해야 한다. 그 외 선택 입력 값으로 성별, 이름 (성, 이름), 이메일 주소, 주소, 핸드폰 번호를 입력할 수 있으며, 아이디, 이메일, 핸드폰 번호는 정규식을 통해 알맞은 값인지를 검사한다.
@@ -90,9 +163,24 @@ evCommentService.ga에 회원가입할 땐 필수 입력 값으로 ID, PW, PW �
 
 정보 변경 페이지에서 프로필 사진을 다시 업로드하면 기존의 프로필 사진 파일은 지워지고, 새로 업로드된 이미지를 사용하게 된다.
 
-업로드된 프로필 사진은 Comment.php에서 제출한 댓글에 표시된다.
+업로드된 프로필 사진은 `Comment.php`에서 제출한 댓글에 표시된다.
 
 로그인, 로그아웃은 세션을 사용해 구현했다.
+
+<br>
+
+* 로그인 화면
+<img src="screenshot/login.png">
+<br>
+
+* 회원가입 화면
+<img src="screenshot/signup.png">
+<br>
+
+* 정보 수정
+<img src="screenshot/useredit.png">
+<br>
+
 
 <hr>
 
@@ -106,28 +194,38 @@ pageTitlePairs와 visitorCounter를 생성해둔다.
 
 서비스를 제거하면 등록해놓은 DB를 제거함으로써, 그 안의 댓글 데이터를 담고 있는 테이블도 모두 제거된다.
 
+* 서비스 추가
+<img src="screenshot/addService.png">
+<br>
+
+* 서비스 홈페이지
+<img src="screenshot/mainservice.png">
+
+
 
 <hr>
 
 * **클라이언트 블로그에서 PHP 서버에 댓글 데이터를 불러오는 과정**
 
-프론트는 Jekyll 기반의 블로그라고 가정한다. 클라이언트 (블로거)는 Jekyll-Script.js를 다운로드 받거나 복사하여, 자신의 블로그 포스트 템플릿에 인클루드 시켜야 한다. 포스트 템플릿은 site.url, page.id, page.title 값을 갖고 있다고 가정한다. (Jekyll 기반의 블로그에 모두 명시되어 있는 값)
+프론트는 Jekyll 기반의 블로그라고 가정한다. 클라이언트 (블로거)는 `Jekyll-Script.html`를 다운로드 받거나 복사하여, 자신의 블로그 포스트 템플릿에 인클루드 시켜야 한다. 포스트 템플릿은 site.url, page.id, page.title 값을 갖고 있다고 가정한다. (Jekyll 기반의 블로그에 모두 명시되어 있는 값)
 
 클라이언트는 `_config.yml` 파일에 site.ev_username 속성을 명시해야 하며, ev_mode 속성을 명시해 서비스를 다른 방식으로 이용할 수도 있다.
 
-인클루드 된 Jekyll-Script.js 파일은 등록된 블로그의 포스팅 글이 로드될 때, PHP 서버에서 script.js 파일을 내려받아, 비동기로 실행한다.
+인클루드 된 `Jekyll-Script.js` 파일은 등록된 블로그의 포스팅 글이 로드될 때, PHP 서버에서 script.js 파일을 내려받아, 비동기로 실행한다.
 
 (script.js를 async로 실행하는 이유는, iframe의 로딩은 외부 페이지 (지킬 블로그)의 로딩에 거의 영향을 주지 않고 실행하기 위해서이다.)
 
-스크립트 파일을 Jekll-Script.js와 script.js 파일로 두 단계로 나눠놓은 것은, 클라이언트 측에서 사용되어야할 로직과 서버 단계에서 실행되어야 할 로직을 분리함으로써, 클라이언트 측에서의 복잡성을 낮추고 오작동을 줄이기 위해서이다. (클라이언트는 서버 측 로직인 script.js를 수정할 수 없다)
+스크립트 파일을 `Jekll-Script.js`와 `script.js` 파일로 두 단계로 나눠놓은 것은, 클라이언트 측에서 사용되어야할 로직과 서버 단계에서 실행되어야 할 로직을 분리함으로써, 클라이언트 측에서의 복잡성을 낮추고 오작동을 줄이기 위해서이다. (클라이언트는 서버 측 로직인 `script.js`를 수정할 수 없다)
 
-script.js 파일에선, 들어온 요청이 올바른 파라미터 값들을 갖추고 있는지 검사하고, 필수 파라미터 값이 결여되어 있다면 PHP 서버에 요청하지 않는다. 파라미터 값들이 갖춰져 있다면, PHP 서버의 URLVerification.php 파일을 ajax로 요청한다.
+script.js 파일에선, 들어온 요청이 올바른 파라미터 값들을 갖추고 있는지 검사하고, 필수 파라미터 값이 결여되어 있다면 PHP 서버에 요청하지 않는다. 파라미터 값들이 갖춰져 있다면, PHP 서버의 `URLVerification.php` 파일을 ajax로 요청한다.
 
-URLVerification.php는 DB를 탐색해 evCommentService.ga 사이트에 등록되어 있는 사이트의 요청인지를 확인한다.  이 때 DB에 등록되어 있지 않은 사이트인 경우엔, 아래와 같은 메시지를 출력하며 서비스에 등록할 것을 권유한다.
+`URLVerification.php`는 DB를 탐색해 evCommentService.ga 사이트에 등록되어 있는 사이트의 요청인지를 확인한다.  이 때 DB에 등록되어 있지 않은 사이트인 경우엔, 아래와 같은 메시지를 출력하며 서비스에 등록할 것을 권유한다.
 
+<p align="center">
 <img src="screenshot/recommend.png">
+</p>
 
-DB에 등록되어 있는 사이트의 요청인 경우, 정당한 요청으로 판정하고, URL에 해당하는 DB에서 해당 서브 URL에 해당하는 테이블이 있는지 검사한다. 이 시점에서 테이블이 없는 경우 새 테이블을 만든다. 그 후, 클라이언트 측에서 실행되고 있는 script.js로 코멘트 페이지의 iframe을 전송한다.
+DB에 등록되어 있는 사이트의 요청인 경우, 정당한 요청으로 판정하고, URL에 해당하는 DB에서 해당 서브 URL에 해당하는 테이블이 있는지 검사한다. 이 시점에서 테이블이 없는 경우 새 테이블을 만든다. 그 후, 클라이언트 측에서 실행되고 있는 `script.js`로 코멘트 페이지의 iframe을 전송한다.
 
 이 iframe은 Comment.php를 참조하며, Get 방식으로 URL_ID, pageID, mode, paginationID 라는 4개의 변수 값을 넘겨준다.
 
@@ -135,9 +233,48 @@ Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같�
 
 크게 보호되어야 할 값은 아니라고 판단했기 때문이다.
 
-4개의 값을 넘겨 받은 Comment.php는 넘겨 받은 값을 통해 DB에서 댓글 데이터를 불러와 PaginationDivision (10)개 만큼 댓글 창에 출력한다.
+4개의 값을 넘겨 받은 `Comment.php`는 넘겨 받은 값을 통해 DB에서 댓글 데이터를 불러와 PaginationDivision (10)개 만큼 댓글 창에 출력한다.
 
 넘겨받은 값 중 mode를 통해 블로거가 설정한 댓글 스타일이 결정되고, 댓글에 감정 분석 값들로 스타일을 입힌다.
+
+
+
+* full
+
+
+<p align="center">
+<img src="screenshot/style.png">
+</p>
+
+
+
+* binary
+
+<p align="center">
+<img src="screenshot/binary.png">
+</p>
+
+
+
+* none, debug
+
+<p align="center">
+<img src="screenshot/none.png">
+</p>
+
+
+
+테이블에 댓글이 없다면 등록된 댓글이 없다는 메시지를 출력한다.
+
+
+<p align="center">
+<img src="screenshot/nocomment.png">
+</p>
+
+
+
+
+
 
 <hr>
 
@@ -145,7 +282,9 @@ Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같�
 
 로그인 되어 있지 않은 상태에서 댓글 제출 버튼을 클릭하면 우선 아래처럼 evCommentService.ga에 가입을 권유하는 메시지를 띄워 나타낸다.
 
+<p align="center">
 <img src="screenshot/recommend2.png">
+</p>
 
 그 상태에서 제출 버튼을 한 번 더 클릭하면 익명으로 댓글을 제출할 수 있다. 로그인 된 상태에서 제출한 댓글은 위와 같은 과정을 거치지 않는다.
 
@@ -153,13 +292,13 @@ Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같�
 
 쟝고 서버에선, 감정 분석 모듈이 작동되고 있으며, 이 모듈에 댓글 내용을 input으로 넣으면 감정분석 결과값이 반환되어 클라이언트 페이지로 전송된다.
 
-클라이언트 페이지에선 이 값이 되돌아 오기를 기다리고 있다가, 값을 받으면 PHP 서버의 AddComment.php에 다시 ajax로 데이터를 전송한다.
+클라이언트 페이지에선 이 값이 되돌아 오기를 기다리고 있다가, 값을 받으면 PHP 서버의 `AddComment.php`에 다시 ajax로 데이터를 전송한다.
 
-AddComment.php는 PHP 서버에 감정 분석 결과 및 댓글 데이터를 저장하며, AddComment.php가 정상적으로 실행을 마치고, 클라이언트 홈페이지의
+`AddComment.php`는 PHP 서버에 감정 분석 결과 및 댓글 데이터를 저장하며, AddComment.php가 정상적으로 실행을 마치고, 클라이언트 홈페이지의
 
-comment.js에 성공했음을 알리면, 페이지를 리로드 한다. 이 땐, iframe 내부가 리로드 되는 것으로, 외부 페이지는 리로드 되지 않는다.
+`comment.js`에 성공했음을 알리면, 페이지를 리로드 한다. 이 땐, iframe 내부가 리로드 되는 것으로, 외부 페이지는 리로드 되지 않는다.
 
-comment.php가 리로드 되면, (새로 등록한 댓글이) 업데이트 된 DB에서 다시 PaginationDivision (10)개의 댓글이 최근 등록된 순으로 출력되게 된다.
+`comment.php`가 리로드 되면, (새로 등록한 댓글이) 업데이트 된 DB에서 다시 PaginationDivision (10)개의 댓글이 최근 등록된 순으로 출력되게 된다.
 
 <hr>
 
@@ -169,6 +308,14 @@ comment.php가 리로드 되면, (새로 등록한 댓글이) 업데이트 된 D
 
 감정분석 값을 다시 받아오게 되므로, 감정 분석 결과 값 역시 갱신되고, 댓글의 스타일도 업데이트 된다.
 
+
+<p align="center">
+<img src="screenshot/commentEdit.png">
+</p>
+
+
+
+
 <hr>
 
 * **감정분석 값 리포트**
@@ -176,6 +323,12 @@ comment.php가 리로드 되면, (새로 등록한 댓글이) 업데이트 된 D
 댓글에 사용된 감정분석 값이 적절하지 않다고 생각되는 경우, 어떤 유저라도 리포트 버튼을 눌러 쟝고 서버로 적절하지 않은 데이터라는
 
 메시지를 보낼 수 있다. 이 버튼은 evMode가 none일 땐 표시되지 않는다.
+
+<p align="center">
+<img src="screenshot/report.png">
+</p>
+
+
 
 <hr>
 
@@ -197,11 +350,30 @@ evCommentService.ga에선, 자신의 블로그를 서비스에 등록하는 것 
 
 이 때 포스팅 별 조회수를 기록할 테이블이 필요하다. 마찬가지로, 포스팅의 댓글마다 데이터를 기록하기엔 적절하지 않으므로, 별도의 테이블을 만든 것이다.
 
-4개의 통계 서비스는 CommentManageService.php에서 왼쪽 4개의 버튼을 누름으로써, ServiceSection에 ajax로 로드되는 형태로 나타난다.
+4개의 통계 서비스는 `CommentManageService.php`에서 왼쪽 4개의 버튼을 누름으로써, ServiceSection에 ajax로 로드되는 형태로 나타난다.
 
 각각의 통계 서비스는 '날짜', '감정분석 값의 평균', '조회 수', '댓글 수' 를 가중치로 하는 우선순위 큐를 사용하여, 목표로 하는 데이터를 추출하고,
 
-chart.js의 차트로 나타낸 후 CommentManageService.php에 echo 한다.
+chart.js의 차트로 나타낸 후 `CommentManageService.php`에 echo 한다.
+
+
+
+* 좋은 평가를 받은 게시물
+<img src="screenshot/service1.png">
+<br>
+
+* 인기 포스팅 분석
+<img src="screenshot/service2.png">
+<br>
+
+* 댓글이 많이 달린 게시글
+<img src="screenshot/service3.png">
+<br>
+
+* 최근 생성된 댓글
+<img src="screenshot/service4.png">
+<br>
+
 
 <hr>
 
@@ -212,27 +384,3 @@ chart.js의 차트로 나타낸 후 CommentManageService.php에 echo 한다.
 이대로는 css 코드를 보수하기 점점 어려워질 것으로 판단하여, Ruby의 Sass란 전처리기를 사용했다.
 
 
-## Screen Shots
-
-* 로그인 화면
-<img src="screenshot/login.png">
-<br>
-
-* 회원가입 화면
-<img src="screenshot/signup.png">
-<br>
-
-* 정보 수정
-<img src="screenshot/useredit.png">
-<br>
-
-* 차트를 통한 분석 서비스
-<img src="screenshot/chart.png">
-<br>
-
-* 서비스 추가
-<img src="screenshot/addService.png">
-<br>
-
-* 서비스 홈페이지
-<img src="screenshot/mainservice.png">

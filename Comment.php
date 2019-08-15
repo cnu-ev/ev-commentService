@@ -186,8 +186,11 @@
           }
       }
       else if($EmotionalAnalysisMode == "binary"){
-          if($Positiveness > 20){
+          if($Positiveness > 10){
               $positiveClass = "comment-positive03";
+          }
+          else if(-10 < $Positiveness && $Positiveness < 10){
+              $positiveClass = "comment-neutral";
           }
           else{
               $positiveClass = "comment-negative03";
