@@ -23,6 +23,9 @@ CNU-EV는 감정 분석 기능을 제공하는 댓글 컴포넌트 서비스를 
 
 - [**ev-sentimentalAnalysis**][c] : 쟝고 서버 내 댓글 감정 분석 모듈입니다.
 
+[a]: https://github.com/cnu-ev/ev-commentService
+[b]: https://github.com/cnu-ev/ev-backend
+[c]: https://github.com/cnu-ev/ev-sentiment_analysis
 
 
 ## 📋 Asset
