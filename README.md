@@ -184,9 +184,9 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 
 * 학습모델
 
-     1 . Logistic Regression (Multi Layer Neural Network)
+     - Logistic Regression (Multi Layer Neural Network)
 
-  2. LSTM+Attension (Recurrent Neural Network)
+  - LSTM+Attension (Recurrent Neural Network)
 
 ## 📉 Performance evaluation
 
@@ -194,14 +194,14 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 
 75000개의 test set에 대해서
 
-<img src="screenshot/acc.png">
+<img src="screenshot/acc.PNG">
 
 ​												Glove_ACC = 0.8672       Word2Vec_ACC = 0.8509<br/>
 ​												Glove_SN = 0.8458         Word2Vec_SN = 0.8271<br/>
 ​												Glove_PREC = 0.8847     Word2Vec_PREC = 0.8697<br/>
 ​												Glove_SP = 0.8888          Word2Vec_SP = 0.8749<br/>
 
-<img src="screenshot/err.png">
+<img src="screenshot/err.PNG">
 
 ​												Glove_ERR = 0.1327     Word2Vec_ERR = 0.1483<br/>
 ​												Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250<br/>
