@@ -198,21 +198,21 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 <img src="screenshot/acc.PNG">
 </p>
 
-```
-Glove_ACC 	= 0.8672    Word2Vec_ACC = 0.8509
-Glove_SN 	= 0.8458    Word2Vec_SN = 0.8271
-Glove_PREC 	= 0.8847    Word2Vec_PREC = 0.8697
-Glove_SP 	= 0.8888    Word2Vec_SP = 0.8749
-```
+|||||
+|:---:|:---:|:---:|:---:|
+| Glove_ACC  | 0.8672 | Word2Vec_ACC | 0.8509 |
+| Glove_SN | 0.8458 | Word2Vec_SN | 0.8271 |
+| Glove_PREC | 0.8847 | Word2Vec_PREC | 0.8697 |
+| Glove_SP | 0.8888 | Word2Vec_SP | 0.8749 |
 
 <p align="center">												
 <img src="screenshot/err.PNG">
 </p>
 
-```
-Glove_ERR = 0.1327     	Word2Vec_ERR = 0.1483
-Glove_FPR = 0.1111    	Word2Vec_FPR = 0.1250
-```
+|||||
+|:---:|:---:|:---:|:---:|
+| Glove_ERR  | 0.1327 | Word2Vec_ERR | 0.1483 |
+| Glove_FPR | 0.1111 | Word2Vec_FPR | 0.1250 |
 
 ## ❗ How to Work
 
