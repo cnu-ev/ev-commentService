@@ -97,7 +97,7 @@ wrapt==1.11.2
 
 백엔드는 php 서버 (evCommentService.ga) 와 쟝고 서버  (emotionanalysisservice.ga) 로 구성되어 있다.
 
-evcommentservice.ga 홈페이지 및 Comment.php엔 모바일 환경에서도 용이하게 사용할 수 있도록 Bootstrap을 적용했다.
+evcommentservice.ga 홈페이지 및 `Comment.php`엔 모바일 환경에서도 용이하게 사용할 수 있도록 Bootstrap을 적용했다.
 
 그 외 도메인 임대는 freenom (https://www.freenom.com/en/index.html?lang=en),  
 
@@ -151,7 +151,7 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 
 
 
-​	입력데이터(문장) -> 전처리된 문장 -> 벡터로 임베딩 -> 모델에 따른 감성분석 결과
+입력데이터(문장) -> 전처리된 문장 -> 벡터로 임베딩 -> 모델에 따른 감성분석 결과
 
 
 
@@ -184,34 +184,43 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 
 * 학습모델
 
-     - Logistic Regression (Multi Layer Neural Network)
+  - Logistic Regression (Multi Layer Neural Network)
 
   - LSTM+Attension (Recurrent Neural Network)
 
 ## 📉 Performance evaluation
 
-두 방법의 성능 차이
+**두 방법의 성능 차이**
 
 75000개의 test set에 대해서
 
+<p align="center">
 <img src="screenshot/acc.PNG">
+</p>
 
-​												Glove_ACC = 0.8672       Word2Vec_ACC = 0.8509<br/>
-​												Glove_SN = 0.8458         Word2Vec_SN = 0.8271<br/>
-​												Glove_PREC = 0.8847     Word2Vec_PREC = 0.8697<br/>
-​												Glove_SP = 0.8888          Word2Vec_SP = 0.8749<br/>
+```
+Glove_ACC 	= 0.8672    Word2Vec_ACC = 0.8509
+Glove_SN 	= 0.8458    Word2Vec_SN = 0.8271
+Glove_PREC 	= 0.8847    Word2Vec_PREC = 0.8697
+Glove_SP 	= 0.8888    Word2Vec_SP = 0.8749
+```
 
+<p align="center">												
 <img src="screenshot/err.PNG">
+</p>
 
-​												Glove_ERR = 0.1327     Word2Vec_ERR = 0.1483<br/>
-​												Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250<br/>
+```
+Glove_ERR = 0.1327     	Word2Vec_ERR = 0.1483
+Glove_FPR = 0.1111    	Word2Vec_FPR = 0.1250
+```
 
-<h2>How to Work</h2>
+## ❗ How to Work
+
 * **회원가입, 로그인, 로그아웃, 정보변경**
 
 evCommentService.ga에 회원가입할 땐 필수 입력 값으로 ID, PW, PW 확인을 입력해야 한다. 그 외 선택 입력 값으로 성별, 이름 (성, 이름), 이메일 주소, 주소, 핸드폰 번호를 입력할 수 있으며, 아이디, 이메일, 핸드폰 번호는 정규식을 통해 알맞은 값인지를 검사한다.
 
-그 외 원하는 프로필 사진을 업로드해 등록할 수 있다. 프로필 사진으로 업로드 가능한 파일은 png, jpg, jpeg이다.
+그 외 원하는 프로필 사진을 업로드해 등록할 수 있다. 프로필 사진으로 업로드 가능한 파일은 `png, jpg, jpeg`이다.
 
 입력한 정보와 업로드된 프로필 사진은 PHP 서버에 저장되며, 정보 변경 페이지에서 변경할 수 있다.
 
@@ -281,7 +290,7 @@ script.js 파일에선, 들어온 요청이 올바른 파라미터 값들을 갖
 
 DB에 등록되어 있는 사이트의 요청인 경우, 정당한 요청으로 판정하고, URL에 해당하는 DB에서 해당 서브 URL에 해당하는 테이블이 있는지 검사한다. 이 시점에서 테이블이 없는 경우 새 테이블을 만든다. 그 후, 클라이언트 측에서 실행되고 있는 `script.js`로 코멘트 페이지의 iframe을 전송한다.
 
-이 iframe은 Comment.php를 참조하며, Get 방식으로 URL_ID, pageID, mode, paginationID 라는 4개의 변수 값을 넘겨준다.
+이 iframe은 `Comment.php`를 참조하며, Get 방식으로 URL_ID, pageID, mode, paginationID 라는 4개의 변수 값을 넘겨준다.
 
 Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같은 출력 페이지를 보여줘야 한다는 것과, 위 4개의 변수들이 보안 상
 
@@ -293,7 +302,7 @@ Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같�
 
 
 
-* full
+- full
 
 
 <p align="center">
@@ -302,7 +311,7 @@ Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같�
 
 
 
-* binary
+- binary
 
 <p align="center">
 <img src="screenshot/binary.png">
@@ -310,7 +319,7 @@ Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같�
 
 
 
-* none, debug
+- none, debug
 
 <p align="center">
 <img src="screenshot/none.png">
@@ -348,7 +357,7 @@ Get 방식을 사용한 것은 같은 값을 통한 요청일 경우 항상 같�
 
 클라이언트 페이지에선 이 값이 되돌아 오기를 기다리고 있다가, 값을 받으면 PHP 서버의 `AddComment.php`에 다시 ajax로 데이터를 전송한다.
 
-`AddComment.php`는 PHP 서버에 감정 분석 결과 및 댓글 데이터를 저장하며, AddComment.php가 정상적으로 실행을 마치고, 클라이언트 홈페이지의
+`AddComment.php`는 PHP 서버에 감정 분석 결과 및 댓글 데이터를 저장하며, `AddComment.php`가 정상적으로 실행을 마치고, 클라이언트 홈페이지의
 
 `comment.js`에 성공했음을 알리면, 페이지를 리로드 한다. 이 땐, iframe 내부가 리로드 되는 것으로, 외부 페이지는 리로드 되지 않는다.
 
@@ -412,19 +421,19 @@ chart.js의 차트로 나타낸 후 `CommentManageService.php`에 echo 한다.
 
 
 
-* 좋은 평가를 받은 게시물
+- 좋은 평가를 받은 게시물
 <img src="screenshot/service1.png">
 <br>
 
-* 인기 포스팅 분석
+- 인기 포스팅 분석
 <img src="screenshot/service2.png">
 <br>
 
-* 댓글이 많이 달린 게시글
+- 댓글이 많이 달린 게시글
 <img src="screenshot/service3.png">
 <br>
 
-* 최근 생성된 댓글
+- 최근 생성된 댓글
 <img src="screenshot/service4.png">
 <br>
 
@@ -435,6 +444,6 @@ chart.js의 차트로 나타낸 후 `CommentManageService.php`에 echo 한다.
 
 프로젝트를 진행하며, css에 중복되는 값들이 많이 나타나 복사, 붙여넣기 해야할 일이 많아졌다. (같은 컴포넌트를 사용하는 경우 등)
 
-이대로는 css 코드를 보수하기 점점 어려워질 것으로 판단하여, Ruby의 Sass란 전처리기를 사용했다.
+이대로는 css 코드를 보수하기 점점 어려워질 것으로 판단하여, Ruby의 Sass란 전처리기를 사용해 CSS의 재사용성을 높였다.
 
 
