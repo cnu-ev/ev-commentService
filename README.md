@@ -151,12 +151,62 @@ debug : 댓글 감정 분석 서비스를 이용하지 않는다. (값을 서버
 
 
 
+​	입력데이터(문장) -> 전처리된 문장 -> 벡터로 임베딩 -> 모델에 따른 감성분석 결과
+
+
+
+* 전처리 - 형태소 분석(태깅)
+
+  Konlpy - Mecab 사용
+
+  
+
+* 단어 임베딩
+
+  1.word2vec
+
+  <img src="screenshot/Word2vec.png">
+  from : https://becominghuman.ai/how-does-word2vecs-skip-gram-work-f92e0525def4
+
+  **Word2Vec**은 중심단어와 주변단어 벡터의 내적이 코사인 유사도가 되도록 단어벡터를 벡터공간에 임베딩.<br/>
+  중심단어에 해당하는 벡터와 주변단어에 해당하는 벡터의 내적값을 높이는 방식으로 임베딩을 한다.<br/>벡터 내적은 코사인이므로 내적값 상향은 단어벡터 간 유사도를 높인다<br/>
+
+  2.Glove
+
+  <img src="screenshot/Glove.png">
+  from : https://nlp.stanford.edu/projects/glove/
+
+  **GloVe**은 임베딩된 두 단어벡터의 내적이 말뭉치 전체에서의 동시 등장확률 로그값이 되도록 목적함수를 정의<br/>
+  임베딩된 단어벡터 간 유사도 측정을 수월하게 하면서도 말뭉치 전체의 통계 정보를 좀 더 잘 반영하도록 한다.<br/>
+  임베딩 된 중심 단어와 주변 단어 벡터의 내적이 전체 코퍼스에서의 동시 등장 확률이 되도록 만드는 방법.<br/>
+
+  
+
+* 학습모델
+
+     1 . Logistic Regression (Multi Layer Neural Network)
+
+  2. LSTM+Attension (Recurrent Neural Network)
+
 ## 📉 Performance evaluation
 
-<br>
+두 방법의 성능 차이
+
+75000개의 test set에 대해서
+
+<img src="screenshot/acc.png">
+
+​												Glove_ACC = 0.8672       Word2Vec_ACC = 0.8509<br/>
+​												Glove_SN = 0.8458         Word2Vec_SN = 0.8271<br/>
+​												Glove_PREC = 0.8847     Word2Vec_PREC = 0.8697<br/>
+​												Glove_SP = 0.8888          Word2Vec_SP = 0.8749<br/>
+
+<img src="screenshot/err.png">
+
+​												Glove_ERR = 0.1327     Word2Vec_ERR = 0.1483<br/>
+​												Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250<br/>
 
 <h2>How to Work</h2>
-
 * **회원가입, 로그인, 로그아웃, 정보변경**
 
 evCommentService.ga에 회원가입할 땐 필수 입력 값으로 ID, PW, PW 확인을 입력해야 한다. 그 외 선택 입력 값으로 성별, 이름 (성, 이름), 이메일 주소, 주소, 핸드폰 번호를 입력할 수 있으며, 아이디, 이메일, 핸드폰 번호는 정규식을 통해 알맞은 값인지를 검사한다.
