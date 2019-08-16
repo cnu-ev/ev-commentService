@@ -293,7 +293,7 @@
       <!-- 현재 댓글의 갯수, 로그인 되어 있는 ID를 나타내는 NavBar -->
       <header id="EV-nav">
         <ul>
-          <li id="EV-CommentNumber" class="nav-tab">Comments</li>
+          <li id="EV-CommentNumber" class="nav-tab" onclick="location.reload();">Comments</li>
           <?php
             if(empty($myProfileImageElement)){
               echo $LoginButton;
