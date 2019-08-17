@@ -1,8 +1,6 @@
-// ==============================+===============================================================
 // @ Author : jopemachine
 // @ Team : team ⓒ EV for BottomUp
 // @ Created : 2019-07-03, 10:10:30
-// ==============================+===============================================================
 
 // 쟝고 감정 분석 서버 URL (full, binary 모드에서 사용)
 var EmotionalAnalysisServiceURL       = "https://emotionanalysisservice.ga/changer/comment";
@@ -132,7 +130,7 @@ function postComment(){
       );
 
       break;
-    
+
     case "debug":
 
       ajaxRequest("POST", "../php-Action/AddComment.php", arg, () => { location.reload(); });

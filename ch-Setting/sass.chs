@@ -4,6 +4,13 @@
 #
 #--------------------------------------------------------
 
+# Setting
+setting.descNumbering        =   0
+setting.issueNumbering       =   0
+setting.recursiveTraversal   =   1
+setting.divBySeparator   =   1
+setting.divByStartEndTag   =   0
+
 # Flags
 flag.Author   =   1
 flag.Last_Edited   =   0
@@ -24,6 +31,8 @@ global.Extension        =  scss
 global.Project_Path     =  C:\xampp\ev-commentService\sass
 global.Author           =  jopemachine
 global.Separator        =  //
+global.StartTag         =   
+global.EndTag           =   
 global.Sub_Div_Line     =  ==============================+===============================================================
 global.Sup_Div_Line     =  ==============================+===============================================================
 global.Email            =   
@@ -37,3 +46,5 @@ global.Memo             =
 # Issue
 
 # Reference URLs
+
+# Excluded files
