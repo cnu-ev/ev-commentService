@@ -4,6 +4,11 @@
 #
 #--------------------------------------------------------
 
+# Setting
+setting.descNumbering        =   1
+setting.issueNumbering       =   1
+setting.recursiveTraversal   =   1
+
 # Flags
 flag.Author   =   1
 flag.Last_Edited   =   0
@@ -23,19 +28,19 @@ flag.Memo   =   0
 global.Extension        =  php, html
 global.Project_Path     =  C:\xampp\ev-commentService
 global.Author           =  jopemachine
-global.Separator        =  
-global.Sub_Div_Line     =  ==============================+===============================================================
--->
-global.Sup_Div_Line     =  <!--
-==============================+===============================================================
+global.Separator        =   
+global.Sub_Div_Line     =  ==============================+===============================================================,-->
+global.Sup_Div_Line     =  <!--,==============================+===============================================================
 global.Email            =   
 global.Telephone        =   
 global.Github_Account   =   
 global.Team             =  team ¨Ï EV for BottomUp
-global.Memo             =  
+global.Memo             =   
 
 # Desc
 
 # Issue
 
 # Reference URLs
+
+# Excluded files
