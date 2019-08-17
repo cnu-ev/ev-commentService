@@ -489,7 +489,7 @@ chart.js의 차트로 나타낸 후 `CommentManageService.php`에 echo 한다.
 
 | File Name | Description |
 |---|---|
-| comment.js |   |
+| comment.js | comment.php에서 서버와 데이터를 주고 받는데 사용합니다. 그 외 댓글에 스타일을 주는 기능을 포함합니다.  |
 | CommentManageService.js | evCommentService.ga에서 블로그 통계를 제공하기 위해 사용됩니다. |
 | SignIn.js | evCommentService.ga의 로그인에 사용됩니다. |
 | SignUp.js | evCommentService.ga의 회원가입에 사용됩니다.  정규식을 통한 유효성 검사 및 프로필 사진 변경에 대한 코드를 포함합니다. |
