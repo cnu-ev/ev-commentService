@@ -1,8 +1,9 @@
+// @ File Name : UserEdit.js
 // @ Author : jopemachine
 // @ Team : team ⓒ EV for BottomUp
 // @ Created : 2019-07-14, 15:52:37
 // @ Desc :
-// @     evCommentService.ga의 유저 정보 변경에 사용됩니다.
+// @    evCommentService.ga의 유저 정보 변경에 사용됩니다.
 
 var profileImage;
 

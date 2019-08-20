@@ -31,7 +31,7 @@ flag.File_Name   =   1
 global.Extension        =  js
 global.Project_Path     =  C:\xampp\ev-commentService\js
 global.Author           =  jopemachine
-global.Separator        =  //
+global.Separator        =  // @ 
 global.StartTag         =   
 global.EndTag           =   
 global.Sub_Div_Line     =  ==============================+===============================================================
@@ -43,7 +43,6 @@ global.Team             =  team ⓒ EV for BottomUp
 global.Memo             =   
 
 # Desc
-comment.js::desc       +=        
 CommentManageService.js::desc       +=       evCommentService.ga에서 블로그 통계를 제공하기 위해 사용됩니다.
 SignIn.js::desc       +=       evCommentService.ga의 로그인에 사용됩니다.
 SignUp.js::desc       +=       evCommentService.ga의 회원가입에 사용됩니다. 

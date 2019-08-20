@@ -1,8 +1,9 @@
+// @ File Name : CommentManageService.js
 // @ Author : jopemachine
 // @ Team : team ⓒ EV for BottomUp
 // @ Created : 2019-07-14, 17:38:31
 // @ Desc :
-// @     evCommentService.ga에서 블로그 통계를 제공하기 위해 사용됩니다.
+// @    evCommentService.ga에서 블로그 통계를 제공하기 위해 사용됩니다.
 
 // 왼쪽 버튼을 누르면 해당하는 php Action을 실행해 serviceSection에 띄운다.
 var urlID = getParameterByName('db');

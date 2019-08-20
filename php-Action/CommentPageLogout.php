@@ -1,9 +1,10 @@
 <!--
+@ File Name : CommentPageLogout.php
 @ Author : jopemachine
 @ Team : team ⓒ EV for BottomUp
 @ Created : 2019-07-11, 22:24:48
 @ Desc : 
-@     Comment.php에서 로그아웃 할 때 사용합니다. 세션을 삭제하는 식으로 작동합니다.
+@    Comment.php에서 로그아웃 할 때 사용합니다. 세션을 삭제하는 식으로 작동합니다.
 -->
 
 

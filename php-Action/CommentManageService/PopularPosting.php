@@ -1,9 +1,10 @@
 <!--
+@ File Name : PopularPosting.php
 @ Author : jopemachine
 @ Team : team ⓒ EV for BottomUp
 @ Created : 2019-07-15, 18:08:08
 @ Desc : 
-@     evCommentService.ga에서 블로그에서 '인기 포스팅 분석' 서비스를 제공합니다.
+@    evCommentService.ga에서 블로그에서 '인기 포스팅 분석' 서비스를 제공합니다.
 -->
 
 

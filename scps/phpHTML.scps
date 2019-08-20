@@ -8,7 +8,7 @@
 setting.descNumbering        =   0
 setting.issueNumbering       =   0
 setting.recursiveTraversal   =   1
-setting.divBySeparator       =   1
+setting.divBySeparator       =   0
 setting.divByStartEndTag     =   1
 
 # Flags
@@ -31,7 +31,7 @@ flag.File_Name   =   1
 global.Extension        =  php, html
 global.Project_Path     =  C:\xampp\ev-commentService
 global.Author           =  jopemachine
-global.Separator        =   
+global.Separator        =  @ 
 global.StartTag         =  <!--
 global.EndTag           =  -->
 global.Sub_Div_Line     =  ==============================+===============================================================
