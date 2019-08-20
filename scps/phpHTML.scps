@@ -8,8 +8,8 @@
 setting.descNumbering        =   0
 setting.issueNumbering       =   0
 setting.recursiveTraversal   =   1
-setting.divBySeparator   =   1
-setting.divByStartEndTag   =   1
+setting.divBySeparator       =   1
+setting.divByStartEndTag     =   1
 
 # Flags
 flag.Author   =   1
@@ -25,12 +25,13 @@ flag.Ref_URLs   =   1
 flag.Created_Date   =   1
 flag.Team   =   1
 flag.Memo   =   0
+flag.File_Name   =   1
 
 # Globals
 global.Extension        =  php, html
 global.Project_Path     =  C:\xampp\ev-commentService
 global.Author           =  jopemachine
-global.Separator        =  
+global.Separator        =   
 global.StartTag         =  <!--
 global.EndTag           =  -->
 global.Sub_Div_Line     =  ==============================+===============================================================
@@ -65,12 +66,12 @@ UserEditAction.php::desc       +=       evCommentService.ga¿¡¼­ È¸¿øÁ¤º¸¸¦ º¯°æÇ
 UserModalBox.php::desc       +=       À¯ÀúÀÇ Á¤º¸¸¦ º¸¿©ÁÖ´Â ModalBox¸¦ ³ªÅ¸³»´Â ÇÔ¼ö°¡ Á¤ÀÇµÇ¾î ÀÖ½À´Ï´Ù. Comment.php¿Í evCommentService.ga È¨ÆäÀÌÁö¿¡¼­ ¸ğµÎ ÀÌ¿ëÇÕ´Ï´Ù.
 CommentManageService.php::desc       +=       evCommentService.ga¿¡¼­ ºí·Î±×¿¡ ´ëÇÑ °£´ÜÇÑ Åë°è ¼­ºñ½º¸¦ Á¦°øÇÕ´Ï´Ù.
 SignIn.php::desc       +=       evCommentService.gaÀÇ ·Î±×ÀÎ ÆäÀÌÁöÀÔ´Ï´Ù.
-URL-Register.php::desc       +=       evCommentService.gaÀÇ ¼­ºñ½º µî·Ï ¹× °ü¸® ÆäÀÌÁöÀÔ´Ï´Ù.
+Register.php::desc       +=       evCommentService.gaÀÇ ¼­ºñ½º µî·Ï ¹× °ü¸® ÆäÀÌÁöÀÔ´Ï´Ù.
 UserEdit.php::desc       +=       evCommentService.gaÀÇ È¸¿ø Á¤º¸ ¼öÁ¤ ÆäÀÌÁöÀÔ´Ï´Ù.
 index.html::desc       +=       evCommentService.gaÀÇ index.htmlÀÇ ±âº» µ¿ÀÛÀº ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿ÇÏ´Â °ÍÀÔ´Ï´Ù.
 SignUp.html::desc       +=       evCommentService.gaÀÇ È¸¿ø °¡ÀÔ ÆäÀÌÁö ÀÔ´Ï´Ù.
 CommentExample.html::desc       +=       ´ñ±Û Ã¢ ½ºÅ¸ÀÏÀ» È®ÀÎÇÏ±â À§ÇÑ ¿¹Á¦ ÆÄÀÏÀÔ´Ï´Ù.
-Jekyll-Script.html::desc       +=       Å¬¶óÀÌ¾ğÆ®°¡ ¼­ºñ½º¸¦ ÀÌ¿ëÇÏ±â À§ÇØ »ç¿ëÇØ¾ß ÇÏ´Â ½ºÅ©¸³Æ® ÆÄÀÏÀÔ´Ï´Ù.
+Script.html::desc       +=       Å¬¶óÀÌ¾ğÆ®°¡ ¼­ºñ½º¸¦ ÀÌ¿ëÇÏ±â À§ÇØ »ç¿ëÇØ¾ß ÇÏ´Â ½ºÅ©¸³Æ® ÆÄÀÏÀÔ´Ï´Ù.
 
 # Issue
 
