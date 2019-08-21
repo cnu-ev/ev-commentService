@@ -1,11 +1,13 @@
 <!--
+==============================+===============================================================
 @ File Name : RegisterURL.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-03, 18:06:09
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-03, 18:06:09
 @ Desc : 
 @    evCommentService.ga에서 서비스를 등록하려 시도할 때 실행됩니다. 
 @    요청으로 들어온 URL 값을 해싱해 DB를 생성하고, 특수한 두 개의 테이블인 pageTitlePairs, VisitorCounter 을 만듭니다.
+==============================+===============================================================
 -->
 
 

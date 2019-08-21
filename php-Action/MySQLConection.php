@@ -1,10 +1,12 @@
 <!--
+==============================+===============================================================
 @ File Name : MySQLConection.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-03, 14:33:51
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-03, 14:33:51
 @ Desc : 
 @    MySQL에 접속하기 위한 클래스인 MySQLConnection이 정의되어 있습니다. 다른 php 파일들에서 require해 사용합니다.
+==============================+===============================================================
 -->
 
 
