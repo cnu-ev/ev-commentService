@@ -269,16 +269,19 @@ function sendCommentUpdateMessage(contentID){
       CommentID       : contentID.replace(/[^0-9]/g,""),
       urlID           : params.urlID,
       pageID          : params.pageID,
-      updatedContent  : $('#' + contentID).html()
-  }
-
+      commentContent  : $('#' + contentID).html()
+  };
+  
   switch (params.evMode) {
 
     case "full":
+    case "binary":
+    case "none":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      ajaxRequest("POST", EmotionalAnalysisServiceURL, arg.updatedContent,
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, { commentContent : arg.commentContent },
         (score) => {
-          arg.emotionalAnalysisValue = score;
+          arg.emotionalAnalysisValue = (parseInt(score));
+          console.log(score);
           ajaxRequest("POST", "../php-Action/EditComment.php", arg,
             // Success
             ()=>{ location.reload(); },
@@ -287,12 +290,9 @@ function sendCommentUpdateMessage(contentID){
           );
         }
       );
-
-    // binary는 full과 동일하게 작동
-    case "binary":
       break;
 
-    case "none":
+    case "debug":
       ajaxRequest("POST", "../php-Action/EditComment.php", arg,
         ()=>{ location.reload(); }
       );
