@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : EditComment.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-07, 17:10:34
-@ Desc : 
-@     댓글을 수정하는 버튼을 눌렀을 때 실행됩니다. 
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-07, 17:10:34
+@ Desc :
+@    댓글을 수정하는 버튼을 눌렀을 때 실행됩니다.
+==============================+===============================================================
 -->
 
 
@@ -16,7 +19,7 @@ $UserID         = $_POST['userID'];
 $CommentID      = $_POST['CommentID'];
 $URLID          = $_POST['urlID'];
 $PageID         = $_POST['pageID'];
-$UpdatedContent = $_POST['updatedContent'];
+$UpdatedContent = $_POST['commentContent'];
 
 if(empty($_POST['emotionalAnalysisValue'])){
   $EmotionalAnalysisValue = 0;

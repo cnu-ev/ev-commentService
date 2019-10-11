@@ -1,9 +1,10 @@
+// @ File Name : SignUp.js
 // @ Author : jopemachine
 // @ Team : team ⓒ EV for BottomUp
 // @ Created : 2019-07-03, 09:17:25
 // @ Desc :
-// @     evCommentService.ga의 회원가입에 사용됩니다. 
-// @     정규식을 통한 유효성 검사 및 프로필 사진 변경에 대한 코드를 포함합니다.
+// @    evCommentService.ga의 회원가입에 사용됩니다.
+// @    정규식을 통한 유효성 검사 및 프로필 사진 변경에 대한 코드를 포함합니다.
 
 var profileImage;
 

@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : CommentPageLogin.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-05, 17:53:33
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-05, 17:53:33
 @ Desc : 
-@     Comment.php에서 로그인할 때 ajax로 호출합니다. evCommentService.ga에서 로그인 할 땐 SignInAction.php를 사용합니다.
+@    Comment.php에서 로그인할 때 ajax로 호출합니다. evCommentService.ga에서 로그인 할 땐 SignInAction.php를 사용합니다.
+==============================+===============================================================
 -->
 
 

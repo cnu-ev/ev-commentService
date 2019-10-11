@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : UserEditAction.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-14, 15:45:47
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-14, 15:45:47
 @ Desc : 
-@     evCommentService.ga에서 회원정보를 변경할 때 실행됩니다.
+@    evCommentService.ga에서 회원정보를 변경할 때 실행됩니다.
+==============================+===============================================================
 -->
 
 

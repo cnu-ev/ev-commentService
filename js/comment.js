@@ -1,3 +1,4 @@
+// @ File Name : comment.js
 // @ Author : jopemachine
 // @ Team : team ⓒ EV for BottomUp
 // @ Created : 2019-07-03, 10:10:30
@@ -18,11 +19,6 @@ var params = {
 
 // reportCommentID, reportCommentContent를 갖고 있는 객체
 var reportComment;
-
-// editMode에 관련된 객체
-var editMode = {
-   isEditMode: false
-};
 
 const log = (logContent) => { console.log("Log from evCommentService : " + logContent); };
 
@@ -139,7 +135,7 @@ function postComment(){
     default:
       // 디폴트 값은 full이지만, 예외처리는 넣어놓았다
       log("Error:: mode value is one of 'full, binary, none'");
-      throw new Error("Assert failed: mode value is one of 'full, binary, none'");
+      throw new Error("Assert failed: mode value is one of 'full, binary, none, debug'");
       break;
   }
 }
@@ -227,36 +223,41 @@ function focusCampo(id){
     }
 }
 
-// 현재 수정 상태라면 수정을 취소하는 명령으로,
-// 현재 수정 상태가 아니라면 editArea로 만드는 명령으로 작동
-function editComment(id, submitButton){
+// editComment가 editMode를 클로징 하기 위해 만든 Wrapper 함수.
+function editCommentWrap(){
 
-  //  editMode는 현재 댓글을 수정 중인지를 나타내는 boolean 변수
-  //  editCommentContentID : 수정 중인 (수정 중이었던) Comment의 ContentID
-  //  commentBuffer는 해당 수정 중이던 Comment의 내용
-  let { isEditMode, commentBuffer, editCommentContentID } = editMode;
+  let editMode = {
+    isEditMode : false,
+    commentBuffer : "",
+    editCommentContentID : ""
+  };
 
-  if(isEditMode){
-    $('#' + editCommentContentID).removeAttr('contenteditable');
-    $('#' + editCommentContentID).removeClass('editArea');
-    $('#' + editCommentContentID).html(editMode.commentBuffer);
-    $('#' + editCommentContentID).nextAll('.sendCommentUpdateButton').hide();
+  return function(id, submitButton){
+    if(editMode.isEditMode){
+      $('#' + editMode.editCommentContentID).removeAttr('contenteditable');
+      $('#' + editMode.editCommentContentID).removeClass('editArea');
+      $('#' + editMode.editCommentContentID).html(editMode.commentBuffer);
+      $('#' + editMode.editCommentContentID).nextAll('.sendCommentUpdateButton').hide();
 
-    if(id == editCommentContentID) {
-      editMode.isEditMode = false;
-      onHeightChange();
-      return;
+      if(id == editMode.editCommentContentID) {
+        editMode.isEditMode = false;
+        onHeightChange();
+        return;
+      }
     }
-  }
 
-  editMode.isEditMode = true;
-  editMode.editCommentContentID = id;
-  editMode.commentBuffer = $('#' + id).html();
-  submitButton.show();
-  $('#' + id).attr('contenteditable', 'PLAINTEXT-ONLY');
-  $('#' + id).addClass('editArea');
-  onHeightChange();
+    editMode.isEditMode = true;
+    editMode.editCommentContentID = id;
+    editMode.commentBuffer = $('#' + id).html();
+    submitButton.show();
+    $('#' + id).attr('contenteditable', 'PLAINTEXT-ONLY');
+    $('#' + id).addClass('editArea');
+    onHeightChange();
+
+  }
 }
+
+const editComment = editCommentWrap();
 
 // 수정 버튼을 클릭하면 댓글 내용을 수정하기 위한 조치를 한 후, 제출 버튼 (이미지)을 추가한다.
 // 그 상태에서 제출 버튼을 클릭하면, sendCommentUpdateMessage 가 실행되어 Ajax로 EditComment.php 내 코드를 실행해
@@ -268,16 +269,18 @@ function sendCommentUpdateMessage(contentID){
       CommentID       : contentID.replace(/[^0-9]/g,""),
       urlID           : params.urlID,
       pageID          : params.pageID,
-      updatedContent  : $('#' + contentID).html()
-  }
+      commentContent  : $('#' + contentID).html()
+  };
 
   switch (params.evMode) {
 
     case "full":
+    case "binary":
+    case "none":
       // 감정 분석 서비스를 받고, 성공한 경우 댓글 관리 서비스에 데이터를 넘겨준다
-      ajaxRequest("POST", EmotionalAnalysisServiceURL, arg.updatedContent,
+      ajaxRequest("POST", EmotionalAnalysisServiceURL, { commentContent : arg.commentContent },
         (score) => {
-          arg.emotionalAnalysisValue = score;
+          arg.emotionalAnalysisValue = (parseInt(score));
           ajaxRequest("POST", "../php-Action/EditComment.php", arg,
             // Success
             ()=>{ location.reload(); },
@@ -286,12 +289,9 @@ function sendCommentUpdateMessage(contentID){
           );
         }
       );
-
-    // binary는 full과 동일하게 작동
-    case "binary":
       break;
 
-    case "none":
+    case "debug":
       ajaxRequest("POST", "../php-Action/EditComment.php", arg,
         ()=>{ location.reload(); }
       );

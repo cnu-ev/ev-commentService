@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : UserModalBox.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-03, 14:35:37
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-03, 14:35:37
 @ Desc : 
-@     유저의 정보를 보여주는 ModalBox를 나타내는 함수가 정의되어 있습니다. Comment.php와 evCommentService.ga 홈페이지에서 모두 이용합니다.
+@    유저의 정보를 보여주는 ModalBox를 나타내는 함수가 정의되어 있습니다. Comment.php와 evCommentService.ga 홈페이지에서 모두 이용합니다.
+==============================+===============================================================
 -->
 
 

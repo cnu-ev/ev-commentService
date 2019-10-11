@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : URLVerification.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-03, 22:08:54
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-03, 22:08:54
 @ Desc : 
-@     클라이언트 페이지에서 댓글 페이지를 요청할 때 실행됩니다.
+@    클라이언트 페이지에서 댓글 페이지를 요청할 때 실행됩니다.
+==============================+===============================================================
 -->
 
 
@@ -47,7 +50,7 @@ if(empty($UserName) || empty($PageIdentifier) || empty($SiteURL) || empty($PageT
       <p style="text-align: center; font-size: 14px; color: #4c4c4c; margin: 0px auto;">모든 값이 설정되어 있지 않습니다.<br> evcommentservice.ga에서 서비스의 사용법을 확인하세요.</p>
     </div>
   ');
-  echo $unregisteredServiceWarning;
+  echo $settingError;
   exit ();
 }
 

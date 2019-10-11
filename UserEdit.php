@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : UserEdit.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-13, 21:40:58
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-13, 21:40:58
 @ Desc : 
-@     evCommentService.ga의 회원 정보 수정 페이지입니다.
+@    evCommentService.ga의 회원 정보 수정 페이지입니다.
+==============================+===============================================================
 -->
 
 

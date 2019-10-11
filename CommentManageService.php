@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : CommentManageService.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-03, 19:27:16
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-03, 19:27:16
 @ Desc : 
-@     evCommentService.ga에서 블로그에 대한 간단한 통계 서비스를 제공합니다.
+@    evCommentService.ga에서 블로그에 대한 간단한 통계 서비스를 제공합니다.
+==============================+===============================================================
 -->
 
 

@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : SignOutAction.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-11, 22:25:37
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-11, 22:25:37
 @ Desc : 
-@     evCommentService.ga에서 로그아웃 할 때 실행됩니다.
+@    evCommentService.ga에서 로그아웃 할 때 실행됩니다.
+==============================+===============================================================
 -->
 
 

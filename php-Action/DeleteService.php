@@ -1,9 +1,12 @@
 <!--
+==============================+===============================================================
+@ File Name : DeleteService.php
 @ Author : jopemachine
-@ Team : team ⓒ EV for BottomUp
-@ Created : 2019-07-12, 17:40:05
+@ Team : team ⓒ EV for 2019 BottomUp
+@ Created Date : 2019-07-12, 17:40:05
 @ Desc : 
-@     evCommentService.ga에서 서비스를 삭제하는 버튼을 눌렀을 때 실행됩니다.
+@    evCommentService.ga에서 서비스를 삭제하는 버튼을 눌렀을 때 실행됩니다.
+==============================+===============================================================
 -->
 
 
