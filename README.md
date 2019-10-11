@@ -14,6 +14,10 @@
     <img src="img/eevee.jpg" width="120px" height="120px">
 </p>
 
+<p align="center">
+    <img src="img/poster.png">
+</p>
+
 ## 📋 Purpose
 
 #### **감성분석을 이용해 글의 감성을 색으로 표현 (시각화)**
